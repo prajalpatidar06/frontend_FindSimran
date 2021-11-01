@@ -17,6 +17,7 @@ import { Provider } from "react-redux";
 import store from "./redux/store";
 import { SET_AUTHENTICATED } from "./redux/types";
 import { logoutUser , getUserData } from "./redux/actions/userAction";
+import doubtExchange from "./pages/doubtExchange";
 
 const token = localStorage.FBIdToken
 if(token){
@@ -39,11 +40,13 @@ class App extends Component {
             <Navbar />
             <Switch>
               <Route exact path="/" component={home} />
+              <Route exact path="/doubtExchange" component={doubtExchange} />
               <Route exact path="/profile" component={profile} />
               <Route exact path="/chats" component={chats} />
               <Route exact path="/notifications" component={notifications} />
               <Route exact path="/aboutUs" component={aboutUs} />
               <AuthRoute exact path="/login" component={login} />
+              <Route component={home} />
             </Switch>
           </Router>
       </Provider>

@@ -13,7 +13,7 @@ let allGood = false
 export const signupUser = (newUserData, history) => (dispatch) => {
   dispatch({ type: LOADING_UI });
   axios
-    .post("api/user/signup", newUserData)
+    .post("/user/signup", newUserData)
     .then((res) => {
       setAuthorizationHeaders(res.data.token);
       dispatch(getUserData());
@@ -34,7 +34,7 @@ export const signupUser = (newUserData, history) => (dispatch) => {
 export const loginUser = (userData, history) => (dispatch) => {
   dispatch({ type: LOADING_UI });
   axios
-    .post("api/user/login", userData)
+    .post("/user/login", userData)
     .then((res) => {
       setAuthorizationHeaders(res.data.token);
       dispatch(getUserData());
@@ -57,13 +57,13 @@ export const logoutUser = () => (dispatch) => {
   delete axios.defaults.headers.common["Authorization"];
   dispatch({ type: SET_UNAUTHENTICATED });
   allGood = false
-  window.location.href = "/login";
+  window.location.href = "/";
 };
 
 export const getUserData = () => (dispatch) => {
   dispatch({ type: LODING_USER });
   axios
-    .get("api/user")
+    .get("/user")
     .then((res) => {
       dispatch({
         type: SET_USER,

@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 
-export class notifications extends Component {
+export class UpcomingContest extends Component {
     render() {
         return (
             <div>
-               notifications
+                Upcoming Contest...
             </div>
         )
     }
 }
 
-export default notifications
+export default UpcomingContest

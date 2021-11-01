@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 
-export class notifications extends Component {
+export class StudyResources extends Component {
     render() {
         return (
             <div>
-               notifications
+                Study Resources...
             </div>
         )
     }
 }
 
-export default notifications
+export default StudyResources

@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 
-export class notifications extends Component {
+export class AuthorScreams extends Component {
     render() {
         return (
             <div>
-               notifications
+                My Screams...
             </div>
         )
     }
 }
 
-export default notifications
+export default AuthorScreams

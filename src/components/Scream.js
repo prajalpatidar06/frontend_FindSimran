@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
+import { LinkIcon } from "@heroicons/react/solid";
 
 export class Scream extends Component {
   render() {
@@ -38,11 +39,12 @@ export class Scream extends Component {
           <p className="pt-4 font-medium text-2xl text-blue-300">{title}</p>
           <p className="pt-3 font-mono">{body}</p>
           <a
-            className="pt-3 font-mono text-green-400 hover:underline"
+            className="pt-3 font-mono text-green-400 hover:underline flex"
             href={url}
             target="_blank"
             rel="noreferrer"
           >
+            <LinkIcon width={20} height={20}/>
             {url}
           </a>
           <ul className="flex">
