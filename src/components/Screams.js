@@ -8,7 +8,7 @@ export class Screams extends Component {
   };
   componentDidMount() {
     axios
-      .get("/screams")
+      .get("api/screams")
       .then((res) => {
         this.setState({
           screams: res.data,

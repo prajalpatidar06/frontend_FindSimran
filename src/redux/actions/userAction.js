@@ -9,10 +9,11 @@ import {
 
 import axios from "axios";
 let allGood = false
+
 export const signupUser = (newUserData, history) => (dispatch) => {
   dispatch({ type: LOADING_UI });
   axios
-    .post("/user/signup", newUserData)
+    .post("api/user/signup", newUserData)
     .then((res) => {
       setAuthorizationHeaders(res.data.token);
       dispatch(getUserData());
@@ -33,7 +34,7 @@ export const signupUser = (newUserData, history) => (dispatch) => {
 export const loginUser = (userData, history) => (dispatch) => {
   dispatch({ type: LOADING_UI });
   axios
-    .post("/user/login", userData)
+    .post("api/user/login", userData)
     .then((res) => {
       setAuthorizationHeaders(res.data.token);
       dispatch(getUserData());
@@ -62,7 +63,7 @@ export const logoutUser = () => (dispatch) => {
 export const getUserData = () => (dispatch) => {
   dispatch({ type: LODING_USER });
   axios
-    .get("/user")
+    .get("api/user")
     .then((res) => {
       dispatch({
         type: SET_USER,
