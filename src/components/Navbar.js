@@ -1,4 +1,4 @@
-import React, { Component ,Fragment } from "react";
+import React, { Component} from "react";
 import HeaderIcon from "./HeaderIcon";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
@@ -6,7 +6,6 @@ import { connect } from "react-redux";
 import { logoutUser } from "../redux/actions/userAction";
 import {
   HomeIcon,
-  ViewGridIcon,
 } from "@heroicons/react/solid";
 
 import {
