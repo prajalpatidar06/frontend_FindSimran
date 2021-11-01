@@ -4,6 +4,10 @@ import jwtDecode from "jwt-decode";
 import axios from "axios";
 // pages stuff
 import home from "./pages/home";
+import profile from "./pages/profile";
+import notifications from "./pages/notifications";
+import aboutUs from "./pages/aboutUs";
+import chats from "./pages/chats"
 import login from "./pages/login";
 // Components stuff
 import Navbar from "./components/Navbar";
@@ -35,6 +39,10 @@ class App extends Component {
             <Navbar />
             <Switch>
               <Route exact path="/" component={home} />
+              <Route exact path="/profile" component={profile} />
+              <Route exact path="/chats" component={chats} />
+              <Route exact path="/notifications" component={notifications} />
+              <Route exact path="/aboutUs" component={aboutUs} />
               <AuthRoute exact path="/login" component={login} />
             </Switch>
           </Router>

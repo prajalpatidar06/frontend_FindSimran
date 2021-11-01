@@ -26,7 +26,7 @@ export class Sidebar extends Component {
     const {user:{credentials:{handle,imageUrl},authenticated}} = this.props
     return (
         <div className="p-2 mt-5 max-w-[600px] xl:min-w-[300px]">
-          {authenticated && (<SidebarRow src={imageUrl} title={handle} />)}
+          {authenticated && (<Link to="/profile"><SidebarRow src={imageUrl} title={handle} /></Link>)}
           {authenticated && (<SidebarRow Icon={AnnotationIcon} title="Post Scream" />)}
           {authenticated && (<SidebarRow Icon={CollectionIcon} title="My Screams" />)}
           <SidebarRow Icon={CalendarIcon} title="Upcoming Contest" />
