@@ -18,6 +18,12 @@ import {
 } from "@heroicons/react/solid";
 
 export class Sidebar extends Component {
+  constructor(){
+    super()
+    this.state = {
+      activeTab: window.location.href.split('/')[window.location.href.split('/').length - 1]
+    }
+  }
   Logoutfunc = () => {
     this.props.logoutUser();
   };
@@ -45,30 +51,30 @@ export class Sidebar extends Component {
             <Link to="/profile"><SidebarRow src={imageUrl} title={handle} /></Link>
           </div>
         )}
-        <Link to="/" title="all screams">
-          <SidebarRow Icon={CollectionIcon} title="All Screams" />
+        <Link to="/" title="all screams" onClick={() =>(this.setState({activeTab: ""}))}>
+          <SidebarRow Icon={CollectionIcon} active = {this.state.activeTab === ""} title="All Screams" />
         </Link>
         {authenticated && (
-          <Link to="/postScream" title="post scream">
-            <SidebarRow Icon={DocumentAddIcon} title="Post Scream" />
+          <Link to="/postScream" title="post scream" onClick={() =>(this.setState({activeTab: "postScream"}))}>
+            <SidebarRow Icon={DocumentAddIcon} active = {this.state.activeTab === "postScream"} title="Post Scream" />
           </Link>
         )}
         {authenticated && (
-          <Link to="/authorScreams" title="your screams">
-            <SidebarRow Icon={AnnotationIcon} title="My Screams" />
+          <Link to="/authorScreams" title="your screams" onClick={() =>(this.setState({activeTab: "authorScreams"}))} >
+            <SidebarRow Icon={AnnotationIcon} active = {this.state.activeTab === "authorScreams"} title="My Screams" />
           </Link>
         )}
-        <Link to="/upcomingContest" title="contest watcher">
-          <SidebarRow Icon={CalendarIcon} title="Upcoming Contest" />
+        <Link to="/upcomingContest" title="contest watcher" onClick={() =>(this.setState({activeTab: "upcomingContest"}))}>
+          <SidebarRow Icon={CalendarIcon} active = {this.state.activeTab === "upcomingContest"} title="Upcoming Contest" />
         </Link>
-        <Link to="/careerOpportunities" title="career">
-          <SidebarRow Icon={AcademicCapIcon} title="Career Opportunities" />
+        <Link to="/careerOpportunities" title="career" onClick={() =>(this.setState({activeTab: "careerOpportunities"}))}>
+          <SidebarRow Icon={AcademicCapIcon} active = {this.state.activeTab === "careerOpportunities"} title="Career Opportunities" />
         </Link>
-        <Link to="/studyResources" title="study resources">
-          <SidebarRow Icon={BookOpenIcon} title="Study Resources" />
+        <Link to="/studyResources" title="study resources" onClick={() =>(this.setState({activeTab: "studyResources"}))}>
+          <SidebarRow Icon={BookOpenIcon} active = {this.state.activeTab === "studyResources"} title="Study Resources" />
         </Link>
-        <Link to="/codingProblems" title="coding problems">
-          <SidebarRow Icon={CodeIcon} title="Coding Problems" />
+        <Link to="/codingProblems" title="coding problems" onClick={() =>(this.setState({activeTab: "codingProblems"}))}>
+          <SidebarRow Icon={CodeIcon} active = {this.state.activeTab === "codingProblems"} title="Coding Problems" />
         </Link>
         {authenticated ? (
           <div onClick={this.Logoutfunc} title="logout">

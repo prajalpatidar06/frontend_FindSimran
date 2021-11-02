@@ -16,7 +16,6 @@ import { SearchIcon, LoginIcon, LogoutIcon } from "@heroicons/react/outline";
 
 function Navbar({ user, logoutUser }) {
   let activeTab = window.location.href.split('/')[window.location.href.split('/').length - 1]
-  console.log(activeTab)
   const [state, setstate] = React.useState(activeTab);
   const LogoutUser = () => {
     logoutUser();

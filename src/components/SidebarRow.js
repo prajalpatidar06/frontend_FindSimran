@@ -1,8 +1,8 @@
 import React from 'react'
 
-function SidebarRow({src,Icon,title}) {
+function SidebarRow({src,Icon,active,title}) {
     return (
-        <div className="flex items-center space-x-2 p-4 hover:bg-gray-200 rounded-xl cursor-pointer">
+        <div className={`flex items-center space-x-2 p-4 ${!active && "hover:bg-gray-200"} rounded-xl cursor-pointer ${active && "bg-blue-300"}`}>
             {src && (
                 <img 
                 className="rounded-full cursor-pointer"
