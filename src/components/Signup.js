@@ -113,7 +113,12 @@ export class Signup extends Component {
               type="submit"
               disabled={loading}
             >
-              Create Account
+              {!loading && <span>Create Account</span>}
+              {loading && (
+                <div class="flex justify-center items-center">
+                  <div class="animate-spin rounded-full h-7 w-7 border-b-2 border-gray-900"></div>
+                </div>
+              )}
             </button>
           </div>
         </form>
