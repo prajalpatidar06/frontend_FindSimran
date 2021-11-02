@@ -1,30 +1,29 @@
 import React, { Component } from "react";
 import Scream from "./Scream";
-import axios from "axios";
+import PropTypes from 'prop-types'
+import { connect } from "react-redux";
+import { getAllScreams } from "../redux/actions/dataAction";
 
 export class Screams extends Component {
-  state = {
-    screams: [],
-  };
   componentDidMount() {
-    axios
-      .get("/screams")
-      .then((res) => {
-        this.setState({
-          screams: res.data,
-        });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+   this.props.getAllScreams() 
   }
   render() {
-    let recentScreamsMarkup = ((this.state.screams.length > 0) ?
-      this.state.screams.map((scream) => <Scream key={scream.screamId} scream={scream} />)
+    const {screams , loading} = this.props.data
+    let recentScreamsMarkup = !loading ?
+      screams.map((scream) => <Scream key={scream.screamId} scream={scream} />)
       : (<p>Loading</p>)
-    )
     return <>{recentScreamsMarkup}</>
   }
 }
 
-export default Screams;
+Screams.propTypes = {
+  getAllScreams: PropTypes.func.isRequired,
+  data: PropTypes.object.isRequired
+}
+
+const mapStateToProps = (state) => ({
+  data: state.data
+})
+
+export default connect(mapStateToProps ,{getAllScreams} )(Screams);

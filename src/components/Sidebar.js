@@ -41,41 +41,41 @@ export class Sidebar extends Component {
     return (
       <div className="p-2 mt-5 max-w-[600px] xl:min-w-[300px]">
         {authenticated && (
-          <div onClick={() => this.redirectUrl("profile")}>
+          <div onClick={() => this.redirectUrl("profile")} title="profile">
             <Link to="/profile"><SidebarRow src={imageUrl} title={handle} /></Link>
           </div>
         )}
-        <Link to="/">
+        <Link to="/" title="all screams">
           <SidebarRow Icon={CollectionIcon} title="All Screams" />
         </Link>
         {authenticated && (
-          <Link to="/postScream">
+          <Link to="/postScream" title="post scream">
             <SidebarRow Icon={DocumentAddIcon} title="Post Scream" />
           </Link>
         )}
         {authenticated && (
-          <Link to="/authorScreams">
+          <Link to="/authorScreams" title="your screams">
             <SidebarRow Icon={AnnotationIcon} title="My Screams" />
           </Link>
         )}
-        <Link to="/upcomingContest">
+        <Link to="/upcomingContest" title="contest watcher">
           <SidebarRow Icon={CalendarIcon} title="Upcoming Contest" />
         </Link>
-        <Link to="/careerOpportunities">
+        <Link to="/careerOpportunities" title="career">
           <SidebarRow Icon={AcademicCapIcon} title="Career Opportunities" />
         </Link>
-        <Link to="/studyResources">
+        <Link to="/studyResources" title="study resources">
           <SidebarRow Icon={BookOpenIcon} title="Study Resources" />
         </Link>
-        <Link to="/codingProblems">
+        <Link to="/codingProblems" title="coding problems">
           <SidebarRow Icon={CodeIcon} title="Coding Problems" />
         </Link>
         {authenticated ? (
-          <div onClick={this.Logoutfunc}>
+          <div onClick={this.Logoutfunc} title="logout">
             <SidebarRow Icon={LogoutIcon} title="Logout" />
           </div>
         ) : (
-          <div onClick={() => (this.redirectUrl("login"))}>
+          <div onClick={() => (this.redirectUrl("login"))} title="login">
             <Link to="/login"><SidebarRow Icon={LoginIcon} title="Login" /></Link>
           </div>
         )}

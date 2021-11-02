@@ -38,7 +38,7 @@ export class Scream extends Component {
           </div>
           <p className="pt-4 font-medium text-2xl text-blue-300">{title}</p>
           <p className="pt-3 font-mono">{body}</p>
-          <a
+          {url !== "" && (<a
             className="pt-3 font-mono text-green-400 hover:underline flex"
             href={url}
             target="_blank"
@@ -46,14 +46,14 @@ export class Scream extends Component {
           >
             <LinkIcon width={20} height={20}/>
             {url}
-          </a>
-          <ul className="flex">
+          </a>)}
+          {requiredSkills.length > 0 ? (<ul className="flex mr-8">
             <li className="text-red-300">Required Skills: </li>
             {requiredSkills.map((element) => (
               <li className="mx-2">{element}</li>
             ))}
-          </ul>
-          <div className="sm:absolute bottom-4 right-2 py-2">
+          </ul>) : (<p className="mt-7"></p>)}
+          <div className="sm:absolute bottom-2 right-2 py-2">
             <button
               className="bg-blue-300 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             >
