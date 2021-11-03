@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { postScream } from "../redux/actions/dataAction";
+import { XCircleIcon } from "@heroicons/react/solid";
+import { PlusCircleIcon } from "@heroicons/react/outline";
 
 export class PostScream extends Component {
   constructor() {
@@ -13,23 +15,24 @@ export class PostScream extends Component {
       requiredSkills: [],
       errors: {},
     };
+    this.inputSkill = React.createRef();
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.UI.errors) {
-      this.state({ errors: nextProps.UI.errors });
+      this.setState({ errors: nextProps.UI.errors });
     }
   }
 
   handleSubmit = (event) => {
     event.preventDefault();
-    const ScreamData = {
-      title: this.state.title,
-      body: this.state.body,
-      url: this.state.url,
-      requiredSkills: this.state.requiredSkills,
-    };
-    this.props.postScream(ScreamData, this.props.history);
+      const ScreamData = {
+        title: this.state.title,
+        body: this.state.body,
+        url: this.state.url,
+        requiredSkills: this.state.requiredSkills,
+      };
+      this.props.postScream(ScreamData , this.props.history);
   };
 
   handleChange = (event) => {
@@ -38,9 +41,30 @@ export class PostScream extends Component {
     });
   };
 
+  handleAddIntoRequiredSkill = () => {
+    if (this.inputSkill.current.value !== "") {
+      this.setState({
+        requiredSkills: [
+          ...this.state.requiredSkills,
+          this.inputSkill.current.value,
+        ],
+      });
+    }
+    this.inputSkill.current.value = "";
+  };
+
+  handleRemoveFromRequiredSkill = (skill) => {
+    let filteredArray = this.state.requiredSkills.filter(
+      (item) => item !== skill.skill
+    );
+    this.setState({ requiredSkills: filteredArray });
+  };
+
   render() {
     const { errors } = this.state;
-    const { UI: {loading}} = this.props
+    const {
+      UI: { loading },
+    } = this.props;
     return (
       <div>
         <div className="mt-5 md:mt-0 md:col-span-2">
@@ -82,8 +106,7 @@ export class PostScream extends Component {
                     name="body"
                     rows="5"
                     className={`shadow-sm p-2 focus:ring-blue-500 focus:border-blue-500 mt-1 block w-full sm:text-sm border-blue-300 rounded-md ${
-                      errors.body ? "border-red-500" : true
-                    } `}
+                      errors.body && "border-red-500"} `}
                     placeholder="Body*"
                     onChange={this.handleChange}
                     value={this.state.body}
@@ -94,7 +117,36 @@ export class PostScream extends Component {
                 </div>
 
                 <div className="mt-4">
-                  <span className="text-blue-400">Required Skills: </span>
+                  <div className="sm:flex">
+                    <p className="text-blue-400 p-2">Required Skills :</p>
+                    <div className="flex items-center">
+                      <input
+                        title="Add Skill"
+                        type="text"
+                        name="skill"
+                        className="focus:ring-blue-500 p-2 focus:border-blue-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-blue-300"
+                        placeholder="Add Skill"
+                        ref={this.inputSkill}
+                      />
+                      <PlusCircleIcon
+                        className= "mx-1 h-9 w-9 cursor-pointer hover:text-blue-500"
+                        onClick={() => this.handleAddIntoRequiredSkill()}
+                      />
+                    </div>
+                  </div>
+                  <div className="flex mt-3">
+                    {this.state.requiredSkills.map((skill) => (
+                      <span className="border-2 border-blue-300 flex m-1 py-1 px-2 items-center rounded-2xl">
+                        {skill}
+                        <XCircleIcon
+                          className="h-6 w-6 items-center cursor-pointer hover:text-red-600"
+                          onClick={() =>
+                            this.handleRemoveFromRequiredSkill({ skill })
+                          }
+                        />
+                      </span>
+                    ))}
+                  </div>
                 </div>
               </div>
 
@@ -121,7 +173,6 @@ export class PostScream extends Component {
 
 PostScream.propTypes = {
   postScream: PropTypes.func.isRequired,
-  clearErrors: PropTypes.object.isRequired,
   UI: PropTypes.object.isRequired,
 };
 

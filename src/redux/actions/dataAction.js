@@ -27,7 +27,8 @@ export const postScream = (newScream , history) => (dispatch) =>{
                 type:POST_SCREAM,
                 payload: res.data
             })
-            dispatch(clearErrors)
+            dispatch(clearErrors())
+            history.push("/")
         })
         .catch(err =>{
             dispatch({
@@ -35,7 +36,6 @@ export const postScream = (newScream , history) => (dispatch) =>{
                 payload: err.response.data
             })
         })
-        history.push("/")
 }
 
 export const voteScream = (screamId , voteData) => (dispatch) =>{
