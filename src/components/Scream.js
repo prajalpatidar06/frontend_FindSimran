@@ -63,8 +63,8 @@ export class Scream extends Component {
             </a>
           )}
           {requiredSkills.length > 0 && (
-              <p className="mx-2 break-words break-normal md:break-all">
-                {requiredSkills.map((element) => (<span className="mx-2 text-red-500">{ element } <span className="text-black sm:text-xl">|</span></span>))}
+              <p className="mx-2 mt-2 break-words break-normal md:break-all border-t">
+                {requiredSkills.map((element) => (<span className="mx-2 text-red-500">{ element }</span>))}
               </p>
           )}
           <div className="my-3 py-3 relative">

@@ -13,6 +13,7 @@ export const STOP_LOADING_UI = 'STOP_LOADING_UI';
 // Data reducer types
 export const LOADING_DATA = 'LOADING_DATA';
 export const SET_SCREAMS = 'SET_SCREAMS';
+export const SET_AUTHSCREAMS = 'SET_AUTHSCREAMS';
 export const VOTE_SCREAM = 'VOTE_SCREAM';
 export const DELETE_SCREAM = 'DELETE_SCREAM';
 export const POST_SCREAM = 'POST_SCREAM';

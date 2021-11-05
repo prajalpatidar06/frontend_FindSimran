@@ -21,12 +21,32 @@ export class home extends Component {
               <div className="flex-grow h-screen pb-44 pt-6 mr-4 xl:mr-40 overflow-y-auto scrollbar-hide">
                 <div className="mx-auto max-w-md md:max-w-lg lg:max-w-2xl">
                   <Route exact path="/" component={Screams} />
-                  <Route exact path="/upcomingContest" component={UpcomingContest} />
-                  <Route exact path="/careerOpportunities" component={CareerOpportunities} />
-                  <Route exact path="/studyResources" component={StudyResources} />
-                  <Route exact path="/codingProblems" component={codingProblems} />
+                  <Route
+                    exact
+                    path="/upcomingContest"
+                    component={UpcomingContest}
+                  />
+                  <Route
+                    exact
+                    path="/careerOpportunities"
+                    component={CareerOpportunities}
+                  />
+                  <Route
+                    exact
+                    path="/studyResources"
+                    component={StudyResources}
+                  />
+                  <Route
+                    exact
+                    path="/codingProblems"
+                    component={codingProblems}
+                  />
                   <Route exact path="/postScream" component={PostScream} />
-                  <Route exact path="/authorScreams" component={AuthorScreams} />
+                  <Route
+                    exact
+                    path="/authorScreams"
+                    component={AuthorScreams}
+                  />
                 </div>
               </div>
             </Switch>

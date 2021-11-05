@@ -19,6 +19,7 @@ import { SET_AUTHENTICATED } from "./redux/types";
 import { logoutUser , getUserData } from "./redux/actions/userAction";
 import doubtExchange from "./pages/doubtExchange";
 
+// axios.defaults.baseURL = "http://localhost:5000/findcodingpartner/asia-east1/api";
 axios.defaults.baseURL = "https://asia-east1-findcodingpartner.cloudfunctions.net/api";
 
 const token = localStorage.FBIdToken

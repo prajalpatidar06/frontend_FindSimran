@@ -9,7 +9,7 @@ export class Screams extends Component {
     this.props.getAllScreams();
   }
   render() {
-    const { screams, loading } = this.props.data;
+    const { screams, loading} = this.props.data;
     let recentScreamsMarkup = !loading ? (
       screams.map((scream) => <Scream key={scream.screamId} scream={scream} />)
     ) : (

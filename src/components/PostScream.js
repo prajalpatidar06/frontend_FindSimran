@@ -31,7 +31,7 @@ export class PostScream extends Component {
     if (answer) {
       const ScreamData = {
         title: this.state.title,
-        body: this.state.body.split("\n"),
+        body: this.state.body.trim().split("\n"),
         url: this.state.url,
         requiredSkills: this.state.requiredSkills,
       };
