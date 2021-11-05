@@ -13,8 +13,8 @@ export class Screams extends Component {
     let recentScreamsMarkup = !loading ? (
       screams.map((scream) => <Scream key={scream.screamId} scream={scream} />)
     ) : (
-      <div class="flex justify-center fixed top-[50%] left-[50%] items-center">
-        <div class="animate-spin rounded-full h-20 w-20 border-b-2 border-gray-900"></div>
+      <div className="flex justify-center fixed top-[50%] left-[50%] items-center">
+        <div className="animate-spin rounded-full h-20 w-20 border-b-2 border-gray-900"></div>
       </div>
     );
     return <>{recentScreamsMarkup}</>;

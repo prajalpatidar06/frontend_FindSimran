@@ -26,13 +26,17 @@ export class PostScream extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
+    const answer = window.confirm("Post scream!");
+    console.log(answer)
+    if (answer) {
       const ScreamData = {
         title: this.state.title,
-        body: this.state.body,
+        body: this.state.body.split("\n"),
         url: this.state.url,
         requiredSkills: this.state.requiredSkills,
       };
-      this.props.postScream(ScreamData , this.props.history);
+      this.props.postScream(ScreamData, this.props.history);
+    }
   };
 
   handleChange = (event) => {
@@ -41,16 +45,13 @@ export class PostScream extends Component {
     });
   };
 
-  handleAddIntoRequiredSkill = () => {
-    if (this.inputSkill.current.value !== "") {
+  handleArrayChange = (ref, stateName) => {
+    if (ref.current.value !== "") {
       this.setState({
-        requiredSkills: [
-          ...this.state.requiredSkills,
-          this.inputSkill.current.value,
-        ],
+        requiredSkills: [...stateName, ref.current.value],
       });
     }
-    this.inputSkill.current.value = "";
+    ref.current.value = "";
   };
 
   handleRemoveFromRequiredSkill = (skill) => {
@@ -106,7 +107,8 @@ export class PostScream extends Component {
                     name="body"
                     rows="5"
                     className={`shadow-sm p-2 focus:ring-blue-500 focus:border-blue-500 mt-1 block w-full sm:text-sm border-blue-300 rounded-md ${
-                      errors.body && "border-red-500"} `}
+                      errors.body && "border-red-500"
+                    } `}
                     placeholder="Body*"
                     onChange={this.handleChange}
                     value={this.state.body}
@@ -129,8 +131,13 @@ export class PostScream extends Component {
                         ref={this.inputSkill}
                       />
                       <PlusCircleIcon
-                        className= "mx-1 h-9 w-9 cursor-pointer hover:text-blue-500"
-                        onClick={() => this.handleAddIntoRequiredSkill()}
+                        className="mx-1 h-9 w-9 cursor-pointer hover:text-blue-500"
+                        onClick={() =>
+                          this.handleArrayChange(
+                            this.inputSkill,
+                            this.state.requiredSkills
+                          )
+                        }
                       />
                     </div>
                   </div>
