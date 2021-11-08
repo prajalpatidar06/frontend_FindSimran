@@ -141,17 +141,17 @@ export class PostScream extends Component {
                       />
                     </div>
                   </div>
-                  <div className="flex mt-3">
+                  <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
                     {this.state.requiredSkills.map((skill) => (
-                      <span className="border-2 border-blue-300 flex m-1 py-1 px-2 items-center rounded-2xl">
+                      <p className="border-2 border-blue-300 flex m-1 py-1 px-2 items-center rounded-2xl">
                         {skill}
                         <XCircleIcon
-                          className="h-6 w-6 items-center cursor-pointer hover:text-red-600"
+                          className="h-9 w-9 items-center cursor-pointer mx-auto hover:text-red-600"
                           onClick={() =>
                             this.handleRemoveFromRequiredSkill({ skill })
                           }
                         />
-                      </span>
+                      </p>
                     ))}
                   </div>
                 </div>

@@ -7,9 +7,9 @@ import { deleteScream } from "../redux/actions/dataAction";
 
 import {
   DotsCircleHorizontalIcon,
-  LinkIcon,
-  LockClosedIcon,
-  LockOpenIcon,
+  ExternalLinkIcon,
+  StatusOfflineIcon,
+  StatusOnlineIcon,
   TrashIcon,
 } from "@heroicons/react/solid";
 
@@ -64,22 +64,22 @@ export class AuthScreamCard extends Component {
                 {dayjs(createdAt).fromNow()}
               </p>
             </div>
+            {url !== "" && (
+              <a
+                className="pt-3 text-green-400 absolute right-2 top-1"
+                href={url}
+                target="_blank"
+                rel="noreferrer"
+                title="link"
+              >
+                <ExternalLinkIcon width={26} height={26} />
+              </a>
+            )}
           </div>
           <p className="pt-4 font-medium text-2xl text-blue-300">{title}</p>
           <div className="pt-3 font-mono">
             {body.length > 0 && body.map((para) => <p>{para}</p>)}
           </div>
-          {url !== "" && (
-            <a
-              className="pt-3 font-mono text-green-400 hover:underline flex"
-              href={url}
-              target="_blank"
-              rel="noreferrer"
-            >
-              <LinkIcon width={20} height={20} />
-              {url}
-            </a>
-          )}
           {requiredSkills.length > 0 && (
             <p className="mx-2 mt-2 break-words break-normal md:break-all">
               {requiredSkills.map((element) => (
@@ -92,12 +92,12 @@ export class AuthScreamCard extends Component {
           <div className="InputIcon rounded-none rounded-bl-2xl">
             {active ? (
               <div className="text-green-700">
-                <LockOpenIcon className="h-4 w-4 text-green-500" />
+                <StatusOnlineIcon className="h-4 w-4 text-green-500" />
                 <p className="text-xs sm:text-bases">active</p>
               </div>
             ) : (
               <div className="text-red-600">
-                <LockClosedIcon className="h-4 w-4 text-red-500" />
+                <StatusOfflineIcon className="h-4 w-4 text-red-500" />
                 <p className="text-xs sm:text-bases">inactive</p>
               </div>
             )}

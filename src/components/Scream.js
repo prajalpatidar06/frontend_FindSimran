@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
-import { LinkIcon } from "@heroicons/react/solid";
+import { ExternalLinkIcon } from "@heroicons/react/solid";
 
 export class Scream extends Component {
   userProfile = (handle) => {
@@ -44,28 +44,28 @@ export class Scream extends Component {
                 {dayjs(createdAt).fromNow()}
               </p>
             </div>
+            {url !== "" && (
+              <a
+                className="pt-3 text-green-400 absolute right-2 top-1"
+                href={url}
+                target="_blank"
+                rel="noreferrer"
+                title="link"
+              >
+                <ExternalLinkIcon width={26} height={26} />
+              </a>
+            )}
           </div>
           <p className="pt-4 font-medium text-2xl text-blue-300">{title}</p>
           <div className="pt-3 font-mono">
-          {body.length > 0 && body.map((para) => (
-            <p>{para}</p>
-          ))}
+            {body.length > 0 && body.map((para) => <p>{para}</p>)}
           </div>
-          {url !== "" && (
-            <a
-              className="pt-3 font-mono text-green-400 hover:underline flex"
-              href={url}
-              target="_blank"
-              rel="noreferrer"
-            >
-              <LinkIcon width={20} height={20} />
-              {url}
-            </a>
-          )}
           {requiredSkills.length > 0 && (
-              <p className="mx-2 mt-2 break-words break-normal md:break-all border-t">
-                {requiredSkills.map((element) => (<span className="mx-2 text-red-500">{ element }</span>))}
-              </p>
+            <p className="mx-2 mt-2 break-words break-normal md:break-all border-t">
+              {requiredSkills.map((element) => (
+                <span className="mx-2 text-red-500">{element}</span>
+              ))}
+            </p>
           )}
           <div className="my-3 py-3 relative">
             <button className="bg-blue-300 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline absolute right-0">
