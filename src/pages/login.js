@@ -1,6 +1,6 @@
 import React from "react";
-import Signup from '../components/Signup'
-import Login from '../components/Login'
+import Signup from '../components/Auth/Signup'
+import Login from '../components/Auth/Login'
 
 const Tabs = ({ color }) => {
   const [openTab, setOpenTab] = React.useState(1);

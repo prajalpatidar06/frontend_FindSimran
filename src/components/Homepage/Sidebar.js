@@ -3,7 +3,7 @@ import SidebarRow from "./SidebarRow";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import { logoutUser } from "../redux/actions/userAction";
+import { logoutUser } from "../../redux/actions/userAction";
 
 import {
   AcademicCapIcon,

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes  from 'prop-types';
 import { connect } from 'react-redux';
-import { getAuthScreams } from '../redux/actions/dataAction';
+import { getAuthScreams } from '../../../redux/actions/dataAction';
 import AuthScreamCard from './AuthScreamCard'
 
 export class AuthorScreams extends Component {

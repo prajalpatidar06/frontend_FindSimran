@@ -11,7 +11,7 @@ import aboutUs from "./pages/aboutUs";
 import chats from "./pages/chats"
 import login from "./pages/login";
 // Components stuff
-import Navbar from "./components/Navbar";
+import Navbar from "./components/Navbar/Navbar";
 import AuthRoute from "./utils/AuthRoute";
 // Redux stuff
 import { Provider } from "react-redux";

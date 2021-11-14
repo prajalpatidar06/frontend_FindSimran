@@ -3,7 +3,7 @@ import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { deleteScream } from "../redux/actions/dataAction";
+import { deleteScream } from "../../../redux/actions/dataAction";
 
 import {
   DotsCircleHorizontalIcon,

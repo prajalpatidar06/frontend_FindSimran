@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import ProfileCard from "../components/ProfileCard";
+import ProfileCard from "../components/Profile/ProfileCard";
 export class profile extends Component {
   render() {
     return (

@@ -1,14 +1,14 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 // components stuff
-import Sidebar from "../components/Sidebar";
-import Screams from "../components/Screams";
-import UpcomingContest from "../components/UpcomingContest";
-import CareerOpportunities from "../components/CareerOpportunities";
-import StudyResources from "../components/StudyResources";
-import codingProblems from "../components/codingProblems";
-import PostScream from "../components/PostScream";
-import AuthorScreams from "../components/AuthorScreams";
+import Sidebar from "../components/Homepage/Sidebar"
+import Screams from "../components/Homepage/Public/Screams";
+import UpcomingContest from "../components/Homepage/Static/UpcomingContest";
+import CareerOpportunities from "../components/Homepage/Static/CareerOpportunities";
+import StudyResources from "../components/Homepage/Static/StudyResources";
+import codingProblems from "../components/Homepage/Static/codingProblems";
+import PostScream from "../components/Homepage/Author/PostScream";
+import AuthorScreams from "../components/Homepage/Author/AuthorScreams";
 
 export class home extends Component {
   render() {

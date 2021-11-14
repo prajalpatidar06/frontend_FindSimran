@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Scream from "./Scream";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { getAllScreams } from "../redux/actions/dataAction";
+import { getAllScreams } from "../../../redux/actions/dataAction";
 
 export class Screams extends Component {
   componentDidMount() {

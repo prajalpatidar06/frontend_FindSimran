@@ -3,7 +3,7 @@ import HeaderIcon from "./HeaderIcon";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { logoutUser } from "../redux/actions/userAction";
+import { logoutUser } from "../../redux/actions/userAction";
 import {
   HomeIcon,
   FlagIcon,

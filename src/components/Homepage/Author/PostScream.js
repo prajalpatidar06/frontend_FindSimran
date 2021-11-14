@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { postScream } from "../redux/actions/dataAction";
+import { postScream } from "../../../redux/actions/dataAction";
 import { XCircleIcon } from "@heroicons/react/solid";
 import { PlusCircleIcon } from "@heroicons/react/outline";
 
