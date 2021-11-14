@@ -2,7 +2,6 @@
   "name": "coding_partner",
   "version": "0.1.0",
   "private": true,
-  "proxy": "https://asia-east1-findcodingpartner.cloudfunctions.net/api",
   "dependencies": {
     "@craco/craco": "^6.4.0",
     "@heroicons/react": "^1.0.5",

@@ -1,6 +1,6 @@
 import React from 'react'
 
-function SidebarRow({src,Icon,active,title}) {
+function SidebarRow({src,Icon,active,title,expand}) {
     return (
         <div className={`flex items-center space-x-2 p-4 ${!active && "hover:bg-gray-200"} rounded-xl cursor-pointer ${active && "bg-blue-300"}`}>
             {src && (
@@ -16,7 +16,7 @@ function SidebarRow({src,Icon,active,title}) {
             {Icon && (
                 <Icon className="h-8 w-8 text-blue-500" />
             )}
-            <p className="hidden sm:inline-flex font-medium">{title}</p>
+            <p className={`${!expand && "hidden"} sm:inline-flex font-medium delay-100`}>{title}</p>
         </div>
     )
 }

@@ -15,14 +15,20 @@ import {
   DocumentAddIcon,
   LoginIcon,
   LogoutIcon,
+  MenuIcon,
+  XIcon,
 } from "@heroicons/react/solid";
 
 export class Sidebar extends Component {
-  constructor(){
-    super()
+  constructor() {
+    super();
     this.state = {
-      activeTab: window.location.href.split('/')[window.location.href.split('/').length - 1]
-    }
+      activeTab:
+        window.location.href.split("/")[
+          window.location.href.split("/").length - 1
+        ],
+      menu: false,
+    };
   }
   Logoutfunc = () => {
     this.props.logoutUser();
@@ -46,43 +52,119 @@ export class Sidebar extends Component {
     } = this.props;
     return (
       <div className="p-2 mt-5 max-w-[600px] xl:min-w-[300px]">
-        {authenticated && (
-          <div onClick={() => this.redirectUrl("profile")} title="profile">
-            <Link to="/profile"><SidebarRow src={imageUrl} title={handle} /></Link>
+        {this.state.menu ? (
+          <div className="inline-flex sm:hidden" onClick={() => this.setState({menu:false})}>
+            <SidebarRow Icon={XIcon} expand={this.state.menu} />
+          </div>
+        ) : (
+          <div className="inline-flex sm:hidden" onClick={() => this.setState({menu:true})}>
+            <SidebarRow Icon={MenuIcon} expand={this.state.menu} />
           </div>
         )}
-        <Link to="/" title="all screams" onClick={() =>(this.setState({activeTab: ""}))}>
-          <SidebarRow Icon={CollectionIcon} active = {this.state.activeTab === ""} title="All Screams" />
+        {authenticated && (
+          <div onClick={() => this.redirectUrl("profile")} title="profile">
+            <Link to="/profile">
+              <SidebarRow src={imageUrl} title={handle} expand={this.state.menu} />
+            </Link>
+          </div>
+        )}
+        <Link
+          to="/"
+          title="all screams"
+          onClick={() => this.setState({ activeTab: "" })}
+        >
+          <SidebarRow
+            Icon={CollectionIcon}
+            active={this.state.activeTab === ""}
+            title="All Screams"
+            expand={this.state.menu}
+          />
         </Link>
         {authenticated && (
-          <Link to="/postScream" title="post scream" onClick={() =>(this.setState({activeTab: "postScream"}))}>
-            <SidebarRow Icon={DocumentAddIcon} active = {this.state.activeTab === "postScream"} title="Post Scream" />
+          <Link
+            to="/postScream"
+            title="post scream"
+            onClick={() => this.setState({ activeTab: "postScream" })}
+          >
+            <SidebarRow
+              Icon={DocumentAddIcon}
+              active={this.state.activeTab === "postScream"}
+              title="Post Scream"
+              expand={this.state.menu}
+            />
           </Link>
         )}
         {authenticated && (
-          <Link to="/authorScreams" title="your screams" onClick={() =>(this.setState({activeTab: "authorScreams"}))} >
-            <SidebarRow Icon={AnnotationIcon} active = {this.state.activeTab === "authorScreams"} title="My Screams" />
+          <Link
+            to="/authorScreams"
+            title="your screams"
+            onClick={() => this.setState({ activeTab: "authorScreams" })}
+          >
+            <SidebarRow
+              Icon={AnnotationIcon}
+              active={this.state.activeTab === "authorScreams"}
+              title="My Screams"
+              expand={this.state.menu}
+            />
           </Link>
         )}
-        <Link to="/upcomingContest" title="contest watcher" onClick={() =>(this.setState({activeTab: "upcomingContest"}))}>
-          <SidebarRow Icon={CalendarIcon} active = {this.state.activeTab === "upcomingContest"} title="Upcoming Contest" />
+        <Link
+          to="/upcomingContest"
+          title="contest watcher"
+          onClick={() => this.setState({ activeTab: "upcomingContest" })}
+        >
+          <SidebarRow
+            Icon={CalendarIcon}
+            active={this.state.activeTab === "upcomingContest"}
+            title="Upcoming Contest"
+            expand={this.state.menu}
+          />
         </Link>
-        <Link to="/careerOpportunities" title="career" onClick={() =>(this.setState({activeTab: "careerOpportunities"}))}>
-          <SidebarRow Icon={AcademicCapIcon} active = {this.state.activeTab === "careerOpportunities"} title="Career Opportunities" />
+        <Link
+          to="/careerOpportunities"
+          title="career"
+          onClick={() => this.setState({ activeTab: "careerOpportunities" })}
+        >
+          <SidebarRow
+            Icon={AcademicCapIcon}
+            active={this.state.activeTab === "careerOpportunities"}
+            title="Career Opportunities"
+            expand={this.state.menu}
+          />
         </Link>
-        <Link to="/studyResources" title="study resources" onClick={() =>(this.setState({activeTab: "studyResources"}))}>
-          <SidebarRow Icon={BookOpenIcon} active = {this.state.activeTab === "studyResources"} title="Study Resources" />
+        <Link
+          to="/studyResources"
+          title="study resources"
+          onClick={() => this.setState({ activeTab: "studyResources" })}
+        >
+          <SidebarRow
+            Icon={BookOpenIcon}
+            active={this.state.activeTab === "studyResources"}
+            title="Study Resources"
+            expand={this.state.menu}
+          />
         </Link>
-        <Link to="/codingProblems" title="coding problems" onClick={() =>(this.setState({activeTab: "codingProblems"}))}>
-          <SidebarRow Icon={CodeIcon} active = {this.state.activeTab === "codingProblems"} title="Coding Problems" />
+        <Link
+          to="/codingProblems"
+          title="coding problems"
+          onClick={() => this.setState({ activeTab: "codingProblems" })}
+        >
+          <SidebarRow
+            Icon={CodeIcon}
+            active={this.state.activeTab === "codingProblems"}
+            title="Coding Problems"
+            expand={this.state.menu}
+          />
         </Link>
         {authenticated ? (
           <div onClick={this.Logoutfunc} title="logout">
-            <SidebarRow Icon={LogoutIcon} title="Logout" />
+            <SidebarRow Icon={LogoutIcon} title="Logout" expand={this.state.menu} />
           </div>
         ) : (
-          <div onClick={() => (this.redirectUrl("login"))} title="login">
-            <Link to="/login"><SidebarRow Icon={LoginIcon} title="Login" /></Link>
+          <div onClick={() => this.redirectUrl("login")} title="login">
+            <Link to="/login">
+              <SidebarRow Icon={LoginIcon} title="Login" expand={this.state.menu} />
+            </Link>
           </div>
         )}
       </div>
