@@ -2,10 +2,11 @@ import React, { Component } from "react";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { ExternalLinkIcon } from "@heroicons/react/solid";
-
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
 export class Scream extends Component {
   userProfile = (handle) => {
-    console.log(handle);
+    window.location.href = (this.props.user.authenticated && this.props.user.credentials.handle === handle) ?  'profile' :  `user/${handle}`
   };
   render() {
     dayjs.extend(relativeTime);
@@ -41,7 +42,9 @@ export class Scream extends Component {
                 {handle}
               </p>
               <p className="text-xs text-gray-400">
-                {dayjs(createdAt).fromNow()}
+                {dayjs(createdAt).fromNow().slice(1) === " days ago"
+                  ? dayjs(createdAt).format("DD/MM/YY")
+                  : dayjs(createdAt).fromNow()}
               </p>
             </div>
             {url !== "" && (
@@ -56,19 +59,21 @@ export class Scream extends Component {
               </a>
             )}
           </div>
-          <p className="pt-4 font-medium text-2xl text-blue-300">{title}</p>
-          <div className="pt-3 font-mono">
+          <p className="pt-4 font-medium text-2xl text-blue-600">{title}</p>
+          <div className="pt-3">
             {body.length > 0 && body.map((para) => <p>{para}</p>)}
           </div>
           {requiredSkills.length > 0 && (
             <p className="mx-2 mt-2 break-words break-normal md:break-all border-t">
               {requiredSkills.map((element) => (
-                <span className="mx-2 text-red-500">{element}</span>
+                <span className="mx-2 text-red-500">
+                  {element.charAt(0).toUpperCase() + element.slice(1)}
+                </span>
               ))}
             </p>
           )}
           <div className="my-3 py-3 relative">
-            <button className="bg-blue-300 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline absolute right-0">
+            <button className="bg-blue-500 sm:bg-blue-400 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline absolute right-0">
               Lets Collab
             </button>
           </div>
@@ -78,4 +83,12 @@ export class Scream extends Component {
   }
 }
 
-export default Scream;
+Scream.propTypes = {
+  user: PropTypes.object.isRequired
+};
+
+const mapStateToProps = (state) => ({
+  user: state.user
+})
+
+export default connect(mapStateToProps)(Scream);

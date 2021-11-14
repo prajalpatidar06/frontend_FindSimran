@@ -12,7 +12,7 @@ import {
   ChatAlt2Icon,
 } from "@heroicons/react/solid";
 
-import { SearchIcon, LoginIcon, LogoutIcon } from "@heroicons/react/outline";
+import {LoginIcon, LogoutIcon } from "@heroicons/react/outline";
 
 function Navbar({ user, logoutUser }) {
   let activeTab = window.location.href.split('/')[window.location.href.split('/').length - 1]
@@ -52,14 +52,14 @@ function Navbar({ user, logoutUser }) {
             onClick={()=>(setstate(""))}
           />
         </Link>
-        <div className="flex ml-2 items-center rounded-full bg-gray-100 p-2">
+        {/* <div className="flex ml-2 items-center rounded-full bg-gray-100 p-2">
           <SearchIcon className="h-6 text-gray-600" />
           <input
             className="hidden md:inline-flex flex ml-2 items-center bg-transparent outline-none placeholder-gray-500 flex-shrink"
             type="text"
             placeholder="Search FindSimran"
           />
-        </div>
+        </div> */}
       </div>
       {/* center */}
       <div className="flex justify-center flex-grow">

@@ -1,9 +1,10 @@
-import {SET_SCREAMS , LOADING_DATA, POST_SCREAM, DELETE_SCREAM, SET_AUTHSCREAMS} from '../types'
+import {SET_SCREAMS , LOADING_DATA, POST_SCREAM, DELETE_SCREAM, SET_AUTHSCREAMS , SET_USERDATA} from '../types'
 
 const initialState = {
     screams: [],
     authScreams:[],
     scream:{},
+    userData:{},
     loading: false
 }
 
@@ -43,6 +44,12 @@ export default function ChangeState (state= initialState , action) {
                 state.authScreams.splice(index , 1)
             return {
                 ...state
+            }
+        case SET_USERDATA:
+            return {
+                ...state,
+                userData:action.payload,
+                loading:false,
             }
         default:
             return state

@@ -5,6 +5,7 @@ import axios from "axios";
 // pages stuff
 import home from "./pages/home";
 import profile from "./pages/profile";
+import user from "./pages/user";
 import notifications from "./pages/notifications";
 import aboutUs from "./pages/aboutUs";
 import chats from "./pages/chats"
@@ -19,7 +20,6 @@ import { SET_AUTHENTICATED } from "./redux/types";
 import { logoutUser , getUserData } from "./redux/actions/userAction";
 import doubtExchange from "./pages/doubtExchange";
 
-// axios.defaults.baseURL = "http://localhost:5000/findcodingpartner/asia-east1/api";
 axios.defaults.baseURL = "https://asia-east1-findcodingpartner.cloudfunctions.net/api";
 
 const token = localStorage.FBIdToken
@@ -45,6 +45,7 @@ class App extends Component {
               <Route exact path="/" component={home} />
               <Route exact path="/doubtExchange" component={doubtExchange} />
               <Route exact path="/profile" component={profile} />
+              <Route path="/user" component={user} />
               <Route exact path="/chats" component={chats} />
               <Route exact path="/notifications" component={notifications} />
               <Route exact path="/aboutUs" component={aboutUs} />

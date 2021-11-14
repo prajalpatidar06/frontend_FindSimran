@@ -4,7 +4,7 @@ export class profile extends Component {
   render() {
     return (
       <div className="min-h-screen py-10 px-3 sm:px-5 bg-gray-100">
-          <ProfileCard name="prajal" title="prfile title" />
+          <ProfileCard />
       </div>
     );
   }

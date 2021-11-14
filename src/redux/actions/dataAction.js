@@ -8,6 +8,7 @@ import {
   LOADING_UI,
   POST_SCREAM,
   DELETE_SCREAM,
+  SET_USERDATA,
 } from "../types";
 import axios from "axios";
 
@@ -106,5 +107,23 @@ export const deleteScream = (screamId) => (dispatch) => {
           type: SET_ERRORS,
           payload:err.response.data
       })
+    });
+};
+
+export const getUserData = (userHandle) => (dispatch) => {
+  dispatch({ type: LOADING_DATA });
+  axios
+    .get(`/user/${userHandle}`)
+    .then((res) => {
+      dispatch({
+        type: SET_USERDATA,
+        payload: res.data
+      });
+    })
+    .catch(() => {
+      dispatch({
+        type: SET_USERDATA,
+        payload: null
+      });
     });
 };

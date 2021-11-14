@@ -61,7 +61,7 @@ export class AuthScreamCard extends Component {
                 {handle}
               </p>
               <p className="text-xs text-gray-400">
-                {dayjs(createdAt).fromNow()}
+                {dayjs(createdAt).fromNow().slice(1) === ' days ago' ? dayjs(createdAt).format('DD/MM/YY') : dayjs(createdAt).fromNow()}
               </p>
             </div>
             {url !== "" && (
@@ -76,14 +76,14 @@ export class AuthScreamCard extends Component {
               </a>
             )}
           </div>
-          <p className="pt-4 font-medium text-2xl text-blue-300">{title}</p>
-          <div className="pt-3 font-mono">
+          <p className="pt-4 font-medium text-2xl text-blue-600">{title}</p>
+          <div className="pt-3">
             {body.length > 0 && body.map((para) => <p>{para}</p>)}
           </div>
           {requiredSkills.length > 0 && (
-            <p className="mx-2 mt-2 break-words break-normal md:break-all">
+            <p className="mt-2 break-words break-normal md:break-all">
               {requiredSkills.map((element) => (
-                <span className="mx-2 text-red-500">{element}</span>
+                <span className="mx-2 text-red-500">{element.charAt(0).toUpperCase() + element.slice(1)}</span>
               ))}
             </p>
           )}

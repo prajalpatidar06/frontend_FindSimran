@@ -17,3 +17,4 @@ export const SET_AUTHSCREAMS = 'SET_AUTHSCREAMS';
 export const VOTE_SCREAM = 'VOTE_SCREAM';
 export const DELETE_SCREAM = 'DELETE_SCREAM';
 export const POST_SCREAM = 'POST_SCREAM';
+export const SET_USERDATA = 'SET_USERDATA';
