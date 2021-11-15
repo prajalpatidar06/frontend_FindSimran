@@ -16,7 +16,7 @@ function SidebarRow({src,Icon,active,title,expand}) {
             {Icon && (
                 <Icon className="h-8 w-8 text-blue-500" />
             )}
-            <p className={`${!expand && "hidden"} sm:inline-flex font-medium delay-100`}>{title}</p>
+            <p className={`${!expand && "hidden"} sm:inline-flex z-10  font-medium delay-100`}>{title}</p>
         </div>
     )
 }

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 // components stuff
-import Sidebar from "../components/Homepage/Sidebar"
+import Sidebar from "../components/Homepage/Sidebar";
 import Screams from "../components/Homepage/Public/Screams";
 import UpcomingContest from "../components/Homepage/Static/UpcomingContest";
 import CareerOpportunities from "../components/Homepage/Static/CareerOpportunities";

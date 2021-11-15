@@ -1,41 +1,21 @@
 import React from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import {CameraIcon} from '@heroicons/react/solid'
-import {uploadImage} from '../../redux/actions/userAction'
 
-function ProfileCard({
+function UserProfileCard({
   user: {
-    credentials: {
-      handle,
-      imageUrl,
-      email,
-      bio,
-      gender,
-      onlinePlateform,
-      skills,
-      website,
-    },
+    handle,
+    imageUrl,
+    email,
+    bio,
+    gender,
+    onlinePlateform,
+    skills,
+    website,
   },
-  uploadImage
 }) {
-
-  const handleImageChange = (event) => {
-    const image = event.target.files[0];
-    const formData = new FormData();
-    formData.append('image', image, image.name);
-    uploadImage(formData);
-  }
-
-  const handleEditPicture = () => {
-    const fileInput = document.getElementById('imageInput');
-    fileInput.click();
-  }
-
   return (
     <div className="flex items-center">
       <div className="mx-auto bg-white shadow-xl rounded-xl p-2">
-        <div className="flex relative">
+        <div className="flex">
           <img
             className="shadow-xl rounded-full mx-auto mt-5"
             width={140}
@@ -43,8 +23,6 @@ function ProfileCard({
             src={imageUrl}
             alt="Profile face"
           />
-          <input type="file" id="imageInput" hidden="hidden" onChange={handleImageChange} />
-          <CameraIcon className="absolute right-5 bottom-0 hover:text-blue-500 cursor-pointer" width={25} height={25} type="button" title="update Image" onClick={handleEditPicture} />
         </div>
         <div className="mt-5">
           <p className="text-xl px-5 sm:text-2xl font-semibold text-gray-900">
@@ -87,13 +65,4 @@ function ProfileCard({
   );
 }
 
-ProfileCard.propTypes = {
-  user: PropTypes.object.isRequired,
-  uploadImage: PropTypes.func.isRequired
-};
-
-const mapStateToProps = (state) => ({
-  user: state.user,
-});
-
-export default connect(mapStateToProps,{uploadImage})(ProfileCard);
+export default UserProfileCard;

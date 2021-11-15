@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { getUserData } from "../redux/actions/dataAction";
+import UserProfileCard from "../components/User/UserProfileCard";
 
 export class user extends Component {
   componentDidMount() {
@@ -21,17 +22,7 @@ export class user extends Component {
             {userData == null ? (
               <div>User Not Found</div>
             ) : (
-              <div>
-                <img
-                  src={userData.imageUrl}
-                  alt="userProfile"
-                  width={140}
-                  height={140}
-                />
-                <p>{userData.handle}</p>
-                <p>{userData.email}</p>
-                <p>{userData.bio}</p>
-              </div>
+              <UserProfileCard user={userData} />
             )}
           </>
         ) : (
