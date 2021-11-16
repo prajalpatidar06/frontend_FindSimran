@@ -37,7 +37,6 @@ function Navbar({ user, logoutUser }) {
       </Fragment>
     );
   }
-  console.log(state)
   return (
     <div className="sticky top-0 z-50 bg-white flex items-center p-2 lg:px-5 shadow-md">
       {/* Left */}
@@ -46,10 +45,8 @@ function Navbar({ user, logoutUser }) {
           <img
             src="https://firebasestorage.googleapis.com/v0/b/findcodingpartner.appspot.com/o/findsimran-logo.png?alt=media"
             alt="Logo"
-            width={45}
-            height={40}
             layout="fixed"
-            className="cursor-pointer"
+            className="cursor-pointer h-8 w-8"
             onClick={()=>(setstate(""))}
           />
         </Link>

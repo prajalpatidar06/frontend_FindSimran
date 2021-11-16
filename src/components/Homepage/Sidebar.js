@@ -35,7 +35,6 @@ export class Sidebar extends Component {
   };
   redirectUrl = (urlParams) => {
     let actionUrl = window.location.href;
-    console.log(urlParams);
     if (actionUrl.split("/")[actionUrl.split("/").length - 1] !== "") {
       actionUrl.split("/")[actionUrl.split("/").length - 1] = urlParams;
     } else {
@@ -71,7 +70,7 @@ export class Sidebar extends Component {
         <Link
           to="/"
           title="all screams"
-          onClick={() => this.setState({ activeTab: "" })}
+          onClick={() => this.setState({ activeTab: "" , menu : false})}
         >
           <SidebarRow
             Icon={CollectionIcon}
@@ -84,7 +83,7 @@ export class Sidebar extends Component {
           <Link
             to="/postScream"
             title="post scream"
-            onClick={() => this.setState({ activeTab: "postScream" })}
+            onClick={() => this.setState({ activeTab: "postScream" , menu : false})}
           >
             <SidebarRow
               Icon={DocumentAddIcon}
@@ -98,7 +97,7 @@ export class Sidebar extends Component {
           <Link
             to="/authorScreams"
             title="your screams"
-            onClick={() => this.setState({ activeTab: "authorScreams" })}
+            onClick={() => this.setState({ activeTab: "authorScreams" , menu : false})}
           >
             <SidebarRow
               Icon={AnnotationIcon}
@@ -111,7 +110,7 @@ export class Sidebar extends Component {
         <Link
           to="/upcomingContest"
           title="contest watcher"
-          onClick={() => this.setState({ activeTab: "upcomingContest" })}
+          onClick={() => this.setState({ activeTab: "upcomingContest" , menu : false})}
         >
           <SidebarRow
             Icon={CalendarIcon}
@@ -123,7 +122,7 @@ export class Sidebar extends Component {
         <Link
           to="/careerOpportunities"
           title="career"
-          onClick={() => this.setState({ activeTab: "careerOpportunities" })}
+          onClick={() => this.setState({ activeTab: "careerOpportunities" , menu : false})}
         >
           <SidebarRow
             Icon={AcademicCapIcon}
@@ -135,7 +134,7 @@ export class Sidebar extends Component {
         <Link
           to="/studyResources"
           title="study resources"
-          onClick={() => this.setState({ activeTab: "studyResources" })}
+          onClick={() => this.setState({ activeTab: "studyResources" , menu : false})}
         >
           <SidebarRow
             Icon={BookOpenIcon}
@@ -147,7 +146,7 @@ export class Sidebar extends Component {
         <Link
           to="/codingProblems"
           title="coding problems"
-          onClick={() => this.setState({ activeTab: "codingProblems" })}
+          onClick={() => this.setState({ activeTab: "codingProblems" , menu : false})}
         >
           <SidebarRow
             Icon={CodeIcon}
