@@ -72,7 +72,7 @@ const Tabs = ({ color }) => {
 export default function login() {
   return (
     <>
-       <Tabs />;
+       <Tabs />
     </>
   );
 }

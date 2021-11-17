@@ -1,8 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import {CameraIcon} from '@heroicons/react/solid'
+import {CameraIcon, PencilIcon} from '@heroicons/react/solid'
 import {uploadImage} from '../../redux/actions/userAction'
+import {Link} from 'react-router-dom'
 
 function ProfileCard({
   user: {
@@ -36,6 +37,7 @@ function ProfileCard({
     <div className="flex items-center">
       <div className="mx-auto bg-white shadow-xl rounded-xl p-2">
         <div className="flex relative">
+          <Link to="/edit-profile"><PencilIcon width={22} height={22} className="absolute right-0 cursor-pointer hover:text-blue-500" /></Link>
           <img
             className="shadow-xl rounded-full mx-auto mt-5"
             width={140}
