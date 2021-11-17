@@ -27,7 +27,7 @@ export class editProfile extends Component {
         : {},
       projects: this.props.credentials.projects
         ? this.props.credentials.projects
-        : [""],
+        : [],
     };
     this.inputSkill = React.createRef();
   }
@@ -35,12 +35,11 @@ export class editProfile extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
     const answer = window.confirm("Update Profile!");
-    console.log(answer);
     if (answer) {
       const userDetails = {
         name: this.state.name,
         contactNumber: this.state.contactNumber,
-        gender: document.getElementById("gender").value,
+        gender: this.state.gender,
         collage: this.state.collage,
         city: this.state.city,
         state: this.state.state,
@@ -87,10 +86,6 @@ export class editProfile extends Component {
   };
 
   render() {
-    const {
-      credentials: { handle, email },
-      loading,
-    } = this.props;
     return (
       <div>
         <div className="mt-5 md:mt-0 md:col-span-2">
@@ -152,7 +147,7 @@ export class editProfile extends Component {
                     <label class="text-sm font-medium text-gray-700 mx-2">
                       Gender :
                     </label>
-                    <select id="gender">
+                    <select id="gender" onChange={this.handleSubmit}>
                       <option>{this.state.gender}</option>
                       <option>
                         {this.state.gender === "male" ? "female" : "male"}
@@ -226,21 +221,71 @@ export class editProfile extends Component {
                 </div>
                 {/* online Plateform */}
                 <div className="mt-4 mx-2 sm:flex">
-                  {Object.keys(this.state.onlinePlateform).map((plateform) => (
                     <div className="mt-4 mx-2">
                       <label class="text-sm font-medium text-gray-700 mx-2">
-                        {plateform} :
+                        Linkedin :
                       </label>
                       <input
                         type="text"
-                        name={plateform}
+                        name="linkedin"
                         className="shadow-sm p-2 focus:ring-blue-500 focus:border-blue-500 mt-1 sm:text-sm border-blue-300 rounded-md"
-                        placeholder=""
+                        placeholder="@username"
                         onChange={this.handlePlateformChange}
-                        value={this.state.onlinePlateform[plateform]}
+                        value={this.state.onlinePlateform['linkedin']}
                       />
                     </div>
-                  ))}
+                    <div className="mt-4 mx-2">
+                      <label class="text-sm font-medium text-gray-700 mx-2">
+                        Github :
+                      </label>
+                      <input
+                        type="text"
+                        name="github"
+                        className="shadow-sm p-2 focus:ring-blue-500 focus:border-blue-500 mt-1 sm:text-sm border-blue-300 rounded-md"
+                        placeholder="@username"
+                        onChange={this.handlePlateformChange}
+                        value={this.state.onlinePlateform['github']}
+                      />
+                    </div>
+                    <div className="mt-4 mx-2">
+                      <label class="text-sm font-medium text-gray-700 mx-2">
+                        Codechef :
+                      </label>
+                      <input
+                        type="text"
+                        name="codechef"
+                        className="shadow-sm p-2 focus:ring-blue-500 focus:border-blue-500 mt-1 sm:text-sm border-blue-300 rounded-md"
+                        placeholder="@username"
+                        onChange={this.handlePlateformChange}
+                        value={this.state.onlinePlateform['codechef']}
+                      />
+                    </div>
+                    <div className="mt-4 mx-2">
+                      <label class="text-sm font-medium text-gray-700 mx-2">
+                        Codeforces :
+                      </label>
+                      <input
+                        type="text"
+                        name="codeforces"
+                        className="shadow-sm p-2 focus:ring-blue-500 focus:border-blue-500 mt-1 sm:text-sm border-blue-300 rounded-md"
+                        placeholder="@username"
+                        onChange={this.handlePlateformChange}
+                        value={this.state.onlinePlateform['codeforces']}
+                      />
+                    </div>
+                    <div className="mt-4 mx-2">
+                      <label class="text-sm font-medium text-gray-700 mx-2">
+                        GFG :
+                      </label>
+                      <input
+                        type="text"
+                        name="gfg"
+                        className="shadow-sm p-2 focus:ring-blue-500 focus:border-blue-500 mt-1 sm:text-sm border-blue-300 rounded-md"
+                        placeholder="@username"
+                        onChange={this.handlePlateformChange}
+                        value={this.state.onlinePlateform['gfg']}
+                      />
+                    </div>
                 </div>
                 {/* Skills */}
                 <div className="mt-4">
