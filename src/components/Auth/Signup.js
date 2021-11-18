@@ -23,13 +23,18 @@ export class Signup extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    const userData = {
-      email: this.state.email,
-      handle: this.state.handle,
-      password: this.state.password,
-      confirmPassword: this.state.confirmPassword,
-    };
-    this.props.signupUser(userData, this.props.history);
+    if(this.state.password.length < 6){
+      this.setState({errors:{password:"password length must be of 6-15"}})
+    }
+    else{
+      const userData = {
+        email: this.state.email,
+        handle: this.state.handle,
+        password: this.state.password,
+        confirmPassword: this.state.confirmPassword,
+      };
+      this.props.signupUser(userData, this.props.history);
+    }
   };
 
   handleChange = (event) => {
@@ -101,7 +106,9 @@ export class Signup extends Component {
               value={this.state.confirmPassword}
             />
             {errors.confirmPassword && (
-              <p className="text-red-500 text-xs italic">{errors.confirmPassword}</p>
+              <p className="text-red-500 text-xs italic">
+                {errors.confirmPassword}
+              </p>
             )}
           </div>
           {errors.general && (

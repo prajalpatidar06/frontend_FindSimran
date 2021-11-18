@@ -8,9 +8,14 @@ import { editUserDetails } from "../redux/actions/userAction";
 export class editProfile extends Component {
   constructor(props) {
     super(props);
+    if (window.performance) {
+      if (performance.navigation.type === 1) {
+        window.location.href = "profile";
+      }
+    }
     this.state = {
       name: this.props.credentials.name,
-      contactNumber: this.props.credentials.contact,
+      contactNumber: this.props.credentials.contactNumber,
       gender: this.props.credentials.gender
         ? this.props.credentials.gender
         : "male",
@@ -25,9 +30,6 @@ export class editProfile extends Component {
       onlinePlateform: this.props.credentials.onlinePlateform
         ? this.props.credentials.onlinePlateform
         : {},
-      projects: this.props.credentials.projects
-        ? this.props.credentials.projects
-        : [],
     };
     this.inputSkill = React.createRef();
   }
@@ -47,10 +49,8 @@ export class editProfile extends Component {
         website: this.state.website,
         skills: this.state.skills,
         onlinePlateform: this.state.onlinePlateform,
-        projects: this.state.projects,
       };
       this.props.editUserDetails(userDetails);
-      window.location.href = "profile"
     }
   };
 
@@ -88,11 +88,22 @@ export class editProfile extends Component {
   render() {
     return (
       <div>
+        {this.props.loading && (
+          <div className="flex justify-center fixed top-[50%] left-[40%] items-center">
+            <div className="animate-spin rounded-full h-20 w-20 sm:w-40 sm:h-40 border-b-2 border-blue-900"></div>
+          </div>
+        )}
         <div className="mt-5 md:mt-0 md:col-span-2">
           <form noValidate onSubmit={this.handleSubmit}>
             <div className="shadow sm:rounded-md sm:overflow-hidden">
               <div className="px-4 py-5 bg-white space-y-6 sm:p-6">
-                <Link to="/profile"><XCircleIcon width={26} height={26} className="absolute right-5 cursor-pointer text-red-600 sm:text-black hover:text-red-600" /></Link>
+                <Link to="/profile">
+                  <XCircleIcon
+                    width={26}
+                    height={26}
+                    className="absolute right-5 cursor-pointer text-red-600 sm:text-black hover:text-red-600"
+                  />
+                </Link>
                 <div className="text-center text-blue-600 text-3xl sm:text-2xl font-bold">
                   Edit Profile
                 </div>
@@ -147,12 +158,25 @@ export class editProfile extends Component {
                     <label class="text-sm font-medium text-gray-700 mx-2">
                       Gender :
                     </label>
-                    <select id="gender" onChange={this.handleSubmit}>
-                      <option>{this.state.gender}</option>
-                      <option>
-                        {this.state.gender === "male" ? "female" : "male"}
-                      </option>
-                    </select>
+                    <button
+                      type="button"
+                      onClick={() => this.setState({ gender: "male" })}
+                      className={`mx-1 inline-flex justify-center border border-transparent shadow-sm text-sm font-medium ${
+                        this.state.gender === "male" && "text-white bg-blue-500"
+                      } hover:bg-blue-700 hover:text-white`}
+                    >
+                      Male
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => this.setState({ gender: "female" })}
+                      className={`mx-1 inline-flex justify-center border border-transparent shadow-sm text-sm font-medium  ${
+                        this.state.gender === "female" &&
+                        "text-white bg-blue-500"
+                      } hover:bg-blue-700 hover:text-white`}
+                    >
+                      Female
+                    </button>
                   </div>
                 </div>
                 {/* Collage  & location*/}
@@ -221,71 +245,71 @@ export class editProfile extends Component {
                 </div>
                 {/* online Plateform */}
                 <div className="mt-4 mx-2 sm:flex">
-                    <div className="mt-4 mx-2">
-                      <label class="text-sm font-medium text-gray-700 mx-2">
-                        Linkedin :
-                      </label>
-                      <input
-                        type="text"
-                        name="linkedin"
-                        className="shadow-sm p-2 focus:ring-blue-500 focus:border-blue-500 mt-1 sm:text-sm border-blue-300 rounded-md"
-                        placeholder="@username"
-                        onChange={this.handlePlateformChange}
-                        value={this.state.onlinePlateform['linkedin']}
-                      />
-                    </div>
-                    <div className="mt-4 mx-2">
-                      <label class="text-sm font-medium text-gray-700 mx-2">
-                        Github :
-                      </label>
-                      <input
-                        type="text"
-                        name="github"
-                        className="shadow-sm p-2 focus:ring-blue-500 focus:border-blue-500 mt-1 sm:text-sm border-blue-300 rounded-md"
-                        placeholder="@username"
-                        onChange={this.handlePlateformChange}
-                        value={this.state.onlinePlateform['github']}
-                      />
-                    </div>
-                    <div className="mt-4 mx-2">
-                      <label class="text-sm font-medium text-gray-700 mx-2">
-                        Codechef :
-                      </label>
-                      <input
-                        type="text"
-                        name="codechef"
-                        className="shadow-sm p-2 focus:ring-blue-500 focus:border-blue-500 mt-1 sm:text-sm border-blue-300 rounded-md"
-                        placeholder="@username"
-                        onChange={this.handlePlateformChange}
-                        value={this.state.onlinePlateform['codechef']}
-                      />
-                    </div>
-                    <div className="mt-4 mx-2">
-                      <label class="text-sm font-medium text-gray-700 mx-2">
-                        Codeforces :
-                      </label>
-                      <input
-                        type="text"
-                        name="codeforces"
-                        className="shadow-sm p-2 focus:ring-blue-500 focus:border-blue-500 mt-1 sm:text-sm border-blue-300 rounded-md"
-                        placeholder="@username"
-                        onChange={this.handlePlateformChange}
-                        value={this.state.onlinePlateform['codeforces']}
-                      />
-                    </div>
-                    <div className="mt-4 mx-2">
-                      <label class="text-sm font-medium text-gray-700 mx-2">
-                        GFG :
-                      </label>
-                      <input
-                        type="text"
-                        name="gfg"
-                        className="shadow-sm p-2 focus:ring-blue-500 focus:border-blue-500 mt-1 sm:text-sm border-blue-300 rounded-md"
-                        placeholder="@username"
-                        onChange={this.handlePlateformChange}
-                        value={this.state.onlinePlateform['gfg']}
-                      />
-                    </div>
+                  <div className="mt-4 mx-2">
+                    <label class="text-sm font-medium text-gray-700 mx-2">
+                      Linkedin :
+                    </label>
+                    <input
+                      type="text"
+                      name="linkedin"
+                      className="shadow-sm p-2 focus:ring-blue-500 focus:border-blue-500 mt-1 sm:text-sm border-blue-300 rounded-md"
+                      placeholder="@username"
+                      onChange={this.handlePlateformChange}
+                      value={this.state.onlinePlateform["linkedin"]}
+                    />
+                  </div>
+                  <div className="mt-4 mx-2">
+                    <label class="text-sm font-medium text-gray-700 mx-2">
+                      Github :
+                    </label>
+                    <input
+                      type="text"
+                      name="github"
+                      className="shadow-sm p-2 focus:ring-blue-500 focus:border-blue-500 mt-1 sm:text-sm border-blue-300 rounded-md"
+                      placeholder="@username"
+                      onChange={this.handlePlateformChange}
+                      value={this.state.onlinePlateform["github"]}
+                    />
+                  </div>
+                  <div className="mt-4 mx-2">
+                    <label class="text-sm font-medium text-gray-700 mx-2">
+                      Codechef :
+                    </label>
+                    <input
+                      type="text"
+                      name="codechef"
+                      className="shadow-sm p-2 focus:ring-blue-500 focus:border-blue-500 mt-1 sm:text-sm border-blue-300 rounded-md"
+                      placeholder="@username"
+                      onChange={this.handlePlateformChange}
+                      value={this.state.onlinePlateform["codechef"]}
+                    />
+                  </div>
+                  <div className="mt-4 mx-2">
+                    <label class="text-sm font-medium text-gray-700 mx-2">
+                      Codeforces :
+                    </label>
+                    <input
+                      type="text"
+                      name="codeforces"
+                      className="shadow-sm p-2 focus:ring-blue-500 focus:border-blue-500 mt-1 sm:text-sm border-blue-300 rounded-md"
+                      placeholder="@username"
+                      onChange={this.handlePlateformChange}
+                      value={this.state.onlinePlateform["codeforces"]}
+                    />
+                  </div>
+                  <div className="mt-4 mx-2">
+                    <label class="text-sm font-medium text-gray-700 mx-2">
+                      GFG :
+                    </label>
+                    <input
+                      type="text"
+                      name="gfg"
+                      className="shadow-sm p-2 focus:ring-blue-500 focus:border-blue-500 mt-1 sm:text-sm border-blue-300 rounded-md"
+                      placeholder="@username"
+                      onChange={this.handlePlateformChange}
+                      value={this.state.onlinePlateform["gfg"]}
+                    />
+                  </div>
                 </div>
                 {/* Skills */}
                 <div className="mt-4">
@@ -343,10 +367,12 @@ export class editProfile extends Component {
 editProfile.propTypes = {
   credentials: PropTypes.object.isRequired,
   editUserDetails: PropTypes.func.isRequired,
+  loading: PropTypes.object.isRequired
 };
 
 const mapStateToProps = (state) => ({
   credentials: state.user.credentials,
+  loading: state.user.loading
 });
 
 export default connect(mapStateToProps, { editUserDetails })(editProfile);

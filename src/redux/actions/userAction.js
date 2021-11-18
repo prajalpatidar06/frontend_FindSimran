@@ -90,8 +90,10 @@ export const editUserDetails = (userDetails) => (dispatch) => {
     .then(() => {
       dispatch(getUserData());
     })
+    .then(()=>{
+      window.location.href = "profile"
+    })
     .catch((err) => console.log(err));
-    window.location.href = "profile"
 };
 
 const setAuthorizationHeaders = (token) => {
