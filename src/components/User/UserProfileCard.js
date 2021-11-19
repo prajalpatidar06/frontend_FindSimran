@@ -10,6 +10,10 @@ function UserProfileCard({
     onlinePlateform,
     skills,
     website,
+    name,
+    collage,
+    city,
+    state
   },
 }) {
   return (
@@ -18,8 +22,8 @@ function UserProfileCard({
         <div className="flex">
           <img
             className="shadow-xl rounded-full mx-auto mt-5"
-            width={140}
-            height={140}
+            width={160}
+            height={160}
             src={imageUrl}
             alt="Profile face"
           />
@@ -28,6 +32,12 @@ function UserProfileCard({
           <p className="text-xl px-5 sm:text-2xl font-semibold text-gray-900">
             {handle}
           </p>
+          {name && (
+            <p className="text-xs sm:text-base text-gray-600 pt-2 px-5 w-auto">
+              <span className="text-red-500 mx-1">name : </span>
+              {name}
+            </p>
+          )}
           <p className="text-xs sm:text-base text-gray-600 pt-2 px-5 w-auto">
             <span className="text-red-500 mx-1">email : </span>
             {email}
@@ -46,6 +56,18 @@ function UserProfileCard({
               </a>
             </p>
           )}
+          {collage && (
+            <p className="text-xs sm:text-base flex text-gray-600 pt-2 px-5 w-auto">
+              <span className="text-red-500 mx-1">collage : </span>
+                {collage}
+            </p>
+          )}
+          {city && (
+            <p className="text-xs sm:text-base flex text-gray-600 pt-2 px-5 w-auto">
+              <span className="text-red-500 mx-1">city : </span>
+                {city}, {state}
+            </p>
+          )}
           {bio && (
             <p className="text-xs sm:text-base text-green-600 pt-2 px-5 w-auto">
               <span className="text-red-500 mx-1">bio : </span> {bio}
@@ -55,7 +77,9 @@ function UserProfileCard({
             <div className="align-center break-words px-5 justify-center mt-3">
               <span className="text-blue-600">skills : </span>
               {skills.map((skill) => (
-                <span className="mx-1 text-red-500">{skill}</span>
+                <span className="mx-1 text-red-500">
+                  {skill.charAt(0).toUpperCase() + skill.slice(1)}
+                </span>
               ))}
             </div>
           )}

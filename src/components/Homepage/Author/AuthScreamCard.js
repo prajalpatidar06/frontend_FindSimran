@@ -40,6 +40,19 @@ export class AuthScreamCard extends Component {
       },
       handle,
     } = this.props;
+
+    const FormateDate = (createdAt) => {
+      return (
+        parseInt(dayjs().format("YY")) >
+          parseInt(dayjs(createdAt).format("YY")) ||
+        parseInt(dayjs().format("MM")) >
+          parseInt(dayjs(createdAt).format("MM")) ||
+        parseInt(dayjs().format("DD")) -
+          parseInt(dayjs(createdAt).format("DD")) >=
+          1
+      );
+    }
+    
     return (
       <div className="flex flex-col">
         <div className="relative p-5 bg-white mt-5 rounded-t-2xl shadow-sm">
@@ -61,7 +74,7 @@ export class AuthScreamCard extends Component {
                 {handle}
               </p>
               <p className="text-xs text-gray-400">
-                {dayjs(createdAt).fromNow().slice(1) === ' days ago' ? dayjs(createdAt).format('DD/MM/YY') : dayjs(createdAt).fromNow()}
+                {FormateDate(createdAt) ? dayjs(createdAt).format('DD/MM/YY') : dayjs(createdAt).fromNow()}
               </p>
             </div>
             {url !== "" && (

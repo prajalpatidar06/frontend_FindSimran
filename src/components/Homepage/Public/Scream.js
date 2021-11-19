@@ -1,17 +1,30 @@
 import React, { Component } from "react";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
-import { ExternalLinkIcon } from "@heroicons/react/solid";
+import { ExternalLinkIcon , XIcon } from "@heroicons/react/solid";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import VoteScreamCard from "./VoteScreamCard";
+
 export class Scream extends Component {
+  constructor() {
+    super();
+    this.state = {
+      vote: false,
+    };
+  }
   userProfile = (handle) => {
-    window.location.href = (this.props.user.authenticated && this.props.user.credentials.handle === handle) ?  'profile' :  `user/${handle}`
+    window.location.href =
+      this.props.user.authenticated &&
+      this.props.user.credentials.handle === handle
+        ? "profile"
+        : `user/${handle}`;
   };
   render() {
     dayjs.extend(relativeTime);
     const {
       scream: {
+        screamId,
         body,
         title,
         url,
@@ -21,6 +34,24 @@ export class Scream extends Component {
         requiredSkills,
       },
     } = this.props;
+    const FormateDate = (createdAt) => {
+      return (
+        parseInt(dayjs().format("YY")) >
+          parseInt(dayjs(createdAt).format("YY")) ||
+        parseInt(dayjs().format("MM")) >
+          parseInt(dayjs(createdAt).format("MM")) ||
+        parseInt(dayjs().format("DD")) -
+          parseInt(dayjs(createdAt).format("DD")) >=
+          1
+      );
+    };
+
+    const handleVote = (event) => {
+      this.props.user.authenticated
+        ? this.setState({ vote: true })
+        : (window.location.href = "login");
+    };
+
     return (
       <div className="flex flex-col">
         <div className="relative p-5 bg-white mt-5 rounded-t-2xl shadow-sm">
@@ -42,7 +73,7 @@ export class Scream extends Component {
                 {handle}
               </p>
               <p className="text-xs text-gray-400">
-                {dayjs(createdAt).fromNow().slice(1) === " days ago"
+                {FormateDate(createdAt)
                   ? dayjs(createdAt).format("DD/MM/YY")
                   : dayjs(createdAt).fromNow()}
               </p>
@@ -73,9 +104,19 @@ export class Scream extends Component {
             </p>
           )}
           <div className="my-3 py-3 relative">
-            <button className="bg-blue-500 sm:bg-blue-400 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline absolute right-0">
-              Lets Collab
-            </button>
+            {this.state.vote ? (
+              <div>
+              <XIcon width={23} height={23} className="text-red-600 cursor-pointer absolute right-2" onClick={()=> this.setState({vote:false})} />
+              <VoteScreamCard ScreamId={screamId} />
+              </div>
+            ) : (
+              <button
+                onClick={handleVote}
+                className="bg-blue-500 sm:bg-blue-400 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline absolute right-0"
+              >
+                Lets Collab
+              </button>
+            )}
           </div>
         </div>
       </div>
@@ -84,11 +125,11 @@ export class Scream extends Component {
 }
 
 Scream.propTypes = {
-  user: PropTypes.object.isRequired
+  user: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  user: state.user
-})
+  user: state.user,
+});
 
 export default connect(mapStateToProps)(Scream);

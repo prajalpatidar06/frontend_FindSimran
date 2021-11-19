@@ -81,6 +81,9 @@ export const voteScream = (screamId, voteData) => (dispatch) => {
       });
       dispatch(clearErrors());
     })
+    .then(()=>{
+      window.location.href = "/"
+    })
     .catch((err) => {
       dispatch({
         type: SET_ERRORS,

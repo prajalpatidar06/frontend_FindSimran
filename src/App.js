@@ -23,6 +23,7 @@ import { logoutUser , getUserData } from "./redux/actions/userAction";
 import doubtExchange from "./pages/doubtExchange";
 
 axios.defaults.baseURL = "https://asia-east1-findcodingpartner.cloudfunctions.net/api";
+// axios.defaults.baseURL = "http://localhost:5000/findcodingpartner/asia-east1/api";
 
 const token = localStorage.FBIdToken
 if(token){
