@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 // components stuff
 import Sidebar from "../components/Homepage/Sidebar";
 import Screams from "../components/Homepage/Public/Screams";
-import UpcomingContest from "../components/Homepage/Static/UpcomingContest";
+import UpcomingContest from "../components/Homepage/Static/UpcomingContest/UpcomingContest";
 import CareerOpportunities from "../components/Homepage/Static/CareerOpportunities";
 import StudyResources from "../components/Homepage/Static/StudyResources";
 import codingProblems from "../components/Homepage/Static/codingProblems";

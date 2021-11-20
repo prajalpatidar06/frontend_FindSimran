@@ -146,7 +146,7 @@ export class PostScream extends Component {
                       <p className="flex m-1 items-center rounded-2xl">
                         {skill}
                         <XCircleIcon
-                          className="h-9 w-9 items-center cursor-pointer m-1 hover:text-red-600"
+                          className="h-5 w-5 sm:h-7 sm:w-7 items-center cursor-pointer m-1 hover:text-red-600"
                           onClick={() =>
                             this.handleRemoveFromRequiredSkill({ skill })
                           }
