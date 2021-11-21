@@ -11,9 +11,15 @@ export class ContestCard extends Component {
       .get(`https://kontests.net/api/v1/${this.props.url}`)
 
       .then((res) => {
-        this.setState({
-          contestinfo: res.data,
-        });
+        if (this.props.url === "code_chef" || this.props.url === "leet_code") {
+          this.setState({
+            contestinfo: res.data.reverse(),
+          });
+        } else {
+          this.setState({
+            contestinfo: res.data,
+          });
+        }
       })
       .catch((err) => {
         console.log(err);
