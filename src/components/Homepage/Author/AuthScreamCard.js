@@ -96,8 +96,8 @@ export class AuthScreamCard extends Component {
               </p>
               <Link to="/updateScream">
                 <PencilAltIcon
-                  width={20}
-                  height={20}
+                  width={21}
+                  height={21}
                   className="absolute right-2 top-1 hover:text-blue-500 cursor-pointer"
                   onClick={() => handleUpdateScream()}
                 />

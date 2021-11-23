@@ -1,17 +1,43 @@
 import React, { Component } from "react";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
-import { ExternalLinkIcon } from "@heroicons/react/solid";
+import axios from "axios";
+import {
+  ExternalLinkIcon,
+  PencilAltIcon,
+  TrashIcon,
+  XIcon,
+} from "@heroicons/react/solid";
+import ShowVoteCard from "./ShowVoteCard";
+import UpdateVoteCard from "./UpdateVoteCard";
 
 export class AuthVoteCard extends Component {
+  constructor() {
+    super();
+    this.state = {
+      updatingVote: false,
+    };
+  }
   userProfile = (handle) => {
-    if(handle === this.props.vote.handle){
-        window.location.href = "/profile";
-    }
-    else{
-        window.location.href = `user/${handle}`
+    if (handle === this.props.vote.handle) {
+      window.location.href = "/profile";
+    } else {
+      window.location.href = `user/${handle}`;
     }
   };
+
+  deleteVote = () => {
+    let answer = window.confirm("Delete Vote");
+    console.log(answer)
+    if (answer) {
+      axios
+        .delete(`screams/${this.props.vote.screamId}/${this.props.vote.voteId}`)
+        .then((res) => {
+          window.location.href = "/authorVotes";
+        })
+    }
+  };
+
   render() {
     dayjs.extend(relativeTime);
     const {
@@ -91,51 +117,34 @@ export class AuthVoteCard extends Component {
               ))}
             </p>
           )}
-          <div className="shadow sm:rounded-md sm:overflow-hidden mt-1">
-            <div className="bg-gray-100 space-y-6">
-              <div className="text-center text-2xl text-blue-500 font-medium">
-                Your Vote
-              </div>
-              <div className="flex items-center space-x-2">
-                <img
-                  className="rounded-full cursor-pointer"
-                  src={vote.userImage}
-                  alt="Profile"
-                  width="40"
-                  height="40"
-                  layout="fixed"
-                  onClick={() => this.userProfile(vote.handle)}
-                />
-                <div>
-                  <p
-                    className="font-medium cursor-pointer"
-                    onClick={() => this.userProfile(vote.handle)}
-                  >
-                    {vote.handle}
-                  </p>
-                  <p className="text-xs text-gray-400">
-                    {FormateDate(vote.createdAt)
-                      ? dayjs(vote.createdAt).format("DD/MM/YY")
-                      : dayjs(vote.createdAt).fromNow()}
-                  </p>
-                </div>
-              </div>
+          <div className="shadow sm:rounded-md sm:overflow-hidden mt-1 bg-gray-100 relative">
+            {!this.state.updatingVote ? (
               <div>
-                {vote.comment.length > 0 &&
-                  vote.comment.map((para) => (
-                    <p style={{ wordBreak: "break-all" }}>{para}</p>
-                  ))}
+                <PencilAltIcon
+                  width={20}
+                  height={20}
+                  className="absolute right-1 top-1 cursor-pointer hover:text-blue-500"
+                  onClick={() => this.setState({ updatingVote: true })}
+                />
+                <ShowVoteCard vote={vote} FormateDate={FormateDate} />
               </div>
-              <div className="mt-4 mx-1">
-                <p className="mt-2 break-words break-normal md:break-all">
-                  {vote.skills.map((element) => (
-                    <span className="mx-2 text-red-500">
-                      {element.charAt(0).toUpperCase() + element.slice(1)}
-                    </span>
-                  ))}
-                </p>
+            ) : (
+              <div>
+                <TrashIcon
+                  width={21}
+                  height={21}
+                  className="absolute top-2 left-2 cursor-pointer text-red-600 hover:text-red-700"
+                  onClick={()=>this.deleteVote()}
+                />
+                <XIcon
+                  width={21}
+                  height={21}
+                  className="absolute right-1 top-2 cursor-pointer text-red-600 sm:text-black hover:text-red-600"
+                  onClick={() => this.setState({ updatingVote: false })}
+                />
+                <UpdateVoteCard vote={vote} />
               </div>
-            </div>
+            )}
           </div>
         </div>
       </div>
