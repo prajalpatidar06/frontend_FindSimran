@@ -1,14 +1,16 @@
 import {
   SET_SCREAMS,
+  SET_SCREAM,
   SET_AUTHSCREAMS,
   LOADING_DATA,
-  VOTE_SCREAM,
   CLEAR_ERRORS,
   SET_ERRORS,
   LOADING_UI,
   POST_SCREAM,
+  UPDATE_SCREAM,
   DELETE_SCREAM,
   SET_USERDATA,
+  SET_VOTES,
 } from "../types";
 import axios from "axios";
 
@@ -26,26 +28,6 @@ export const getAllScreams = () => (dispatch) => {
       dispatch({
         type: SET_SCREAMS,
         payload: [],
-      });
-    });
-};
-
-export const postScream = (newScream, history) => (dispatch) => {
-  dispatch({ type: LOADING_UI });
-  axios
-    .post("/screams", newScream)
-    .then((res) => {
-      dispatch({
-        type: POST_SCREAM,
-        payload: res.data,
-      });
-      dispatch(clearErrors());
-      history.push("/");
-    })
-    .catch((err) => {
-      dispatch({
-        type: SET_ERRORS,
-        payload: err.response.data,
       });
     });
 };
@@ -71,18 +53,60 @@ export const getAuthScreams = (handle) => (dispatch) => {
     });
 };
 
-export const voteScream = (screamId, voteData) => (dispatch) => {
+export const postScream = (newScream, history) => (dispatch) => {
+  dispatch({ type: LOADING_UI });
   axios
-    .post(`screams/${screamId}/vote`, voteData)
+    .post("/screams", newScream)
     .then((res) => {
       dispatch({
-        type: VOTE_SCREAM,
+        type: POST_SCREAM,
         payload: res.data,
       });
       dispatch(clearErrors());
+      history.push("/");
     })
-    .then(()=>{
-      window.location.href = "/"
+    .catch((err) => {
+      dispatch({
+        type: SET_ERRORS,
+        payload: err.response.data,
+      });
+    });
+};
+
+export const OpenUpdateScreamPage = (scream) => (dispatch) => {
+  dispatch({ type: SET_SCREAM, payload: scream });
+};
+
+export const updateScream =
+  (screamId, updatedScream, history) => (dispatch) => {
+    dispatch({ type: LOADING_UI });
+    dispatch({type:DELETE_SCREAM , payload: screamId})
+    axios
+      .put(`/screams/${screamId}`, updatedScream)
+      .then((res) => {
+        dispatch({
+          type: UPDATE_SCREAM,
+          payload: res.data,
+        });
+        dispatch(clearErrors());
+        history.push("/authorScreams");
+      })
+      .catch((err) => {
+        dispatch({
+          type: SET_ERRORS,
+          payload: err.response.data,
+        });
+      });
+  };
+
+export const deleteScream = (screamId) => (dispatch) => {
+  axios
+    .delete(`screams/${screamId}`)
+    .then((res) => {
+      dispatch({
+        type: DELETE_SCREAM,
+        payload: screamId,
+      });
     })
     .catch((err) => {
       dispatch({
@@ -96,23 +120,6 @@ export const clearErrors = () => (dispatch) => {
   dispatch({ type: CLEAR_ERRORS });
 };
 
-export const deleteScream = (screamId) => (dispatch) => {
-  axios
-    .delete(`screams/${screamId}`)
-    .then((res) => {
-      dispatch({
-        type: DELETE_SCREAM,
-        payload: screamId,
-      });
-    })
-    .catch((err) => {
-      dispatch({
-          type: SET_ERRORS,
-          payload:err.response.data
-      })
-    });
-};
-
 export const getUserData = (userHandle) => (dispatch) => {
   dispatch({ type: LOADING_DATA });
   axios
@@ -120,13 +127,101 @@ export const getUserData = (userHandle) => (dispatch) => {
     .then((res) => {
       dispatch({
         type: SET_USERDATA,
-        payload: res.data
+        payload: res.data,
       });
     })
     .catch(() => {
       dispatch({
         type: SET_USERDATA,
-        payload: null
+        payload: null,
+      });
+    });
+};
+
+export const getAuthVotes = () => (dispatch) => {
+  dispatch({ type: LOADING_DATA });
+  axios
+    .get("/votes")
+    .then((res) => {
+      dispatch({
+        type: SET_VOTES,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      dispatch({
+        type: SET_VOTES,
+        payload: [],
+      });
+    });
+};
+
+export const voteScream = (screamId, voteData) => (dispatch) => {
+  axios
+    .post(`/votes/${screamId}`, voteData)
+    .then((res) => {
+      window.location.href = "/";
+    })
+    .catch((err) => {
+      dispatch({
+        type: SET_ERRORS,
+        payload: err.response.data,
+      });
+    });
+};
+
+export const updateVote = (voteId, updatedVote) => (dispatch) => {
+  axios
+    .put(`/votes/${voteId}`, updatedVote)
+    .then((res) => {
+      dispatch(getAuthVotes());
+    })
+    .catch((err) => {
+      dispatch({
+        type: SET_ERRORS,
+        payload: err.response.data,
+      });
+    });
+};
+
+export const deleteVote = (screamId, voteId) => (dispatch) => {
+  axios
+    .delete(`/screams/${screamId}/${voteId}`)
+    .then((res) => {
+      dispatch(getAuthVotes());
+    })
+    .catch((err) => {
+      dispatch({
+        type: SET_ERRORS,
+        payload: err.response.data,
+      });
+    });
+};
+
+export const acceptCollab = (screamId, voteId) => (dispatch) => {
+  axios
+    .post(`/screams/${screamId}/${voteId}`)
+    .then((res) => {
+      window.location.href = "/";
+    })
+    .catch((err) => {
+      dispatch({
+        type: SET_ERRORS,
+        payload: err.response.data,
+      });
+    });
+};
+
+export const updateScreamStatus = (screamId, status, handle) => (dispatch) => {
+  axios
+    .put(`/screams/${screamId}/${status}`)
+    .then((res) => {
+      dispatch(getAuthScreams(handle));
+    })
+    .catch((err) => {
+      dispatch({
+        type: SET_ERRORS,
+        payload: err.response.data,
       });
     });
 };

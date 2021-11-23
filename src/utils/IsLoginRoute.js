@@ -8,7 +8,7 @@ const IsLoginRoute = ({ component: Component, authenticated, ...rest }) => {
     <Route
     {...rest}
     render={(props) =>
-      authenticated === true ? <Component {...props} /> : <Redirect to="/login" />
+      authenticated === true ? <Component {...props} /> : <Redirect to="/" />
     }
   />
   )

@@ -6,13 +6,13 @@ import { Link } from "react-router-dom";
 import { logoutUser } from "../../redux/actions/userAction";
 
 import {
-  AcademicCapIcon,
   AnnotationIcon,
   BookOpenIcon,
   CalendarIcon,
   CodeIcon,
   CollectionIcon,
   DocumentAddIcon,
+  HandIcon,
   LoginIcon,
   LogoutIcon,
   MenuIcon,
@@ -52,25 +52,35 @@ export class Sidebar extends Component {
     return (
       <div className="p-2 max-w-[600px] xl:min-w-[300px]">
         {this.state.menu ? (
-          <div className="inline-flex sm:hidden" onClick={() => this.setState({menu:false})}>
+          <div
+            className="inline-flex sm:hidden"
+            onClick={() => this.setState({ menu: false })}
+          >
             <SidebarRow Icon={XIcon} expand={this.state.menu} />
           </div>
         ) : (
-          <div className="inline-flex sm:hidden" onClick={() => this.setState({menu:true})}>
+          <div
+            className="inline-flex sm:hidden"
+            onClick={() => this.setState({ menu: true })}
+          >
             <SidebarRow Icon={MenuIcon} expand={this.state.menu} />
           </div>
         )}
         {authenticated && (
           <div onClick={() => this.redirectUrl("profile")} title="profile">
             <Link to="/profile">
-              <SidebarRow src={imageUrl} title={handle} expand={this.state.menu} />
+              <SidebarRow
+                src={imageUrl}
+                title={handle}
+                expand={this.state.menu}
+              />
             </Link>
           </div>
         )}
         <Link
           to="/"
           title="all screams"
-          onClick={() => this.setState({ activeTab: "" , menu : false})}
+          onClick={() => this.setState({ activeTab: "", menu: false })}
         >
           <SidebarRow
             Icon={CollectionIcon}
@@ -83,7 +93,9 @@ export class Sidebar extends Component {
           <Link
             to="/postScream"
             title="post scream"
-            onClick={() => this.setState({ activeTab: "postScream" , menu : false})}
+            onClick={() =>
+              this.setState({ activeTab: "postScream", menu: false })
+            }
           >
             <SidebarRow
               Icon={DocumentAddIcon}
@@ -97,7 +109,9 @@ export class Sidebar extends Component {
           <Link
             to="/authorScreams"
             title="your screams"
-            onClick={() => this.setState({ activeTab: "authorScreams" , menu : false})}
+            onClick={() =>
+              this.setState({ activeTab: "authorScreams", menu: false })
+            }
           >
             <SidebarRow
               Icon={AnnotationIcon}
@@ -107,10 +121,28 @@ export class Sidebar extends Component {
             />
           </Link>
         )}
+        {authenticated && (
+          <Link
+            to="/authorVotes"
+            title="your votes"
+            onClick={() =>
+              this.setState({ activeTab: "authorVotes", menu: false })
+            }
+          >
+            <SidebarRow
+              Icon={HandIcon}
+              active={this.state.activeTab === "authorVotes"}
+              title="My Votes"
+              expand={this.state.menu}
+            />
+          </Link>
+        )}
         <Link
           to="/upcomingContest"
           title="contest watcher"
-          onClick={() => this.setState({ activeTab: "upcomingContest" , menu : false})}
+          onClick={() =>
+            this.setState({ activeTab: "upcomingContest", menu: false })
+          }
         >
           <SidebarRow
             Icon={CalendarIcon}
@@ -120,21 +152,11 @@ export class Sidebar extends Component {
           />
         </Link>
         <Link
-          to="/careerOpportunities"
-          title="career"
-          onClick={() => this.setState({ activeTab: "careerOpportunities" , menu : false})}
-        >
-          <SidebarRow
-            Icon={AcademicCapIcon}
-            active={this.state.activeTab === "careerOpportunities"}
-            title="Career Opportunities"
-            expand={this.state.menu}
-          />
-        </Link>
-        <Link
           to="/studyResources"
           title="study resources"
-          onClick={() => this.setState({ activeTab: "studyResources" , menu : false})}
+          onClick={() =>
+            this.setState({ activeTab: "studyResources", menu: false })
+          }
         >
           <SidebarRow
             Icon={BookOpenIcon}
@@ -146,7 +168,9 @@ export class Sidebar extends Component {
         <Link
           to="/codingProblems"
           title="coding problems"
-          onClick={() => this.setState({ activeTab: "codingProblems" , menu : false})}
+          onClick={() =>
+            this.setState({ activeTab: "codingProblems", menu: false })
+          }
         >
           <SidebarRow
             Icon={CodeIcon}
@@ -157,12 +181,20 @@ export class Sidebar extends Component {
         </Link>
         {authenticated ? (
           <div onClick={this.Logoutfunc} title="logout">
-            <SidebarRow Icon={LogoutIcon} title="Logout" expand={this.state.menu} />
+            <SidebarRow
+              Icon={LogoutIcon}
+              title="Logout"
+              expand={this.state.menu}
+            />
           </div>
         ) : (
           <div onClick={() => this.redirectUrl("login")} title="login">
             <Link to="/login">
-              <SidebarRow Icon={LoginIcon} title="Login" expand={this.state.menu} />
+              <SidebarRow
+                Icon={LoginIcon}
+                title="Login"
+                expand={this.state.menu}
+              />
             </Link>
           </div>
         )}

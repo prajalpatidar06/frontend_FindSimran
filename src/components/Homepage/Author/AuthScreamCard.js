@@ -3,26 +3,31 @@ import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { deleteScream } from "../../../redux/actions/dataAction";
+import {
+  deleteScream,
+  updateScreamStatus,
+  OpenUpdateScreamPage,
+} from "../../../redux/actions/dataAction";
 
 import {
   DotsCircleHorizontalIcon,
-  ExternalLinkIcon,
+  PencilAltIcon,
   StatusOfflineIcon,
   StatusOnlineIcon,
   TrashIcon,
 } from "@heroicons/react/solid";
+import { Link } from "react-router-dom";
 
 export class AuthScreamCard extends Component {
   userProfile = (handle) => {
-    console.log(handle);
+    window.location.href = "/profile";
   };
 
   handleDelete = (screamId) => {
-      const confirm = window.confirm('Deleting Scream')
-      if(confirm){
-        this.props.deleteScream(screamId);
-      }
+    const confirm = window.confirm("Deleting Scream");
+    if (confirm) {
+      this.props.deleteScream(screamId);
+    }
   };
 
   render() {
@@ -51,8 +56,19 @@ export class AuthScreamCard extends Component {
           parseInt(dayjs(createdAt).format("DD")) >=
           1
       );
-    }
-    
+    };
+
+    const changeScreamStatus = (status) => {
+      const confirm = window.confirm(`${status} scream ?`);
+      if (confirm) {
+        this.props.updateScreamStatus(screamId, status, handle);
+      }
+    };
+
+    const handleUpdateScream = () => {
+      this.props.OpenUpdateScreamPage(this.props.scream);
+    };
+
     return (
       <div className="flex flex-col">
         <div className="relative p-5 bg-white mt-5 rounded-t-2xl shadow-sm">
@@ -74,29 +90,43 @@ export class AuthScreamCard extends Component {
                 {handle}
               </p>
               <p className="text-xs text-gray-400">
-                {FormateDate(createdAt) ? dayjs(createdAt).format('DD/MM/YY') : dayjs(createdAt).fromNow()}
+                {FormateDate(createdAt)
+                  ? dayjs(createdAt).format("DD/MM/YY")
+                  : dayjs(createdAt).fromNow()}
               </p>
+              <Link to="/updateScream">
+                <PencilAltIcon
+                  width={20}
+                  height={20}
+                  className="absolute right-2 top-1 hover:text-blue-500 cursor-pointer"
+                  onClick={() => handleUpdateScream()}
+                />
+              </Link>
             </div>
-            {url !== "" && (
-              <a
-                className="pt-3 text-green-400 absolute right-2 top-1"
-                href={url}
-                target="_blank"
-                rel="noreferrer"
-                title="link"
-              >
-                <ExternalLinkIcon width={26} height={26} />
-              </a>
-            )}
           </div>
           <p className="pt-4 font-medium text-2xl text-blue-600">{title}</p>
           <div className="pt-3">
-            {body.length > 0 && body.map((para) => <p>{para}</p>)}
+            {body.length > 0 &&
+              body.map((para) => (
+                <p style={{ wordBreak: "break-all" }}>{para}</p>
+              ))}
           </div>
+          <a
+            className="pt-3 text-green-400"
+            href={url}
+            target="_blank"
+            rel="noreferrer"
+            title="link"
+            style={{ wordBreak: "break-all" }}
+          >
+            {url}
+          </a>
           {requiredSkills.length > 0 && (
             <p className="mt-2 break-words break-normal md:break-all">
               {requiredSkills.map((element) => (
-                <span className="mx-2 text-red-500">{element.charAt(0).toUpperCase() + element.slice(1)}</span>
+                <span className="mx-2 text-red-500">
+                  {element.charAt(0).toUpperCase() + element.slice(1)}
+                </span>
               ))}
             </p>
           )}
@@ -104,12 +134,18 @@ export class AuthScreamCard extends Component {
         <div className="flex justify-between items-center bg-white px-2 py-2 sm:px-4 shadow-md sm:text-xl border-t">
           <div className="InputIcon rounded-none rounded-bl-2xl">
             {active ? (
-              <div className="text-green-700">
+              <div
+                className="text-green-700 cursor-pointer"
+                onClick={() => changeScreamStatus("deactive")}
+              >
                 <StatusOnlineIcon className="h-4 w-4 text-green-500" />
                 <p className="text-xs sm:text-bases">active</p>
               </div>
             ) : (
-              <div className="text-red-600">
+              <div
+                className="text-red-600 cursor-pointer"
+                onClick={() => changeScreamStatus("active")}
+              >
                 <StatusOfflineIcon className="h-4 w-4 text-red-500" />
                 <p className="text-xs sm:text-bases">inactive</p>
               </div>
@@ -134,6 +170,14 @@ export class AuthScreamCard extends Component {
 
 AuthScreamCard.propTypes = {
   deleteScream: PropTypes.func.isRequired,
+  updateScreamStatus: PropTypes.func.isRequired,
+  updateScream: PropTypes.func.isRequired,
 };
 
-export default connect(null, { deleteScream })(AuthScreamCard);
+const mapActionsToProps = {
+  deleteScream,
+  updateScreamStatus,
+  OpenUpdateScreamPage,
+};
+
+export default connect(null, mapActionsToProps)(AuthScreamCard);

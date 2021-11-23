@@ -4,11 +4,13 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Sidebar from "../components/Homepage/Sidebar";
 import Screams from "../components/Homepage/Public/Screams";
 import UpcomingContest from "../components/Homepage/Static/UpcomingContest/UpcomingContest";
-import CareerOpportunities from "../components/Homepage/Static/CareerOpportunities";
 import StudyResources from "../components/Homepage/Static/StudyResources";
 import codingProblems from "../components/Homepage/Static/codingProblems";
 import PostScream from "../components/Homepage/Author/PostScream";
+import UpdateScream from "../components/Homepage/Author/UpdateScream";
 import AuthorScreams from "../components/Homepage/Author/AuthorScreams";
+import AuthorVotes from "../components/Homepage/Author/AuthorVotes";
+import IsLoginRoute from "../utils/IsLoginRoute"
 
 export class home extends Component {
   render() {
@@ -28,11 +30,6 @@ export class home extends Component {
                   />
                   <Route
                     exact
-                    path="/careerOpportunities"
-                    component={CareerOpportunities}
-                  />
-                  <Route
-                    exact
                     path="/studyResources"
                     component={StudyResources}
                   />
@@ -41,11 +38,21 @@ export class home extends Component {
                     path="/codingProblems"
                     component={codingProblems}
                   />
-                  <Route exact path="/postScream" component={PostScream} />
-                  <Route
+                  <IsLoginRoute exact path="/postScream" component={PostScream} />
+                  <IsLoginRoute
                     exact
                     path="/authorScreams"
                     component={AuthorScreams}
+                  />
+                  <IsLoginRoute
+                    exact
+                    path="/authorVotes"
+                    component={AuthorVotes}
+                  />
+                  <IsLoginRoute
+                    exact
+                    path="/updateScream"
+                    component={UpdateScream}
                   />
                 </div>
               </div>

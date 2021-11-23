@@ -9,7 +9,8 @@ import editProfile from "./pages/editProfile";
 import user from "./pages/user";
 import notifications from "./pages/notifications";
 import aboutUs from "./pages/aboutUs";
-import chats from "./pages/chats"
+// import chats from "./pages/chats"
+import career from './pages/career'
 import login from "./pages/login";
 // Components stuff
 import Navbar from "./components/Navbar/Navbar";
@@ -20,7 +21,6 @@ import { Provider } from "react-redux";
 import store from "./redux/store";
 import { SET_AUTHENTICATED } from "./redux/types";
 import { logoutUser , getUserData } from "./redux/actions/userAction";
-import doubtExchange from "./pages/doubtExchange";
 
 axios.defaults.baseURL = "https://asia-east1-findcodingpartner.cloudfunctions.net/api";
 // axios.defaults.baseURL = "http://localhost:5000/findcodingpartner/asia-east1/api";
@@ -46,11 +46,11 @@ class App extends Component {
             <Navbar />
             <Switch>
               <Route exact path="/" component={home} />
-              <Route exact path="/doubtExchange" component={doubtExchange} />
+              <Route exact path="/career" component={career} />
               <IsLoginRoute exact path="/profile" component={profile} />
               <IsLoginRoute exact path="/edit-profile" component={editProfile} />
               <Route path="/user" component={user} />
-              <IsLoginRoute exact path="/chats" component={chats} />
+              {/* <IsLoginRoute exact path="/chats" component={chats} /> */}
               <IsLoginRoute exact path="/notifications" component={notifications} />
               <Route exact path="/aboutUs" component={aboutUs} />
               <AuthRoute exact path="/login" component={login} />

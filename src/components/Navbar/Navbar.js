@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import { logoutUser } from "../../redux/actions/userAction";
 import {
   HomeIcon,
-  FlagIcon,
+  AcademicCapIcon,
   BellIcon,
   InformationCircleIcon,
   ChatAlt2Icon,
@@ -24,11 +24,6 @@ function Navbar({ user, logoutUser }) {
   if (user.authenticated) {
     chatnotificationIcon = (
       <Fragment>
-        <Link to="/chats">
-          <div title="chat" onClick={() => setstate("chats")}>
-            <HeaderIcon active={state === "chats"} Icon={ChatAlt2Icon} />
-          </div>
-        </Link>
         <Link to="/notifications">
           <div title="notifications" onClick={() => setstate("notifications")}>
             <HeaderIcon active={state === "notifications"} Icon={BellIcon} />
@@ -67,9 +62,9 @@ function Navbar({ user, logoutUser }) {
               <HeaderIcon active={state === ""} Icon={HomeIcon} />
             </div>
           </Link>
-          <Link to="/doubtExchange">
-            <div title="Doubt Exchange" onClick={() => setstate("doubtExchange")}>
-              <HeaderIcon active={state === "doubtExchange"} Icon={FlagIcon} />
+          <Link to="/career">
+            <div title="career" onClick={() => setstate("career")}>
+              <HeaderIcon active={state === "career"} Icon={AcademicCapIcon} />
             </div>
           </Link>
           {chatnotificationIcon}
