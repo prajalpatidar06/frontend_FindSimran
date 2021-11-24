@@ -50,7 +50,6 @@ class App extends Component {
               <IsLoginRoute exact path="/profile" component={profile} />
               <IsLoginRoute exact path="/edit-profile" component={editProfile} />
               <Route path="/user" component={user} />
-              {/* <IsLoginRoute exact path="/chats" component={chats} /> */}
               <IsLoginRoute exact path="/notifications" component={notifications} />
               <Route exact path="/aboutUs" component={aboutUs} />
               <AuthRoute exact path="/login" component={login} />

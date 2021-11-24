@@ -11,15 +11,21 @@ export class AuthorVotes extends Component {
   render() {
     const { authVotes, loading } = this.props.data;
     let recentVotesMarkup = !loading ? (
-      authVotes.map((data) => (
-        <AuthVoteCard
-          key={data.scream.screamId}
-          vote={data.vote}
-          scream={data.scream}
-        />
-      ))
+      authVotes.length > 0 ? (
+        authVotes.map((data) => (
+          <AuthVoteCard
+            key={data.scream.screamId}
+            vote={data.vote}
+            scream={data.scream}
+          />
+        ))
+      ) : (
+        <div className="flex justify-center fixed top-[50%]  sm:left-[50%] items-center">
+        <h1 className="text-red-500 text-2xl">No votes found</h1>
+      </div>
+      )
     ) : (
-      <div className="flex justify-center fixed top-[50%] left-[50%] items-center">
+      <div className="flex justify-center fixed top-[50%] left-[40%] sm:left-[50%] items-center">
         <div className="animate-spin rounded-full h-20 w-20 border-b-2 border-gray-900"></div>
       </div>
     );

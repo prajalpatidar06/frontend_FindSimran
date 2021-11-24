@@ -30,6 +30,7 @@ export default function ChangeState(state = initialState, action) {
       return {
         ...state,
         scream: action.payload,
+        loading: false
       }
     case SET_SCREAMS:
       return {

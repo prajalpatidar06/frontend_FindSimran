@@ -10,7 +10,8 @@ import PostScream from "../components/Homepage/Author/PostScream";
 import UpdateScream from "../components/Homepage/Author/UpdateScream";
 import AuthorScreams from "../components/Homepage/Author/AuthorScreams";
 import AuthorVotes from "../components/Homepage/Author/AuthorVotes";
-import IsLoginRoute from "../utils/IsLoginRoute"
+import AuthScream from "../components/Homepage/Author/AuthOneScream/AuthScream";
+import IsLoginRoute from "../utils/IsLoginRoute";
 
 export class home extends Component {
   render() {
@@ -38,7 +39,11 @@ export class home extends Component {
                     path="/codingProblems"
                     component={codingProblems}
                   />
-                  <IsLoginRoute exact path="/postScream" component={PostScream} />
+                  <IsLoginRoute
+                    exact
+                    path="/postScream"
+                    component={PostScream}
+                  />
                   <IsLoginRoute
                     exact
                     path="/authorScreams"
@@ -53,6 +58,11 @@ export class home extends Component {
                     exact
                     path="/updateScream"
                     component={UpdateScream}
+                  />
+                  <IsLoginRoute
+                    exact
+                    path="/scream/:screamId"
+                    component={AuthScream}
                   />
                 </div>
               </div>

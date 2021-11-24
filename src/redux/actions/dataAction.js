@@ -53,6 +53,24 @@ export const getAuthScreams = (handle) => (dispatch) => {
     });
 };
 
+export const getAuthScream = (handle,screamId) => (dispatch) => {
+  dispatch({ type: LOADING_DATA });
+  axios
+    .get(`screams/${handle}/${screamId}`)
+    .then((res) => {
+      dispatch({
+        type: SET_SCREAM,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      dispatch({
+        type: SET_SCREAM,
+        payload: [],
+      });
+    });
+}
+
 export const postScream = (newScream, history) => (dispatch) => {
   dispatch({ type: LOADING_UI });
   axios

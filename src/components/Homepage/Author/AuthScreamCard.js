@@ -151,10 +151,12 @@ export class AuthScreamCard extends Component {
               </div>
             )}
           </div>
-          <div className="InputIcon rounded-none cursor-pointer hover:text-blue-500">
-            <DotsCircleHorizontalIcon className="h-4" />
-            <p className="text-xs sm:text-bases">votes</p>
-          </div>
+          <Link to={`scream/${screamId}`}>
+            <div className="InputIcon rounded-none cursor-pointer hover:text-blue-500">
+              <DotsCircleHorizontalIcon className="h-4" />
+              <p className="text-xs sm:text-bases">votes</p>
+            </div>
+          </Link>
           <div
             className="InputIcon rounded-none rounded-br-2xl text-red-400 cursor-pointer hover:text-red-700"
             onClick={() => this.handleDelete(screamId)}
