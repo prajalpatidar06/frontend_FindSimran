@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
-import { ExternalLinkIcon , XIcon } from "@heroicons/react/solid";
+import { ExternalLinkIcon, XIcon } from "@heroicons/react/solid";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import VoteScreamCard from "./VoteScreamCard";
@@ -106,13 +106,18 @@ export class Scream extends Component {
           <div className="my-3 py-3 relative">
             {this.state.vote ? (
               <div>
-              <XIcon width={23} height={23} className="text-red-600 cursor-pointer absolute right-2" onClick={()=> this.setState({vote:false})} />
-              <VoteScreamCard ScreamId={screamId} />
+                <XIcon
+                  width={23}
+                  height={23}
+                  className="text-red-600 cursor-pointer absolute right-2"
+                  onClick={() => this.setState({ vote: false })}
+                />
+                <VoteScreamCard ScreamId={screamId} />
               </div>
             ) : (
               <button
                 onClick={handleVote}
-                className="bg-blue-500 sm:bg-blue-400 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline absolute right-0"
+                className={`bg-blue-500 sm:bg-blue-400 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline absolute right-0 ${handle === this.props.user.credentials.handle && "hidden"}`}
               >
                 Lets Collab
               </button>

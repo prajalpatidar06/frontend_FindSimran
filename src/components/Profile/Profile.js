@@ -1,31 +1,52 @@
-import React from "react";
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
 import {
+  CameraIcon,
   LibraryIcon,
   LinkIcon,
   MailIcon,
+  PencilAltIcon,
   PhoneIcon,
   UserIcon,
 } from "@heroicons/react/solid";
+import { uploadImage } from "../../redux/actions/userAction";
+import { Link } from "react-router-dom";
 
-function UserProfileCard({
-  user: {
-    handle,
-    imageUrl,
-    email,
-    bio,
-    gender,
-    onlinePlateform,
-    skills,
-    website,
-    name,
-    collage,
-    city,
-    state,
-    contactNumber
-  },
-}) {
-  return (
-    <div className="">
+export class Profile extends Component {
+  handleImageChange = (event) => {
+    const image = event.target.files[0];
+    const formData = new FormData();
+    formData.append("image", image, image.name);
+    this.props.uploadImage(formData);
+  };
+
+  handleEditPicture = () => {
+    const fileInput = document.getElementById("imageInput");
+    fileInput.click();
+  };
+  render() {
+    const {
+      user: {
+        credentials: {
+          handle,
+          imageUrl,
+          email,
+          bio,
+          gender,
+          onlinePlateform,
+          skills,
+          website,
+          name,
+          collage,
+          city,
+          state,
+          contactNumber,
+        },
+      },
+    } = this.props;
+    return (
+      <div className="">
         <div className="">
           <div
             style={{ background: "lightblue" }}
@@ -37,6 +58,22 @@ function UserProfileCard({
                 alt={handle}
                 className="w-48 h-42 rounded-full border-4 border-white shadow absolute top-5 left-5"
               />
+              <div>
+                <input
+                  type="file"
+                  id="imageInput"
+                  hidden="hidden"
+                  onChange={this.handleImageChange}
+                />
+                <CameraIcon
+                  className=" absolute bottom-0 hover:text-blue-500 cursor-pointer"
+                  width={25}
+                  height={25}
+                  type="button"
+                  title="update Image"
+                  onClick={this.handleEditPicture}
+                />
+              </div>
             </div>
             <div className="flex-1 relative p-5">
               <h3 className="text-2xl font-semibold">{handle}</h3>
@@ -50,6 +87,13 @@ function UserProfileCard({
           <div className="sm:flex mt-10">
             <div className="bg-white flex-1 p-2 rounded-2xl shadow mt-2">
               <div className="mx-2 mt-2 flex text-xl font-medium relative">
+                <Link to="edit-profile">
+                  <PencilAltIcon
+                    width={22}
+                    height={22}
+                    className="absolute right-0 hover:text-blue-500 cursor-pointer"
+                  />
+                </Link>
                 {name && (
                   <p className="mx-2 items-center flex">
                     <UserIcon width={22} height={22} />
@@ -208,7 +252,17 @@ function UserProfileCard({
           </div>
         </div>
       </div>
-  );
+    );
+  }
 }
 
-export default UserProfileCard;
+Profile.propTypes = {
+  user: PropTypes.object.isRequired,
+  uploadImage: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  user: state.user,
+});
+
+export default connect(mapStateToProps, { uploadImage })(Profile);

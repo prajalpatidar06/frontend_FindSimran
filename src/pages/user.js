@@ -20,14 +20,10 @@ export class user extends Component {
         {!loading ? (
           <>
             {userData == null ? (
-              <div>User Not Found</div>
+              <div className="font-bold text-2xl flex text-red-500 absolute top-[50%] left-[30%] sm:left-[45%]">User Not Found</div>
             ) : (
               <div className="min-h-screen py-2 px-1 bg-gray-100">
-                <div className="flex-grow h-screen overflow-y-auto scrollbar-hide">
-                  <div className="mx-auto max-w-md md:max-w-lg lg:max-w-2xl">
-                    <UserProfileCard user={userData} />
-                  </div>
-                </div>
+                <UserProfileCard user={userData} />
               </div>
             )}
           </>

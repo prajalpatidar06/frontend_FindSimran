@@ -202,34 +202,6 @@ export const updateVote = (voteId, updatedVote) => (dispatch) => {
     });
 };
 
-export const deleteVote = (screamId, voteId) => (dispatch) => {
-  axios
-    .delete(`/screams/${screamId}/${voteId}`)
-    .then((res) => {
-      dispatch(getAuthVotes());
-    })
-    .catch((err) => {
-      dispatch({
-        type: SET_ERRORS,
-        payload: err.response.data,
-      });
-    });
-};
-
-export const acceptCollab = (screamId, voteId) => (dispatch) => {
-  axios
-    .post(`/screams/${screamId}/${voteId}`)
-    .then((res) => {
-      window.location.href = "/";
-    })
-    .catch((err) => {
-      dispatch({
-        type: SET_ERRORS,
-        payload: err.response.data,
-      });
-    });
-};
-
 export const updateScreamStatus = (screamId, status, handle) => (dispatch) => {
   axios
     .put(`/screams/${screamId}/${status}`)

@@ -1,14 +1,10 @@
 import React, { Component } from "react";
-import ProfileCard from "../components/Profile/ProfileCard";
+import Profile from "../components/Profile/Profile";
 export class profile extends Component {
   render() {
     return (
       <div className="min-h-screen py-10 px-3 bg-gray-100">
-        <div className="flex-grow h-screen pb-44 pt-6 mr-4 xl:mr-40 overflow-y-auto scrollbar-hide">
-          <div className="mx-auto max-w-md md:max-w-lg lg:max-w-2xl">
-            <ProfileCard />
-          </div>
-        </div>
+        <Profile />
       </div>
     );
   }
