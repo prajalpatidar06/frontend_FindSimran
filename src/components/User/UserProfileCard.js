@@ -61,13 +61,13 @@ function UserProfileCard({
             <div className="bg-white p-2 rounded-2xl shadow">
               <div className="mx-2 mt-2 flex text-xl font-medium relative">
                 {name && (
-                  <p className="mx-2 items-center flex">
-                    <UserIcon width={22} height={22} />
+                  <p className="items-center flex">
+                    <UserIcon width={22} height={22} className="mx-1" />
                     {name}
                   </p>
                 )}
               </div>
-              <div className="grid sm:grid-cols-2 mt-2">
+              <div className="grid sm:grid-cols-2 grid-gap-2 mt-2">
                 {contactNumber && (
                   <p className="flex items-center mx-1">
                     <PhoneIcon width={20} height={20} className="mx-1" />{" "}

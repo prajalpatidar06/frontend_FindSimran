@@ -38,9 +38,18 @@ export class Signup extends Component {
   };
 
   handleChange = (event) => {
-    this.setState({
-      [event.target.name]: event.target.value,
-    });
+    if(event.target.name === "handle" && event.target.value.length > 31){
+      this.setState({errors:{handle:"max char length is not more than 30"}})
+    }
+    else if(event.target.name === "handle" && event.target.value[event.target.value.length -1] === ' '){
+      this.setState({errors:{handle:"username does not contain space"}})
+    }
+    else{
+      this.setState({
+        [event.target.name]: event.target.value,
+        errors:{}
+      });
+    }
   };
   render() {
     const {

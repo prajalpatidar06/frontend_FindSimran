@@ -10,13 +10,17 @@ export class UpdateScream extends Component {
   constructor(props) {
     super(props);
     window.onload = (event) => {
-      window.location.href = "/authorScreams"
+      window.location.href = "/authorScreams";
     };
     this.state = {
       title: this.props.scream.title,
-      body: this.props.scream.body ? this.props.scream.body.toString().split(",").join("\n") : "",
+      body: this.props.scream.body
+        ? this.props.scream.body.toString().split(",").join("\n")
+        : "",
       url: this.props.scream.url,
-      requiredSkills: this.props.scream.requiredSkills ? this.props.scream.requiredSkills : [],
+      requiredSkills: this.props.scream.requiredSkills
+        ? this.props.scream.requiredSkills
+        : [],
       errors: {},
     };
     this.inputSkill = React.createRef();
@@ -35,7 +39,7 @@ export class UpdateScream extends Component {
     if (answer) {
       const ScreamData = {
         title: this.state.title,
-        body:this.state.body.trim().split("\n"),
+        body: this.state.body.trim().split("\n"),
         url: this.state.url,
         requiredSkills: this.state.requiredSkills,
       };
@@ -48,18 +52,42 @@ export class UpdateScream extends Component {
   };
 
   handleChange = (event) => {
-    this.setState({
-      [event.target.name]: event.target.value,
-    });
+    console.log(event.target.value);
+    if (event.target.name === "body" && event.target.value.length >= 800) {
+      this.setState({
+        errors: { body: "max char length is not more than 800" },
+      });
+    } else if (
+      event.target.name === "title" &&
+      event.target.value.length >= 80
+    ) {
+      this.setState({
+        errors: { title: "max char length is not more than 80" },
+      });
+    } else if (event.target.name === "url" && event.target.value.length >= 50) {
+      this.setState({
+        errors: { url: "max char length is not more than 50" },
+      });
+    } else {
+      this.setState({ errors: {} });
+      this.setState({
+        [event.target.name]: event.target.value,
+      });
+    }
   };
 
   handleArrayChange = (ref, stateName) => {
-    if (ref.current.value !== "") {
+    if (ref.current.value.length > 13) {
+      this.setState({
+        errors: { requiredSkills: "max char length is not more than 13" },
+      });
+    } else if (ref.current.value !== "") {
+      this.setState({ errors: {} });
       this.setState({
         requiredSkills: [...stateName, ref.current.value],
       });
+      ref.current.value = "";
     }
-    ref.current.value = "";
   };
 
   handleRemoveFromRequiredSkill = (skill) => {
@@ -80,7 +108,13 @@ export class UpdateScream extends Component {
           <form noValidate onSubmit={this.handleSubmit}>
             <div className="shadow sm:rounded-md sm:overflow-hidden">
               <div className="px-4 py-5 bg-white space-y-6 sm:p-6">
-                <Link to="/authorScreams"><XIcon width={20} height={20} className="hover:text-red-500 cursor-pointer"/></Link>
+                <Link to="/authorScreams">
+                  <XIcon
+                    width={20}
+                    height={20}
+                    className="hover:text-red-500 cursor-pointer"
+                  />
+                </Link>
                 <div className="text-center text-blue-600 text-3xl sm:text-2xl font-bold">
                   Update Scream
                 </div>
@@ -95,8 +129,13 @@ export class UpdateScream extends Component {
                     onChange={this.handleChange}
                     value={this.state.title}
                   ></textarea>
+                  {errors.title && (
+                    <p className="text-red-500 text-xs italic">
+                      {errors.title}
+                    </p>
+                  )}
                 </div>
-                <div className="mt-4 flex rounded-md shadow-sm">
+                <div className="mt-4  rounded-md shadow-sm">
                   <input
                     title="Url"
                     type="text"
@@ -107,6 +146,9 @@ export class UpdateScream extends Component {
                     onChange={this.handleChange}
                     value={this.state.url}
                   />
+                  {errors.url && (
+                    <p className="text-red-500 text-xs italic">{errors.url}</p>
+                  )}
                 </div>
 
                 <div className="mt-4">
@@ -149,6 +191,11 @@ export class UpdateScream extends Component {
                         }
                       />
                     </div>
+                    {errors.requiredSkills && (
+                      <p className="text-red-500 text-xs italic">
+                        {errors.requiredSkills}
+                      </p>
+                    )}
                   </div>
                   <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
                     {this.state.requiredSkills.map((skill) => (

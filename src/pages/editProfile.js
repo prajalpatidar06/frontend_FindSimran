@@ -9,7 +9,7 @@ export class editProfile extends Component {
   constructor(props) {
     super(props);
     window.onload = (event) => {
-      window.location.href = "profile"
+      window.location.href = "profile";
     };
     this.state = {
       name: this.props.credentials.name,
@@ -28,6 +28,7 @@ export class editProfile extends Component {
       onlinePlateform: this.props.credentials.onlinePlateform
         ? this.props.credentials.onlinePlateform
         : {},
+      errors: {},
     };
     this.inputSkill = React.createRef();
   }
@@ -53,27 +54,89 @@ export class editProfile extends Component {
   };
 
   handleChange = (event) => {
-    this.setState({
-      [event.target.name]: event.target.value,
-    });
+    console.log(event.target.value);
+    if (event.target.name === "name" && event.target.value.length >= 50) {
+      this.setState({
+        errors: { name: "max char length is not more than 30" },
+      });
+    } else if (
+      event.target.name === "contactNumber" &&
+      event.target.value.length >= 14
+    ) {
+      this.setState({
+        errors: { contactNumber: "max char length is not more than 13" },
+      });
+    } else if (
+      event.target.name === "collage" &&
+      event.target.value.length >= 50
+    ) {
+      this.setState({
+        errors: { collage: "max char length is not more than 50" },
+      });
+    } else if (
+      event.target.name === "city" &&
+      event.target.value.length >= 21
+    ) {
+      this.setState({
+        errors: { city: "max char length is not more than 20" },
+      });
+    } else if (
+      event.target.name === "state" &&
+      event.target.value.length >= 30
+    ) {
+      this.setState({
+        errors: { state: "max char length is not more than 30" },
+      });
+    } else if (
+      event.target.name === "bio" &&
+      event.target.value.length >= 250
+    ) {
+      this.setState({
+        errors: { bio: "max char length is not more than 250" },
+      });
+    } else if (
+      event.target.name === "website" &&
+      event.target.value.length >= 50
+    ) {
+      this.setState({
+        errors: { website: "max char length is not more than 50" },
+      });
+    } else {
+      this.setState({ errors: {} });
+      this.setState({
+        [event.target.name]: event.target.value,
+      });
+    }
   };
 
   handlePlateformChange = (event) => {
-    this.setState({
-      onlinePlateform: {
-        ...this.state.onlinePlateform,
-        [event.target.name]: event.target.value,
-      },
-    });
+    if (event.target.value.length > 30) {
+      this.setState({
+        errors: { onlinePlateform: `max char length of ${event.target.name} is not more than 30`},
+      });
+    } else {
+      this.setState({
+        onlinePlateform: {
+          ...this.state.onlinePlateform,
+          [event.target.name]: event.target.value,
+        },
+        errors: {},
+      });
+    }
   };
 
   handleArrayChange = (ref, stateName) => {
-    if (ref.current.value !== "") {
+    if (ref.current.value.length > 13) {
+      this.setState({
+        errors: { skills: "max char length is not more than 13" },
+      });
+    } else if (ref.current.value !== "") {
+      this.setState({errors:{}})
       this.setState({
         skills: [...stateName, ref.current.value],
       });
+      ref.current.value = "";
     }
-    ref.current.value = "";
   };
 
   handleRemoveFromSkill = (skill) => {
@@ -84,6 +147,7 @@ export class editProfile extends Component {
   };
 
   render() {
+    const { errors } = this.state;
     return (
       <div>
         {this.props.loading && (
@@ -121,6 +185,11 @@ export class editProfile extends Component {
                       onChange={this.handleChange}
                       value={this.state.name}
                     />
+                    {errors.name && (
+                      <p className="text-red-500 text-xs italic">
+                        {errors.name}
+                      </p>
+                    )}
                   </div>
                   <div className="mt-4 mx-2">
                     <label class="text-sm font-medium text-gray-700 mx-2">
@@ -136,6 +205,11 @@ export class editProfile extends Component {
                       onChange={this.handleChange}
                       value={this.state.contactNumber}
                     />
+                    {errors.contactNumber && (
+                      <p className="text-red-500 text-xs italic">
+                        {errors.contactNumber}
+                      </p>
+                    )}
                   </div>
                   <div className="mt-4 mx-2 items-center">
                     <label class="text-sm font-medium text-gray-700 mx-2">
@@ -151,6 +225,11 @@ export class editProfile extends Component {
                       onChange={this.handleChange}
                       value={this.state.website}
                     />
+                    {errors.website && (
+                      <p className="text-red-500 text-xs italic">
+                        {errors.website}
+                      </p>
+                    )}
                   </div>
                   <div className="mt-4 mx-2 items-center">
                     <label class="text-sm font-medium text-gray-700 mx-2">
@@ -193,6 +272,11 @@ export class editProfile extends Component {
                       onChange={this.handleChange}
                       value={this.state.collage}
                     />
+                    {errors.collage && (
+                      <p className="text-red-500 text-xs italic">
+                        {errors.collage}
+                      </p>
+                    )}
                   </div>
                   <div className="mt-4 mx-2 items-center">
                     <label class="text-sm font-medium text-gray-700 mx-2">
@@ -208,6 +292,11 @@ export class editProfile extends Component {
                       onChange={this.handleChange}
                       value={this.state.city}
                     />
+                    {errors.city && (
+                      <p className="text-red-500 text-xs italic">
+                        {errors.city}
+                      </p>
+                    )}
                   </div>
                   <div className="mt-4 mx-2 items-center">
                     <label class="text-sm font-medium text-gray-700 mx-2">
@@ -223,6 +312,11 @@ export class editProfile extends Component {
                       onChange={this.handleChange}
                       value={this.state.state}
                     />
+                    {errors.state && (
+                      <p className="text-red-500 text-xs italic">
+                        {errors.state}
+                      </p>
+                    )}
                   </div>
                 </div>
                 {/* Bio */}
@@ -240,6 +334,9 @@ export class editProfile extends Component {
                     onChange={this.handleChange}
                     value={this.state.bio}
                   ></textarea>
+                  {errors.bio && (
+                    <p className="text-red-500 text-xs italic">{errors.bio}</p>
+                  )}
                 </div>
                 {/* online Plateform */}
                 <div className="mt-4 mx-2 sm:flex">
@@ -308,7 +405,25 @@ export class editProfile extends Component {
                       value={this.state.onlinePlateform["gfg"]}
                     />
                   </div>
+                  <div className="mt-4 mx-2">
+                    <label class="text-sm font-medium text-gray-700 mx-2">
+                      HackerRank :
+                    </label>
+                    <input
+                      type="text"
+                      name="hackerrank"
+                      className="shadow-sm p-2 focus:ring-blue-500 focus:border-blue-500 mt-1 sm:text-sm border-blue-300 rounded-md"
+                      placeholder="@username"
+                      onChange={this.handlePlateformChange}
+                      value={this.state.onlinePlateform["hankerrank"]}
+                    />
+                  </div>
                 </div>
+                {errors.onlinePlateform && (
+                    <p className="text-red-500 text-xs italic">
+                      {errors.onlinePlateform}
+                    </p>
+                  )}
                 {/* Skills */}
                 <div className="mt-4">
                   <div className="sm:flex">
@@ -332,6 +447,11 @@ export class editProfile extends Component {
                         }
                       />
                     </div>
+                    {errors.skills && (
+                    <p className="text-red-500 text-xs italic">
+                      {errors.skills}
+                    </p>
+                  )}
                   </div>
                   <div className="grid grid-cols-3 gap-4 sm:grid-cols-5 mt-1">
                     {this.state.skills.map((skill) => (
@@ -365,12 +485,12 @@ export class editProfile extends Component {
 editProfile.propTypes = {
   credentials: PropTypes.object.isRequired,
   editUserDetails: PropTypes.func.isRequired,
-  loading: PropTypes.object.isRequired
+  loading: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   credentials: state.user.credentials,
-  loading: state.user.loading
+  loading: state.user.loading,
 });
 
 export default connect(mapStateToProps, { editUserDetails })(editProfile);

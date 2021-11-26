@@ -40,19 +40,32 @@ export class UpdateVoteCard extends Component {
   };
 
   handleChange = (event) => {
-    this.setState({
-      [event.target.name]: event.target.value,
-    });
+    if (event.target.name === "comment" && event.target.value.length >= 500) {
+      this.setState({
+        errors: { comment: "max char length is not more than 500" },
+      });
+    } else {
+      this.setState({ errors: {} });
+      this.setState({
+        [event.target.name]: event.target.value,
+      });
+    }
   };
 
   handleArrayChange = (ref, stateName) => {
-    if (ref.current.value !== "") {
+    if (ref.current.value.length > 13) {
+      this.setState({
+        errors: { skills: "max char length is not more than 13" },
+      });
+    } else if (ref.current.value !== "") {
+      this.setState({ errors: {} });
       this.setState({
         skills: [...stateName, ref.current.value],
       });
+      ref.current.value = "";
     }
-    ref.current.value = "";
   };
+
 
   handleRemoveFromSkill = (skill) => {
     let filteredArray = this.state.skills.filter(
@@ -113,6 +126,11 @@ export class UpdateVoteCard extends Component {
                       }
                     />
                   </div>
+                  {errors.skills && (
+                  <p className="text-red-500 text-xs italic">
+                    {errors.skills}
+                  </p>
+                )}
                 </div>
                 <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
                   {this.state.skills.map((skill) => (

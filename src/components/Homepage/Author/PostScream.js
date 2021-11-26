@@ -27,7 +27,7 @@ export class PostScream extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
     const answer = window.confirm("Post scream!");
-    console.log(answer)
+    console.log(answer);
     if (answer) {
       const ScreamData = {
         title: this.state.title,
@@ -40,18 +40,42 @@ export class PostScream extends Component {
   };
 
   handleChange = (event) => {
-    this.setState({
-      [event.target.name]: event.target.value,
-    });
+    console.log(event.target.value);
+    if (event.target.name === "body" && event.target.value.length >= 800) {
+      this.setState({
+        errors: { body: "max char length is not more than 800" },
+      });
+    } else if (
+      event.target.name === "title" &&
+      event.target.value.length >= 80
+    ) {
+      this.setState({
+        errors: { title: "max char length is not more than 80" },
+      });
+    } else if (event.target.name === "url" && event.target.value.length >= 50) {
+      this.setState({
+        errors: { url: "max char length is not more than 50" },
+      });
+    } else {
+      this.setState({
+        [event.target.name]: event.target.value,
+        errors:{}
+      });
+    }
   };
 
   handleArrayChange = (ref, stateName) => {
-    if (ref.current.value !== "") {
+    if (ref.current.value.length > 13) {
+      this.setState({
+        errors: { requiredSkills: "max char length is not more than 13" },
+      });
+    } else if (ref.current.value !== "") {
       this.setState({
         requiredSkills: [...stateName, ref.current.value],
+        errors:{}
       });
+      ref.current.value = "";
     }
-    ref.current.value = "";
   };
 
   handleRemoveFromRequiredSkill = (skill) => {
@@ -86,8 +110,13 @@ export class PostScream extends Component {
                     onChange={this.handleChange}
                     value={this.state.title}
                   ></textarea>
+                  {errors.title && (
+                    <p className="text-red-500 text-xs italic">
+                      {errors.title}
+                    </p>
+                  )}
                 </div>
-                <div className="mt-4 flex rounded-md shadow-sm">
+                <div className="mt-4 rounded-md shadow-sm">
                   <input
                     title="Url"
                     type="text"
@@ -98,6 +127,9 @@ export class PostScream extends Component {
                     onChange={this.handleChange}
                     value={this.state.url}
                   />
+                  {errors.url && (
+                    <p className="text-red-500 text-xs italic">{errors.url}</p>
+                  )}
                 </div>
 
                 <div className="mt-4">
@@ -140,6 +172,11 @@ export class PostScream extends Component {
                         }
                       />
                     </div>
+                    {errors.requiredSkills && (
+                      <p className="text-red-500 text-xs italic">
+                        {errors.requiredSkills}
+                      </p>
+                    )}
                   </div>
                   <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
                     {this.state.requiredSkills.map((skill) => (

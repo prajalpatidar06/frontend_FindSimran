@@ -95,8 +95,8 @@ export class Profile extends Component {
                   />
                 </Link>
                 {name && (
-                  <p className="mx-2 items-center flex">
-                    <UserIcon width={22} height={22} />
+                  <p className="items-center flex">
+                    <UserIcon width={22} height={22} className="mx-1" />
                     {name}
                   </p>
                 )}
@@ -133,20 +133,20 @@ export class Profile extends Component {
               </div>
               <div className="grid grid-cols-3 gap-2 sm:grid-cols-5 mt-5 mx-2">
                 {onlinePlateform && "linkedin" in onlinePlateform && (
-                  <a
-                    target="_blank"
-                    href={`https://in.linkedin.com/in/${onlinePlateform.linkedin}`}
-                    rel="noreferrer"
-                    className="items-center"
-                  >
-                    <img
-                      class="website-logo"
-                      src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/LinkedIn_logo_initials.png/768px-LinkedIn_logo_initials.png"
-                      alt=""
-                      className="w-8 h-8"
-                    />
-                    <p>Linkedin</p>
-                  </a>
+                    <a
+                      target="_blank"
+                      href={`https://in.linkedin.com/in/${onlinePlateform.linkedin}`}
+                      rel="noreferrer"
+                      className="items-center"
+                    >
+                      <img
+                        class="website-logo"
+                        src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/LinkedIn_logo_initials.png/768px-LinkedIn_logo_initials.png"
+                        alt=""
+                        className="w-8 h-8"
+                      />
+                      <p>Linkedin</p>
+                    </a>
                 )}
 
                 {onlinePlateform && "github" in onlinePlateform && (
