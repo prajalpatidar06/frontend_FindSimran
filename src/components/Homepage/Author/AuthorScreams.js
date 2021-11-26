@@ -45,4 +45,4 @@ const mapStateToProps = (state) => ({
   user: state.user,
 });
 
-export default connect(mapStateToProps, { getAuthScreams })(AuthorScreams);
+export default connect(mapStateToProps, { getAuthScreams})(AuthorScreams);

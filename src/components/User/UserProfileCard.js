@@ -1,4 +1,5 @@
 import React from "react";
+import Scream from "../Homepage/Public/Scream";
 import {
   LibraryIcon,
   LinkIcon,
@@ -21,34 +22,43 @@ function UserProfileCard({
     collage,
     city,
     state,
-    contactNumber
+    contactNumber,
+    screams,
   },
 }) {
+  let recentScreamsMarkup =
+    (screams &&
+    screams.length > 0) ?
+    screams.map((scream) => <Scream key={scream.screamId} scream={scream} />):(
+      <p className="text-center mt-4 text-xl font-medium">No Screams Found</p>
+    )
+
   return (
     <div className="">
-        <div className="">
-          <div
-            style={{ background: "lightblue" }}
-            className="flex bg-white h-[130px] sm:h-[150px] text-center relative mb-10 sm:mb-20"
-          >
-            <div className="flex-1 relative">
-              <img
-                src={imageUrl}
-                alt={handle}
-                className="w-48 h-42 rounded-full border-4 border-white shadow absolute top-5 left-5"
-              />
-            </div>
-            <div className="flex-1 relative p-5">
-              <h3 className="text-2xl font-semibold">{handle}</h3>
-              {city && (
-                <h3 className="text-gray-500 font-medium">
-                  {city} , {state}
-                </h3>
-              )}
-            </div>
+      <div className="">
+        <div
+          style={{ background: "lightblue" }}
+          className="flex bg-white h-[130px] sm:h-[150px] text-center relative"
+        >
+          <div className="flex-1 relative">
+            <img
+              src={imageUrl}
+              alt={handle}
+              className="w-48 h-42 rounded-full border-4 border-white shadow absolute top-5 left-5"
+            />
           </div>
-          <div className="sm:flex mt-10">
-            <div className="bg-white flex-1 p-2 rounded-2xl shadow mt-2">
+          <div className="flex-1 relative p-5">
+            <h3 className="text-2xl font-semibold">{handle}</h3>
+            {city && (
+              <h3 className="text-gray-500 font-medium">
+                {city} , {state}
+              </h3>
+            )}
+          </div>
+        </div>
+        <div className="sm:flex">
+          <div className="flex-1 mx-2 mt-20">
+            <div className="bg-white p-2 rounded-2xl shadow">
               <div className="mx-2 mt-2 flex text-xl font-medium relative">
                 {name && (
                   <p className="mx-2 items-center flex">
@@ -185,7 +195,7 @@ function UserProfileCard({
                 )}
               </div>
             </div>
-            <div className="flex-1 mx-1 mt-2 bg-white p-2 rounded-2xl shadow">
+            <div className="bg-white p-2 rounded-2xl shadow mt-2">
               {bio && (
                 <div>
                   <p className="font-medium text-xl">About</p>
@@ -206,8 +216,17 @@ function UserProfileCard({
               )}
             </div>
           </div>
+          <div className="flex-1 pt-6">
+            <p className="text-2xl text-blue-500 text-center font-bold">
+              Screams
+            </p>
+            <div className="flex-grow h-screen mr-4 xl:mr-40 overflow-y-auto ">
+              {recentScreamsMarkup}
+            </div>
+          </div>
         </div>
       </div>
+    </div>
   );
 }
 

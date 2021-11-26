@@ -2,12 +2,6 @@ import React from "react";
 import dayjs from "dayjs";
 import axios from "axios";
 
-if (window.performance) {
-  if (performance.navigation.type === 1) {
-    window.location.href = "/authorScreams";
-  }
-}
-
 function VoteCard({ vote, FormateDate }) {
     const deleteVote = () => {
         let answer = window.confirm("Remove Vote?");

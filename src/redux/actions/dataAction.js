@@ -34,7 +34,7 @@ export const getAllScreams = () => (dispatch) => {
 
 export const getAuthScreams = (handle) => (dispatch) => {
   if (typeof handle === "undefined") {
-    return (window.location.href = "/");
+    handle = localStorage.getItem('handle')
   }
   dispatch({ type: LOADING_DATA });
   axios

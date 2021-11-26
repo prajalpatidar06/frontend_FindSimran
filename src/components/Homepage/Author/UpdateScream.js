@@ -9,18 +9,14 @@ import { PlusCircleIcon } from "@heroicons/react/outline";
 export class UpdateScream extends Component {
   constructor(props) {
     super(props);
-
-    if (window.performance) {
-      if (performance.navigation.type === 1) {
-        window.location.href = "/authorScreams";
-      }
-    }
-
+    window.onload = (event) => {
+      window.location.href = "/authorScreams"
+    };
     this.state = {
       title: this.props.scream.title,
-      body: this.props.scream.body.toString().split(",").join("\n"),
+      body: this.props.scream.body ? this.props.scream.body.toString().split(",").join("\n") : "",
       url: this.props.scream.url,
-      requiredSkills: this.props.scream.requiredSkills,
+      requiredSkills: this.props.scream.requiredSkills ? this.props.scream.requiredSkills : [],
       errors: {},
     };
     this.inputSkill = React.createRef();
@@ -39,7 +35,7 @@ export class UpdateScream extends Component {
     if (answer) {
       const ScreamData = {
         title: this.state.title,
-        body: this.state.body.trim().split("\n"),
+        body:this.state.body.trim().split("\n"),
         url: this.state.url,
         requiredSkills: this.state.requiredSkills,
       };

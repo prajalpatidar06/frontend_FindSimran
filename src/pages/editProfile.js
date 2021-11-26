@@ -8,11 +8,9 @@ import { editUserDetails } from "../redux/actions/userAction";
 export class editProfile extends Component {
   constructor(props) {
     super(props);
-    if (window.performance) {
-      if (performance.navigation.type === 1) {
-        window.location.href = "profile";
-      }
-    }
+    window.onload = (event) => {
+      window.location.href = "profile"
+    };
     this.state = {
       name: this.props.credentials.name,
       contactNumber: this.props.credentials.contactNumber,
