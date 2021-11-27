@@ -5,7 +5,7 @@ import Sidebar from "../components/Homepage/Sidebar";
 import Screams from "../components/Homepage/Public/Screams";
 import UpcomingContest from "../components/Homepage/Static/UpcomingContest/UpcomingContest";
 import StudyResources from "../components/Homepage/Static/StudyResources";
-import codingProblems from "../components/Homepage/Static/codingProblems";
+import CodingProblems from "../components/Homepage/Static/CodingProblems/CodingProblems";
 import PostScream from "../components/Homepage/Author/PostScream";
 import UpdateScream from "../components/Homepage/Author/UpdateScream";
 import AuthorScreams from "../components/Homepage/Author/AuthorScreams";
@@ -37,7 +37,7 @@ export class home extends Component {
                   <Route
                     exact
                     path="/codingProblems"
-                    component={codingProblems}
+                    component={CodingProblems}
                   />
                   <IsLoginRoute
                     exact
