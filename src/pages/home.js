@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Sidebar from "../components/Homepage/Sidebar";
 import Screams from "../components/Homepage/Public/Screams";
 import UpcomingContest from "../components/Homepage/Static/UpcomingContest/UpcomingContest";
-import StudyResources from "../components/Homepage/Static/StudyResources";
+import StudyResources from "../components/Homepage/Static/StudyResources/StudyResources";
 import CodingProblems from "../components/Homepage/Static/CodingProblems/CodingProblems";
 import PostScream from "../components/Homepage/Author/PostScream";
 import UpdateScream from "../components/Homepage/Author/UpdateScream";

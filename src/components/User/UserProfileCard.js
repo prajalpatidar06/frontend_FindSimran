@@ -57,7 +57,7 @@ function UserProfileCard({
           </div>
         </div>
         <div className="sm:flex">
-          <div className="flex-1 mx-2 mt-20">
+          <div className="flex-1 mx-2 sm:mr-12 sm:ml-3 mt-20">
             <div className="bg-white p-2 rounded-2xl shadow">
               <div className="mx-2 mt-2 flex text-xl font-medium relative">
                 {name && (
@@ -195,15 +195,15 @@ function UserProfileCard({
                 )}
               </div>
             </div>
-            <div className="bg-white p-2 rounded-2xl shadow mt-2">
+            <div className="bg-white px-4 py-2 rounded-2xl shadow mt-2">
               {bio && (
                 <div>
                   <p className="font-medium text-xl">About</p>
-                  <p>{bio}</p>
+                  <p className="mx-2">{bio}</p>
                 </div>
               )}
               {skills && skills.length > 0 && (
-                <div className="px-2 mt-3">
+                <div className="mt-3">
                   <p className="font-medium text-xl">Skills</p>
                   <div className="grid grid-cols-3 sm:grid-cols-5">
                     {skills.map((skill) => (
@@ -220,7 +220,7 @@ function UserProfileCard({
             <p className="text-2xl text-blue-500 text-center font-bold">
               Screams
             </p>
-            <div className="flex-grow h-screen mr-4 xl:mr-40 overflow-y-auto ">
+            <div className="flex-grow h-screen mx-2 sm:mr-12 sm:ml-3 overflow-y-auto ">
               {recentScreamsMarkup}
             </div>
           </div>
