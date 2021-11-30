@@ -29,14 +29,20 @@ export class AuthScream extends Component {
           1
       );
     };
+
+    const userProfile = (handle) => {
+      window.location.href =
+        localStorage.getItem("handle") === handle ? "/profile" : `/user/${handle}`;
+    };
+
     const {votes} = this.props.scream
     return (
       <div>
-        <ScreamCard scream={this.props.scream} FormateDate={FormateDate} />
+        <ScreamCard scream={this.props.scream} FormateDate={FormateDate} userProfile={userProfile}/>
         <div className="flex flex-col">
           <h1 className="mx-auto text-blue-500 text-2xl">Votes</h1>
           {Array.isArray(votes) && votes.map(vote => (
-            <VoteCard vote={vote} FormateDate={FormateDate}/>
+            <VoteCard vote={vote} FormateDate={FormateDate} userProfile={userProfile}/>
           ))}
         </div>
       </div>

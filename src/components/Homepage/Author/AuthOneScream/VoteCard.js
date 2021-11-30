@@ -2,7 +2,7 @@ import React from "react";
 import dayjs from "dayjs";
 import axios from "axios";
 
-function VoteCard({ vote, FormateDate }) {
+function VoteCard({ vote, FormateDate , userProfile }) {
     const deleteVote = () => {
         let answer = window.confirm("Remove Vote?");
         console.log(answer)
@@ -37,12 +37,12 @@ function VoteCard({ vote, FormateDate }) {
           width="40"
           height="40"
           layout="fixed"
-          onClick={() => this.userProfile(vote.handle)}
+          onClick={() => userProfile(vote.handle)}
         />
         <div>
           <p
             className="font-medium cursor-pointer"
-            onClick={() => this.userProfile(vote.handle)}
+            onClick={() => userProfile(vote.handle)}
           >
             {vote.handle}
           </p>

@@ -33,6 +33,7 @@ export class users extends Component {
             ) {
               return val;
             }
+            return val
           })
           .sort((a, b) => {
             return a.handle.localeCompare(b.handle);
@@ -55,10 +56,9 @@ export class users extends Component {
         <div className="bg-white shadow-sm">
           <div className="flex justify-center font-medium ">
             <input
-              title="Url"
+              title="search user"
               type="text"
-              name="url"
-              id="url"
+              name="user"
               className="p-2 sm:text-sm border-b-2 border-blue-300 focus:outline-none"
               placeholder="Search for User"
               onChange={(event) =>

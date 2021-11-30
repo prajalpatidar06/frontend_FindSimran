@@ -14,6 +14,7 @@ export class ScreamCard extends Component {
         requiredSkills,
       },
       FormateDate,
+      userProfile
     } = this.props;
     return (
       <div>
@@ -26,12 +27,12 @@ export class ScreamCard extends Component {
               width="40"
               height="40"
               layout="fixed"
-              onClick={() => this.userProfile(handle)}
+              onClick={() => userProfile(handle)}
             />
             <div>
               <p
                 className="font-medium cursor-pointer"
-                onClick={() => this.userProfile(handle)}
+                onClick={() => userProfile(handle)}
               >
                 {handle}
               </p>

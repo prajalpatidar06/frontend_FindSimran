@@ -126,7 +126,7 @@ export class AuthVoteCard extends Component {
                   className="absolute right-1 top-1 cursor-pointer hover:text-blue-500"
                   onClick={() => this.setState({ updatingVote: true })}
                 />
-                <ShowVoteCard vote={vote} FormateDate={FormateDate} />
+                <ShowVoteCard vote={vote} FormateDate={FormateDate} userProfile={this.userProfile} />
               </div>
             ) : (
               <div>

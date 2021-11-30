@@ -13,18 +13,18 @@ function NotificationCard({ notification }) {
         : `user/${handle}`;
   };
   return (
-    <div className="flex flex-col items-center">
-      <div className="p-5 bg-white mt-5 rounded-t-2xl shadow-sm">
+    <div className="flex flex-col">
+      <div className="relative p-5 mt-5 bg-white rounded-t-2xl shadow-sm">
         <div className="flex items-center space-x-2">
-        <img
-              className="rounded-full cursor-pointer"
-              src={notification.senderImage}
-              alt="Profile"
-              width="60"
-              height="60"
-              layout="fixed"
-              onClick={() => userProfile(notification.sender)}
-            />
+          <img
+            className="rounded-full cursor-pointer"
+            src={notification.senderImage}
+            alt="Profile"
+            width="60"
+            height="60"
+            layout="fixed"
+            onClick={() => userProfile(notification.sender)}
+          />
           <span
             className="font-medium cursor-pointer hover:text-blue-500"
             onClick={() => userProfile(notification.sender)}
@@ -41,16 +41,11 @@ function NotificationCard({ notification }) {
           ) : (
             <span>accept your collab request for scream</span>
           )}
-          <p className="text-xs text-gray-400">
+          <p className="text-xs text-gray-400 sm:absolute right-2">
             {dayjs(notification.createdAt).fromNow().slice(1) === " days ago"
               ? dayjs(notification.createdAt).format("DD/MM/YY")
               : dayjs(notification.createdAt).fromNow()}
           </p>
-          {notification.read ? (
-            <EyeIcon width={15} height={15} />
-          ) : (
-            <EyeOffIcon width={15} height={15} />
-          )}
         </div>
       </div>
     </div>

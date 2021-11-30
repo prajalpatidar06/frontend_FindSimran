@@ -46,6 +46,12 @@ export class AuthScreamCard extends Component {
       handle,
     } = this.props;
 
+    const userProfile = (handle) => {
+      console.log('clicked')
+      window.location.href =
+        localStorage.getItem("handle") === handle ? "profile" : `user/${handle}`;
+    };
+
     const FormateDate = (createdAt) => {
       return (
         parseInt(dayjs().format("YY")) >
@@ -80,12 +86,12 @@ export class AuthScreamCard extends Component {
               width="40"
               height="40"
               layout="fixed"
-              onClick={() => this.userProfile(handle)}
+              onClick={() => userProfile(handle)}
             />
             <div>
               <p
                 className="font-medium cursor-pointer"
-                onClick={() => this.userProfile(handle)}
+                onClick={() => userProfile(handle)}
               >
                 {handle}
               </p>

@@ -1,7 +1,7 @@
 import React from "react";
 import dayjs from "dayjs";
 
-function ShowVoteCard({ vote, FormateDate }) {
+function ShowVoteCard({ vote, FormateDate , userProfile }) {
   return (
     <div className="space-y-6">
       <div className="flex items-center space-x-2 mt-2 mx-1">
@@ -12,12 +12,12 @@ function ShowVoteCard({ vote, FormateDate }) {
           width="40"
           height="40"
           layout="fixed"
-          onClick={() => this.userProfile(vote.handle)}
+          onClick={() => userProfile(vote.handle)}
         />
         <div>
           <p
             className="font-medium cursor-pointer"
-            onClick={() => this.userProfile(vote.handle)}
+            onClick={() => userProfile(vote.handle)}
           >
             {vote.handle}
           </p>
