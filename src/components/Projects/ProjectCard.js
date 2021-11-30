@@ -1,19 +1,27 @@
 import React from "react";
 import dayjs from "dayjs";
-import relativeTime from 'dayjs/plugin/relativeTime'
-import {ExternalLinkIcon} from '@heroicons/react/solid'
+import relativeTime from "dayjs/plugin/relativeTime";
+import { ExternalLinkIcon } from "@heroicons/react/solid";
 
-function ProjectCard({project:{
-  projectId,
-  body,
-  title,
-  url,
-  techUsed,
-  handle,
-  userImage,
-  createdAt,
-}}) {
+function ProjectCard({
+  project: {
+    projectId,
+    body,
+    title,
+    url,
+    techUsed,
+    handle,
+    userImage,
+    createdAt,
+  },
+}) {
   dayjs.extend(relativeTime);
+
+  const userProfile = (handle) => {
+    window.location.href =
+      localStorage.getItem("handle") === handle ? "profile" : `user/${handle}`;
+  };
+
   const FormateDate = (createdAt) => {
     return (
       parseInt(dayjs().format("YY")) >
@@ -37,12 +45,12 @@ function ProjectCard({project:{
             width="40"
             height="40"
             layout="fixed"
-            onClick={() => this.userProfile(handle)}
+            onClick={() => userProfile(handle)}
           />
           <div>
             <p
               className="font-medium cursor-pointer"
-              onClick={() => this.userProfile(handle)}
+              onClick={() => userProfile(handle)}
             >
               {handle}
             </p>
