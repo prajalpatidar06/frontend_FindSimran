@@ -11,11 +11,14 @@ export class projects extends Component {
 
   render() {
     const { projects, loading } = this.props.data;
-    console.log(projects);
     let recentProjectsMarkup = !loading ? (
-      projects.map((project) => (
-        <ProjectCard key={project.projectId} project={project} />
-      ))
+      projects.length > 0 ? (
+        projects.map((project) => (
+          <ProjectCard key={project.projectId} project={project} />
+        ))
+      ) : (
+        <p className="text-xl font-medium text-center mt-20">No Project Found</p>
+      )
     ) : (
       <div className="flex justify-center fixed top-[50%] left-[50%] items-center">
         <div className="animate-spin rounded-full h-20 w-20 border-b-2 border-gray-900"></div>
@@ -23,9 +26,11 @@ export class projects extends Component {
     );
 
     return (
-      <div className="bg-gray-100 ">
+      <div className="bg-gray-100 h-screen">
         <div className="flex-grow pb-5 pt-5 overflow-y-auto scrollbar-hide">
-          <p className="text-center font-bold text-2xl text-blue-500">Projects</p>
+          <p className="text-center font-bold text-2xl text-blue-500">
+            Projects
+          </p>
           <div className="mx-auto max-w-md md:max-w-lg lg:max-w-2xl">
             {recentProjectsMarkup}
           </div>

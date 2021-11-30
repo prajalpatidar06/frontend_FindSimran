@@ -70,34 +70,43 @@ export class Profile extends Component {
     } = this.props;
 
     const recentProjectMarkup = !loading ? (
-      authProjects.map((project) =>
-        this.state.card === project.projectId ? (
-          <div className="shadow sm:rounded-md sm:overflow-hidden">
-            <div className="px-4 py-5 bg-white space-y-6 sm:p-6 relative">
-              <XIcon width={21} height={21} className="hover:text-red-500 absolute right-2" onClick={()=> this.setState({card:""})} />
-              <UpdateProject
-                key={project.projectId}
-                updateProject={this.props.updateProject}
-                deleteProject={this.props.deleteProject}
-                project={project}
-              />
-            </div>
-          </div>
-        ) : (
-          <div className="flex flex-col">
-            <div className="relative p-5 bg-white mt-5 rounded-t-2xl shadow-sm">
-              <div className="flex items-center space-x-2">
-                <PencilAltIcon
+      authProjects.length > 0 ? (
+        authProjects.map((project) =>
+          this.state.card === project.projectId ? (
+            <div className="shadow sm:rounded-md sm:overflow-hidden">
+              <div className="px-4 py-5 bg-white space-y-6 sm:p-6 relative">
+                <XIcon
                   width={21}
                   height={21}
-                  className="absolute right-2 top-1 hover:text-blue-500 cursor-pointer"
-                  onClick={() => this.setState({ card: project.projectId })}
+                  className="hover:text-red-500 absolute right-2"
+                  onClick={() => this.setState({ card: "" })}
+                />
+                <UpdateProject
+                  key={project.projectId}
+                  updateProject={this.props.updateProject}
+                  deleteProject={this.props.deleteProject}
+                  project={project}
                 />
               </div>
-              <AuthProjectCard key={project.projectId} project={project} />
             </div>
-          </div>
+          ) : (
+            <div className="flex flex-col">
+              <div className="relative p-5 bg-white mt-5 rounded-t-2xl shadow-sm">
+                <div className="flex items-center space-x-2">
+                  <PencilAltIcon
+                    width={21}
+                    height={21}
+                    className="absolute right-2 top-1 hover:text-blue-500 cursor-pointer"
+                    onClick={() => this.setState({ card: project.projectId })}
+                  />
+                </div>
+                <AuthProjectCard key={project.projectId} project={project} />
+              </div>
+            </div>
+          )
         )
+      ) : (
+        <p className="text-xl font-medium text-center">No Project Found</p>
       )
     ) : (
       <div className="flex justify-center fixed top-[50%] left-[50%] items-center">
