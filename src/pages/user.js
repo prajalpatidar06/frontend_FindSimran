@@ -11,6 +11,7 @@ export class user extends Component {
         window.location.href.split("/").length - 1
       ]
     );
+    
   }
   render() {
     const { userData, loading } = this.props;
@@ -22,7 +23,7 @@ export class user extends Component {
             {userData == null ? (
               <div className="font-bold text-2xl flex text-red-500 absolute top-[50%] left-[30%] sm:left-[45%]">User Not Found</div>
             ) : (
-              <div className="min-h-screen py-2 px-1 bg-gray-100">
+              <div className="min-h-screen bg-gray-100">
                 <UserProfileCard user={userData} />
               </div>
             )}

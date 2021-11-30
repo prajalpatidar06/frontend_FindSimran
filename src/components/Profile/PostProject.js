@@ -1,11 +1,8 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import { postScream } from "../../../redux/actions/dataAction";
 import { XCircleIcon } from "@heroicons/react/solid";
 import { PlusCircleIcon } from "@heroicons/react/outline";
 
-export class PostScream extends Component {
+export class PostProject extends Component {
   constructor() {
     super();
     this.state = {
@@ -18,24 +15,23 @@ export class PostScream extends Component {
     this.inputSkill = React.createRef();
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.UI.errors) {
-      this.setState({ errors: nextProps.UI.errors });
-    }
-  }
-
   handleSubmit = (event) => {
     event.preventDefault();
-    const answer = window.confirm("Post scream!");
+    const answer = window.confirm("Add New Project!");
     console.log(answer);
     if (answer) {
-      const ScreamData = {
+      const ProjectData = {
         title: this.state.title,
         body: this.state.body.trim().split("\n"),
         url: this.state.url,
-        requiredSkills: this.state.requiredSkills,
+        techUsed: this.state.requiredSkills,
       };
-      this.props.postScream(ScreamData, this.props.history);
+      if (this.state.body.trim() === "") {
+        this.setState({ errors: { body: "must not be empty" } });
+        return;
+      } else {
+        this.props.postProject(ProjectData);
+      }
     }
   };
 
@@ -58,7 +54,7 @@ export class PostScream extends Component {
     } else {
       this.setState({
         [event.target.name]: event.target.value,
-        errors:{}
+        errors: {},
       });
     }
   };
@@ -71,7 +67,7 @@ export class PostScream extends Component {
     } else if (ref.current.value !== "") {
       this.setState({
         requiredSkills: [...stateName, ref.current.value],
-        errors:{}
+        errors: {},
       });
       ref.current.value = "";
     }
@@ -86,18 +82,12 @@ export class PostScream extends Component {
 
   render() {
     const { errors } = this.state;
-    const {
-      UI: { loading },
-    } = this.props;
     return (
       <div>
         <div className="mt-5 md:mt-0 md:col-span-2">
           <form noValidate onSubmit={this.handleSubmit}>
             <div className="shadow sm:rounded-md sm:overflow-hidden">
               <div className="px-4 py-5 bg-white space-y-6 sm:p-6">
-                <div className="mt-4 text-center text-blue-600 text-3xl sm:text-2xl font-bold">
-                  Post Scream
-                </div>
                 <div className="mt-4">
                   <textarea
                     title="Title"
@@ -105,7 +95,7 @@ export class PostScream extends Component {
                     name="title"
                     rows="3"
                     className="shadow-sm p-2 focus:ring-blue-500 focus:border-blue-500 mt-1 block w-full sm:text-sm border-blue-300 rounded-md"
-                    placeholder="Title"
+                    placeholder="Project Title"
                     onChange={this.handleChange}
                     value={this.state.title}
                   ></textarea>
@@ -140,7 +130,7 @@ export class PostScream extends Component {
                     className={`shadow-sm p-2 focus:ring-blue-500 focus:border-blue-500 mt-1 block w-full sm:text-sm border-blue-300 rounded-md ${
                       errors.body && "border-red-500"
                     } `}
-                    placeholder="Body*"
+                    placeholder="Description"
                     onChange={this.handleChange}
                     value={this.state.body}
                   ></textarea>
@@ -151,14 +141,14 @@ export class PostScream extends Component {
 
                 <div className="mt-4">
                   <div className="sm:flex">
-                    <p className="text-blue-400 p-2">Required Skills :</p>
+                    <p className="text-blue-400 p-2">Tech Used :</p>
                     <div className="flex items-center">
                       <input
                         title="Add Skill"
                         type="text"
                         name="skill"
                         className="focus:ring-blue-500 p-2 focus:border-blue-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-blue-300"
-                        placeholder="Add Skill"
+                        placeholder="Add Tech"
                         ref={this.inputSkill}
                       />
                       <PlusCircleIcon
@@ -196,14 +186,9 @@ export class PostScream extends Component {
               <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
                 <button
                   type="submit"
-                  className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-500 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                  className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-500 hover:bg-blue-700"
                 >
-                  {!loading && <span>Post Scream</span>}
-                  {loading && (
-                    <div class="flex justify-center items-center">
-                      <div class="animate-spin rounded-full h-7 w-7 border-b-2 border-gray-900"></div>
-                    </div>
-                  )}
+                  <span>Add Project</span>
                 </button>
               </div>
             </div>
@@ -214,13 +199,4 @@ export class PostScream extends Component {
   }
 }
 
-PostScream.propTypes = {
-  postScream: PropTypes.func.isRequired,
-  UI: PropTypes.object.isRequired,
-};
-
-const mapStateToProps = (state) => ({
-  UI: state.UI,
-});
-
-export default connect(mapStateToProps, { postScream })(PostScream);
+export default PostProject;

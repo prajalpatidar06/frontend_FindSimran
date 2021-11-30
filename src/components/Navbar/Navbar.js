@@ -6,10 +6,9 @@ import { connect } from "react-redux";
 import { logoutUser } from "../../redux/actions/userAction";
 import {
   HomeIcon,
-  AcademicCapIcon,
   BellIcon,
   InformationCircleIcon,
-  ChatAlt2Icon,
+  LightBulbIcon,
 } from "@heroicons/react/solid";
 
 import {LoginIcon, LogoutIcon } from "@heroicons/react/outline";
@@ -62,9 +61,9 @@ function Navbar({ user, logoutUser }) {
               <HeaderIcon active={state === ""} Icon={HomeIcon} />
             </div>
           </Link>
-          <Link to="/career">
-            <div title="career" onClick={() => setstate("career")}>
-              <HeaderIcon active={state === "career"} Icon={AcademicCapIcon} />
+          <Link to="/projects">
+            <div title="projects" onClick={() => setstate("projects")}>
+              <HeaderIcon active={state === "projects"} Icon={LightBulbIcon} />
             </div>
           </Link>
           {chatnotificationIcon}

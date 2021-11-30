@@ -9,8 +9,7 @@ import editProfile from "./pages/editProfile";
 import user from "./pages/user";
 import notifications from "./pages/notifications";
 import aboutUs from "./pages/aboutUs";
-// import chats from "./pages/chats"
-import career from './pages/career'
+import projects from "./pages/projects"
 import login from "./pages/login";
 // Components stuff
 import Navbar from "./components/Navbar/Navbar";
@@ -46,7 +45,7 @@ class App extends Component {
             <Navbar />
             <Switch>
               <Route exact path="/" component={home} />
-              <Route exact path="/career" component={career} />
+              <Route exact path="/projects" component={projects} />
               <IsLoginRoute exact path="/profile" component={profile} />
               <IsLoginRoute exact path="/edit-profile" component={editProfile} />
               <Route path="/user" component={user} />

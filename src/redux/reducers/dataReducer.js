@@ -8,6 +8,11 @@ import {
   DELETE_SCREAM,
   SET_USERDATA,
   SET_VOTES,
+  SET_PROJECTS,
+  SET_AUTHPROJECTS,
+  POST_PROJECT,
+  UPDATE_PROJECT,
+  DELETE_PROJECT,
 } from "../types";
 
 const initialState = {
@@ -16,6 +21,8 @@ const initialState = {
   authVotes: [],
   scream: {},
   userData: {},
+  projects: [],
+  authProjects: [],
   loading: false,
 };
 
@@ -30,8 +37,8 @@ export default function ChangeState(state = initialState, action) {
       return {
         ...state,
         scream: action.payload,
-        loading: false
-      }
+        loading: false,
+      };
     case SET_SCREAMS:
       return {
         ...state,
@@ -48,6 +55,7 @@ export default function ChangeState(state = initialState, action) {
       return {
         ...state,
         screams: [action.payload, ...state.screams],
+        authScreams: [action.payload, ...state.authScreams],
         loading: false,
       };
     case UPDATE_SCREAM:
@@ -70,16 +78,54 @@ export default function ChangeState(state = initialState, action) {
         ...state,
       };
     case SET_VOTES:
-        return {
-            ...state,
-            authVotes: action.payload,
-            loading:false
-        }
+      return {
+        ...state,
+        authVotes: action.payload,
+        loading: false,
+      };
     case SET_USERDATA:
       return {
         ...state,
         userData: action.payload,
         loading: false,
+      };
+    case SET_PROJECTS:
+      return {
+        ...state,
+        projects: action.payload,
+        loading: false,
+      };
+    case SET_AUTHPROJECTS:
+      return {
+        ...state,
+        authProjects: action.payload,
+        loading: false,
+      };
+    case POST_PROJECT:
+      return {
+        ...state,
+        projects: [action.payload, ...state.projects],
+        authProjects: [action.payload, ...state.authProjects],
+        loading: false,
+      };
+    case UPDATE_PROJECT:
+      return {
+        ...state,
+        projects: [action.payload, ...state.projects],
+        authProjects: [action.payload, ...state.authProjects],
+        loading: false,
+      };
+    case DELETE_PROJECT:
+      let idx = state.projects.findIndex(
+        (project) => project.projectId === action.payload
+      );
+      state.projects.splice(idx, 1);
+      idx = state.authProjects.findIndex(
+        (project) => project.projectId === action.payload
+      );
+      state.authProjects.splice(idx, 1);
+      return {
+        ...state,
       };
     default:
       return state;

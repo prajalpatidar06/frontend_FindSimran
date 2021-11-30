@@ -7,6 +7,7 @@ import {
   PhoneIcon,
   UserIcon,
 } from "@heroicons/react/solid";
+import ProjectCard from "../Projects/ProjectCard";
 
 function UserProfileCard({
   user: {
@@ -24,14 +25,26 @@ function UserProfileCard({
     state,
     contactNumber,
     screams,
+    projects,
   },
 }) {
   let recentScreamsMarkup =
-    (screams &&
-    screams.length > 0) ?
-    screams.map((scream) => <Scream key={scream.screamId} scream={scream} />):(
+    screams && screams.length > 0 ? (
+      screams.map((scream) => <Scream key={scream.screamId} scream={scream} />)
+    ) : (
       <p className="text-center mt-4 text-xl font-medium">No Screams Found</p>
-    )
+    );
+
+  let recentProjectsMarkup =
+    projects && projects.length > 0 ? (
+      projects.map((project) => (
+        <ProjectCard key={project.projectId} project={project} />
+      ))
+    ) : (
+      <p className="text-center mt-4 text-xl font-medium">No Project Found</p>
+    );
+
+  const [tab, setTab] = React.useState(1);
 
   return (
     <div className="">
@@ -57,7 +70,7 @@ function UserProfileCard({
           </div>
         </div>
         <div className="sm:flex">
-          <div className="flex-1 mx-2 sm:mr-12 sm:ml-3 mt-20">
+          <div className="flex-1 mx-2 sm:mr-10 sm:ml-3 mt-20">
             <div className="bg-white p-2 rounded-2xl shadow">
               <div className="mx-2 mt-2 flex text-xl font-medium relative">
                 {name && (
@@ -217,11 +230,53 @@ function UserProfileCard({
             </div>
           </div>
           <div className="flex-1 pt-6">
-            <p className="text-2xl text-blue-500 text-center font-bold">
-              Screams
-            </p>
-            <div className="flex-grow h-screen mx-2 sm:mr-12 sm:ml-3 overflow-y-auto ">
-              {recentScreamsMarkup}
+            <ul className="flex mb-0 list-none flex-wrap pt-3 pb-4 flex-row">
+              <li
+                className="m-2 last:mr-0 flex-auto text-center"
+                role="tablist"
+              >
+                <a
+                  className={`text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal ${
+                    tab === 1 && "text-blue-600"
+                  }`}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setTab(1);
+                  }}
+                  data-toggle="tab"
+                  href="#link1"
+                  role="tablist"
+                >
+                  Screams
+                </a>
+              </li>
+              <li
+                className="m-2 last:mr-0 flex-auto text-center"
+                role="tablist"
+              >
+                <a
+                  className={`text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal ${
+                    tab === 2 && "text-blue-600"
+                  }`}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setTab(2);
+                  }}
+                  data-toggle="tab"
+                  href="#link2"
+                  role="tablist"
+                >
+                  Projects
+                </a>
+              </li>
+            </ul>
+            <div className="flex-grow h-screen mx-1 sm:mr-5 overflow-y-auto ">
+              <div className={tab === 1 ? "block" : "hidden"} id="#link1">
+                {recentScreamsMarkup}
+              </div>
+              <div className={tab === 2 ? "block" : "hidden"} id="#link2">
+                {recentProjectsMarkup}
+              </div>
             </div>
           </div>
         </div>

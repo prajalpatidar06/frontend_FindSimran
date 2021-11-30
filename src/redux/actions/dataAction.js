@@ -11,6 +11,11 @@ import {
   DELETE_SCREAM,
   SET_USERDATA,
   SET_VOTES,
+  SET_PROJECTS,
+  SET_AUTHPROJECTS,
+  POST_PROJECT,
+  UPDATE_PROJECT,
+  DELETE_PROJECT,
 } from "../types";
 import axios from "axios";
 
@@ -34,7 +39,7 @@ export const getAllScreams = () => (dispatch) => {
 
 export const getAuthScreams = (handle) => (dispatch) => {
   if (typeof handle === "undefined") {
-    handle = localStorage.getItem('handle')
+    handle = localStorage.getItem("handle");
   }
   dispatch({ type: LOADING_DATA });
   axios
@@ -53,7 +58,7 @@ export const getAuthScreams = (handle) => (dispatch) => {
     });
 };
 
-export const getAuthScream = (handle,screamId) => (dispatch) => {
+export const getAuthScream = (handle, screamId) => (dispatch) => {
   dispatch({ type: LOADING_DATA });
   axios
     .get(`screams/${handle}/${screamId}`)
@@ -69,7 +74,7 @@ export const getAuthScream = (handle,screamId) => (dispatch) => {
         payload: [],
       });
     });
-}
+};
 
 export const postScream = (newScream, history) => (dispatch) => {
   dispatch({ type: LOADING_UI });
@@ -98,7 +103,7 @@ export const OpenUpdateScreamPage = (scream) => (dispatch) => {
 export const updateScream =
   (screamId, updatedScream, history) => (dispatch) => {
     dispatch({ type: LOADING_UI });
-    dispatch({type:DELETE_SCREAM , payload: screamId})
+    dispatch({ type: DELETE_SCREAM, payload: screamId });
     axios
       .put(`/screams/${screamId}`, updatedScream)
       .then((res) => {
@@ -214,4 +219,84 @@ export const updateScreamStatus = (screamId, status, handle) => (dispatch) => {
         payload: err.response.data,
       });
     });
+};
+
+export const getAllProjects = () => (dispatch) => {
+  dispatch({ type: LOADING_DATA });
+  axios
+    .get("/projects")
+    .then((res) => {
+      dispatch({
+        type: SET_PROJECTS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      dispatch({
+        type: SET_PROJECTS,
+        payload: [],
+      });
+    });
+};
+
+export const getAuthProjects = (handle) => (dispatch) => {
+  if (typeof handle === "undefined") {
+    handle = localStorage.getItem("handle");
+  }
+  dispatch({ type: LOADING_DATA });
+  axios
+    .get(`projects/${handle}`)
+    .then((res) => {
+      dispatch({
+        type: SET_AUTHPROJECTS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      dispatch({
+        type: SET_AUTHPROJECTS,
+        payload: [],
+      });
+    });
+};
+
+export const postProject = (newProject) => (dispatch) => {
+  dispatch({ type: LOADING_UI });
+  axios
+    .post("/projects", newProject)
+    .then((res) => {
+      dispatch({
+        type: POST_PROJECT,
+        payload: res.data,
+      });
+      dispatch(clearErrors());
+    })
+    .then(() => {
+      window.location.href = "profile";
+    });
+};
+
+export const updateProject = (projectId, updatedProject) => (dispatch) => {
+  dispatch({ type: LOADING_UI });
+  dispatch({ type: DELETE_PROJECT, payload: projectId });
+  axios
+    .put(`/projects/${projectId}`, updatedProject)
+    .then((res) => {
+      dispatch({
+        type: UPDATE_PROJECT,
+        payload: res.data,
+      });
+      dispatch(clearErrors());
+    })
+};
+
+export const deleteProject = (projectId) => (dispatch) => {
+  axios
+    .delete(`projects/${projectId}`)
+    .then((res) => {
+      dispatch({
+        type: DELETE_PROJECT,
+        payload: projectId,
+      });
+    })
 };
