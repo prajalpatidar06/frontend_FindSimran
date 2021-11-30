@@ -34,7 +34,7 @@ function NotificationCard({ notification }) {
           {notification.type === "vote" ? (
             <p>
               voted on your scream{" "}
-              <Link to="/" className="text-blue-500">
+              <Link to={`/scream/${notification.screamId}`} className="text-blue-500">
                 view
               </Link>
             </p>

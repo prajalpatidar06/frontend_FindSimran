@@ -5,7 +5,6 @@ import {
   LinkIcon,
   MailIcon,
   PhoneIcon,
-  UserIcon,
 } from "@heroicons/react/solid";
 import ProjectCard from "../Projects/ProjectCard";
 
@@ -75,7 +74,11 @@ function UserProfileCard({
               <div className="mx-2 mt-2 flex text-xl font-medium relative">
                 {name && (
                   <p className="items-center flex">
-                    <UserIcon width={22} height={22} className="mx-1" />
+                    {gender === "male" ? (
+                      <span classNam="mr-2">👦</span>
+                    ) : (
+                      <span className="mr-2">👧</span>
+                    )}
                     {name}
                   </p>
                 )}

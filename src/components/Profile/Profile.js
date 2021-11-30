@@ -8,7 +8,6 @@ import {
   MailIcon,
   PencilAltIcon,
   PhoneIcon,
-  UserIcon,
   XIcon,
 } from "@heroicons/react/solid";
 import { uploadImage } from "../../redux/actions/userAction";
@@ -166,7 +165,11 @@ export class Profile extends Component {
                   </Link>
                   {name && (
                     <p className="items-center flex">
-                      <UserIcon width={22} height={22} className="mx-1" />
+                      {gender === "male" ? (
+                        <span classNam="mr-2">👦</span>
+                      ) : (
+                        <span className="mr-2">👧</span>
+                      )}
                       {name}
                     </p>
                   )}
