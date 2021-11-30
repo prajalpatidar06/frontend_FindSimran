@@ -16,6 +16,7 @@ import {
   POST_PROJECT,
   UPDATE_PROJECT,
   DELETE_PROJECT,
+  SET_USERS,
 } from "../types";
 import axios from "axios";
 
@@ -160,6 +161,24 @@ export const getUserData = (userHandle) => (dispatch) => {
       });
     });
 };
+
+export const getUsers = () => (dispatch) => {
+  dispatch({ type: LOADING_DATA });
+  axios
+    .get("user/users/getall")
+    .then((res) => {
+      dispatch({
+        type: SET_USERS,
+        payload: res.data,
+      });
+    })
+    .catch(() => {
+      dispatch({
+        type: SET_USERS,
+        payload: [],
+      });
+    });
+}
 
 export const getAuthVotes = () => (dispatch) => {
   dispatch({ type: LOADING_DATA });

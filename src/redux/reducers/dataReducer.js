@@ -7,6 +7,7 @@ import {
   UPDATE_SCREAM,
   DELETE_SCREAM,
   SET_USERDATA,
+  SET_USERS,
   SET_VOTES,
   SET_PROJECTS,
   SET_AUTHPROJECTS,
@@ -20,6 +21,7 @@ const initialState = {
   authScreams: [],
   authVotes: [],
   scream: {},
+  users: [],
   userData: {},
   projects: [],
   authProjects: [],
@@ -87,6 +89,12 @@ export default function ChangeState(state = initialState, action) {
       return {
         ...state,
         userData: action.payload,
+        loading: false,
+      };
+    case SET_USERS:
+      return {
+        ...state,
+        users: action.payload,
         loading: false,
       };
     case SET_PROJECTS:

@@ -1,4 +1,4 @@
-import React, {Fragment } from "react";
+import React from "react";
 import HeaderIcon from "./HeaderIcon";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
@@ -9,30 +9,20 @@ import {
   BellIcon,
   InformationCircleIcon,
   LightBulbIcon,
+  UserGroupIcon,
 } from "@heroicons/react/solid";
 
-import {LoginIcon, LogoutIcon } from "@heroicons/react/outline";
+import { LoginIcon, LogoutIcon } from "@heroicons/react/outline";
 
 function Navbar({ user, logoutUser }) {
-  let activeTab = window.location.href.split('/')[window.location.href.split('/').length - 1]
+  let activeTab =
+    window.location.href.split("/")[window.location.href.split("/").length - 1];
   const [state, setstate] = React.useState(activeTab);
   const LogoutUser = () => {
     logoutUser();
   };
-  let chatnotificationIcon = "";
-  if (user.authenticated) {
-    chatnotificationIcon = (
-      <Fragment>
-        <Link to="/notifications">
-          <div title="notifications" onClick={() => setstate("notifications")}>
-            <HeaderIcon active={state === "notifications"} Icon={BellIcon} />
-          </div>
-        </Link>
-      </Fragment>
-    );
-  }
   return (
-    <div className="sticky top-0 z-50 bg-white flex items-center p-2 lg:px-5 shadow-md">
+    <div className="sticky flex top-0 z-50 bg-white items-center p-2 lg:px-5 shadow-md">
       {/* Left */}
       <div className="flex items-center">
         <Link to="/">
@@ -41,17 +31,9 @@ function Navbar({ user, logoutUser }) {
             alt="Logo"
             layout="fixed"
             className="cursor-pointer h-8 w-8"
-            onClick={()=>(setstate(""))}
+            onClick={() => setstate("")}
           />
         </Link>
-        {/* <div className="flex ml-2 items-center rounded-full bg-gray-100 p-2">
-          <SearchIcon className="h-6 text-gray-600" />
-          <input
-            className="hidden md:inline-flex flex ml-2 items-center bg-transparent outline-none placeholder-gray-500 flex-shrink"
-            type="text"
-            placeholder="Search FindSimran"
-          />
-        </div> */}
       </div>
       {/* center */}
       <div className="flex justify-center flex-grow">
@@ -66,10 +48,30 @@ function Navbar({ user, logoutUser }) {
               <HeaderIcon active={state === "projects"} Icon={LightBulbIcon} />
             </div>
           </Link>
-          {chatnotificationIcon}
+          <Link to="/users">
+            <div title="users" onClick={() => setstate("users")}>
+              <HeaderIcon active={state === "users"} Icon={UserGroupIcon} />
+            </div>
+          </Link>
+          {user.authenticated && (
+            <Link to="/notifications">
+              <div
+                title="notifications"
+                onClick={() => setstate("notifications")}
+              >
+                <HeaderIcon
+                  active={state === "notifications"}
+                  Icon={BellIcon}
+                />
+              </div>
+            </Link>
+          )}
           <Link to="/aboutUs">
             <div title="About Us" onClick={() => setstate("aboutUs")}>
-              <HeaderIcon active={state === "aboutUs"} Icon={InformationCircleIcon} />
+              <HeaderIcon
+                active={state === "aboutUs"}
+                Icon={InformationCircleIcon}
+              />
             </div>
           </Link>
           {user.authenticated ? (
