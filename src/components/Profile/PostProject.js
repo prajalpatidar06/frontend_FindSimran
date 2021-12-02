@@ -18,7 +18,6 @@ export class PostProject extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
     const answer = window.confirm("Add New Project!");
-    console.log(answer);
     if (answer) {
       const ProjectData = {
         title: this.state.title,

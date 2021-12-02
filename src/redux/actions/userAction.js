@@ -3,12 +3,13 @@ import {
   SET_ERRORS,
   CLEAR_ERRORS,
   LOADING_UI,
-  LOADING_USER, 
+  LOADING_USER,
   SET_UNAUTHENTICATED,
 } from "../types";
-
+import firebase from "firebase/app";
+import "firebase/auth";
 import axios from "axios";
-let allGood = false
+let allGood = false;
 
 export const signupUser = (newUserData, history) => (dispatch) => {
   dispatch({ type: LOADING_UI });
@@ -18,16 +19,43 @@ export const signupUser = (newUserData, history) => (dispatch) => {
       setAuthorizationHeaders(res.data.token);
       dispatch(getUserData());
       dispatch({ type: CLEAR_ERRORS });
-      allGood = true
+      allGood = true;
       history.push("/");
     })
-    .catch(err => {
-      if(!allGood){
+    .catch((err) => {
+      if (!allGood) {
         dispatch({
           type: SET_ERRORS,
           payload: err.response.data,
         });
       }
+    });
+};
+
+export const SignInWithGoogle = () => (dispatch) => {
+  firebase
+    .auth()
+    .signInWithPopup(new firebase.auth.GoogleAuthProvider())
+    .then((userCred) => {
+      firebase.auth().onAuthStateChanged((user) => {
+        if (user) {
+          user
+            .getIdToken()
+            .then((token) => {
+              setAuthorizationHeaders(token);
+            })
+            .then(() => {
+              console.log(userCred);
+              if (userCred.additionalUserInfo.isNewUser) {
+                axios.post("/user/signupWithGoogle").then(() => {
+                  window.location.href = "/";
+                });
+              } else {
+                window.location.href = "/";
+              }
+            });
+        }
+      });
     });
 };
 
@@ -43,7 +71,7 @@ export const loginUser = (userData, history) => (dispatch) => {
       history.push("/");
     })
     .catch((err) => {
-      if(!allGood){
+      if (!allGood) {
         dispatch({
           type: SET_ERRORS,
           payload: err.response.data,
@@ -57,7 +85,7 @@ export const logoutUser = () => (dispatch) => {
   localStorage.removeItem("handle");
   delete axios.defaults.headers.common["Authorization"];
   dispatch({ type: SET_UNAUTHENTICATED });
-  allGood = false
+  allGood = false;
   window.location.href = "/";
 };
 
@@ -70,7 +98,7 @@ export const getUserData = () => (dispatch) => {
         type: SET_USER,
         payload: res.data,
       });
-      localStorage.setItem("handle",res.data.credentials.handle)
+      localStorage.setItem("handle", res.data.credentials.handle);
     })
     .catch((err) => console.log(err));
 };
@@ -78,7 +106,7 @@ export const getUserData = () => (dispatch) => {
 export const uploadImage = (formData) => (dispatch) => {
   dispatch({ type: LOADING_USER });
   axios
-    .post('/user/image', formData)
+    .post("/user/image", formData)
     .then(() => {
       dispatch(getUserData());
     })
@@ -88,12 +116,12 @@ export const uploadImage = (formData) => (dispatch) => {
 export const editUserDetails = (userDetails) => (dispatch) => {
   dispatch({ type: LOADING_USER });
   axios
-    .post('/user', userDetails)
+    .post("/user", userDetails)
     .then(() => {
       dispatch(getUserData());
     })
-    .then(()=>{
-      window.location.href = "profile"
+    .then(() => {
+      window.location.href = "profile";
     })
     .catch((err) => console.log(err));
 };

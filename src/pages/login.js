@@ -1,6 +1,9 @@
 import React from "react";
-import Signup from '../components/Auth/Signup'
-import Login from '../components/Auth/Login'
+import Signup from "../components/Auth/Signup";
+import Login from "../components/Auth/Login";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { SignInWithGoogle } from "../redux/actions/userAction";
 
 const Tabs = ({ color }) => {
   const [openTab, setOpenTab] = React.useState(1);
@@ -20,7 +23,7 @@ const Tabs = ({ color }) => {
                     ? "text-white bg-" + color + "-600"
                     : "text-" + color + "-600 bg-white")
                 }
-                onClick={e => {
+                onClick={(e) => {
                   e.preventDefault();
                   setOpenTab(1);
                 }}
@@ -39,7 +42,7 @@ const Tabs = ({ color }) => {
                     ? "text-white bg-" + color + "-600"
                     : "text-" + color + "-600 bg-white")
                 }
-                onClick={e => {
+                onClick={(e) => {
                   e.preventDefault();
                   setOpenTab(3);
                 }}
@@ -47,7 +50,7 @@ const Tabs = ({ color }) => {
                 href="#link3"
                 role="tablist"
               >
-                 Signup
+                Signup
               </a>
             </li>
           </ul>
@@ -69,10 +72,29 @@ const Tabs = ({ color }) => {
   );
 };
 
-export default function login() {
+export function login({SignInWithGoogle}) {
   return (
     <>
-       <Tabs />
+     <button
+        className="flex bg-blue-300 hover:bg-blue-700 mx-auto hover:text-white my-7 py-2 px-4 rounded focus:outline-none"
+        onClick={() =>SignInWithGoogle()}
+      >
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/2048px-Google_%22G%22_Logo.svg.png"
+          alt="google"
+          className="w-8 h-8"
+        />
+        <p className="font-bold mx-2">Sign In with Google</p>
+      </button>
+      <p className="my-5 text-center font-medium text-xl">or</p>
+      <Tabs />
+     
     </>
   );
 }
+
+login.propTypes = {
+  SignInWithGoogle: PropTypes.func.isRequired,
+};
+
+export default connect(null, { SignInWithGoogle })(login);

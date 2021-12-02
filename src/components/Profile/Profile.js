@@ -39,7 +39,10 @@ export class Profile extends Component {
     const image = event.target.files[0];
     const formData = new FormData();
     formData.append("image", image, image.name);
-    this.props.uploadImage(formData);
+    const answer = window.confirm("Change Image!");
+    if (answer) {
+      this.props.uploadImage(formData);
+    }
   };
 
   handleEditPicture = () => {
@@ -124,7 +127,8 @@ export class Profile extends Component {
               <img
                 src={imageUrl}
                 alt={handle}
-                className="w-48 h-42 rounded-full border-4 border-white shadow absolute top-5 left-5"
+                style={{ width: "140px", height: "140px" }}
+                className="rounded-full border-4 border-white shadow absolute top-5 left-5"
               />
               <div>
                 <input
@@ -165,11 +169,8 @@ export class Profile extends Component {
                   </Link>
                   {name && (
                     <p className="items-center flex">
-                      {gender === "male" ? (
-                        <span classNam="mr-2">👦</span>
-                      ) : (
-                        <span className="mr-2">👧</span>
-                      )}
+                      {gender === "male" && <span classNam="mr-2">👦</span>}
+                      {gender === "female" && <span className="mr-2">👧</span>}
                       {name}
                     </p>
                   )}

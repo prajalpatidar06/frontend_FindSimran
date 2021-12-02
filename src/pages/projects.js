@@ -20,7 +20,6 @@ export class projects extends Component {
 
     let finalData = !loading
       ? projects.filter((val) => {
-          console.log(val)
           if (this.state.search.trim() === "") {
             return val;
           } else if (
@@ -32,7 +31,6 @@ export class projects extends Component {
           ) {
             return val;
           }
-          return val
         })
       : [];
 

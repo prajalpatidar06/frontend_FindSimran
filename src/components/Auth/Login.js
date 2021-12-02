@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { loginUser } from "../../redux/actions/userAction";
+import { loginUser} from "../../redux/actions/userAction";
 
 export class Login extends Component {
   constructor() {
@@ -80,7 +80,7 @@ export class Login extends Component {
             <button
               className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
               type="submit"
-              disabled = {loading}
+              disabled={loading}
             >
               {!loading && <span>Sign In</span>}
               {loading && (

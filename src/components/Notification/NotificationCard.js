@@ -2,7 +2,6 @@ import React from "react";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { Link } from "react-router-dom";
-import { EyeIcon, EyeOffIcon } from "@heroicons/react/solid";
 
 dayjs.extend(relativeTime);
 function NotificationCard({ notification }) {
@@ -25,22 +24,27 @@ function NotificationCard({ notification }) {
             layout="fixed"
             onClick={() => userProfile(notification.sender)}
           />
-          <span
-            className="font-medium cursor-pointer hover:text-blue-500"
-            onClick={() => userProfile(notification.sender)}
-          >
-            {notification.sender}
-          </span>
-          {notification.type === "vote" ? (
-            <p>
-              voted on your scream{" "}
-              <Link to={`/scream/${notification.screamId}`} className="text-blue-500">
-                view
-              </Link>
-            </p>
-          ) : (
-            <span>accept your collab request for scream</span>
-          )}
+          <div>
+            <span
+              className="font-medium cursor-pointer hover:text-blue-500"
+              onClick={() => userProfile(notification.sender)}
+            >
+              {notification.sender}
+            </span>
+            {notification.type === "vote" ? (
+              <p className="flex">
+                voted on your scream
+                <Link
+                  to={`/scream/${notification.screamId}`}
+                  className="text-blue-500"
+                >
+                  <span className="mx-2">view</span>
+                </Link>
+              </p>
+            ) : (
+              <span>accept your collab request for scream</span>
+            )}
+          </div>
           <p className="text-xs text-gray-400 sm:absolute right-2">
             {dayjs(notification.createdAt).fromNow().slice(1) === " days ago"
               ? dayjs(notification.createdAt).format("DD/MM/YY")

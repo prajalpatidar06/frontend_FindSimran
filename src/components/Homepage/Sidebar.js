@@ -50,7 +50,7 @@ export class Sidebar extends Component {
       },
     } = this.props;
     return (
-      <div className="p-2 max-w-[600px] xl:min-w-[300px]">
+      <div className="p-2 mt-5 max-w-[600px] xl:min-w-[300px]">
         {this.state.menu ? (
           <div
             className="inline-flex sm:hidden"

@@ -16,8 +16,7 @@ function UsersCard({ user: { handle, imageUrl, email, name } }) {
             className="rounded-full"
             src={imageUrl}
             alt="Profile"
-            width="40"
-            height="40"
+            style={{width:"50px",height:"50px"}}
             layout="fixed"
           />
           <div>

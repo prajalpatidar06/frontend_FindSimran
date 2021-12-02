@@ -56,7 +56,8 @@ function UserProfileCard({
             <img
               src={imageUrl}
               alt={handle}
-              className="w-48 h-42 rounded-full border-4 border-white shadow absolute top-5 left-5"
+              style={{width:"140px",height:"140px"}}
+              className="rounded-full border-4 border-white shadow absolute top-5 left-5"
             />
           </div>
           <div className="flex-1 relative p-5">

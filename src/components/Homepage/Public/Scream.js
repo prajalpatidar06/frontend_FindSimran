@@ -60,8 +60,7 @@ export class Scream extends Component {
               className="rounded-full cursor-pointer"
               src={userImage}
               alt="Profile"
-              width="40"
-              height="40"
+              style={{width:"50px",height:"50px"}}
               layout="fixed"
               onClick={() => this.userProfile(handle)}
             />

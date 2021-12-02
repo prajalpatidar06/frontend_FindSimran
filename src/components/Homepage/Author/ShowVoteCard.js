@@ -9,8 +9,7 @@ function ShowVoteCard({ vote, FormateDate , userProfile }) {
           className="rounded-full cursor-pointer"
           src={vote.userImage}
           alt="Profile"
-          width="40"
-          height="40"
+          style={{width:"50px",height:"50px"}}
           layout="fixed"
           onClick={() => userProfile(vote.handle)}
         />

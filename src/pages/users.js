@@ -33,7 +33,6 @@ export class users extends Component {
             ) {
               return val;
             }
-            return val
           })
           .sort((a, b) => {
             return a.handle.localeCompare(b.handle);
