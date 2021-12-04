@@ -14,9 +14,11 @@ import {
   POST_PROJECT,
   UPDATE_PROJECT,
   DELETE_PROJECT,
+  SET_ALERT,
 } from "../types";
 
 const initialState = {
+  alert:"",
   screams: [],
   authScreams: [],
   authVotes: [],
@@ -30,6 +32,12 @@ const initialState = {
 
 export default function ChangeState(state = initialState, action) {
   switch (action.type) {
+    case SET_ALERT:
+      return {
+        ...state,
+        alert: action.payload
+      }
+      
     case LOADING_DATA:
       return {
         ...state,

@@ -17,6 +17,7 @@ import {
   UPDATE_PROJECT,
   DELETE_PROJECT,
   SET_USERS,
+  SET_ALERT,
 } from "../types";
 import axios from "axios";
 
@@ -87,6 +88,7 @@ export const postScream = (newScream, history) => (dispatch) => {
         payload: res.data,
       });
       dispatch(clearErrors());
+      dispatch({type:SET_ALERT , payload:"Scream Posted Successfully!"})
       history.push("/");
     })
     .catch((err) => {
@@ -113,6 +115,7 @@ export const updateScream =
           payload: res.data,
         });
         dispatch(clearErrors());
+        dispatch({type:SET_ALERT , payload:"Scream Updated Successfully!"})
         history.push("/authorScreams");
       })
       .catch((err) => {
@@ -131,6 +134,7 @@ export const deleteScream = (screamId) => (dispatch) => {
         type: DELETE_SCREAM,
         payload: screamId,
       });
+      dispatch({type:SET_ALERT , payload:"Scream Deleted Successfully!"})
     })
     .catch((err) => {
       dispatch({
@@ -178,7 +182,7 @@ export const getUsers = () => (dispatch) => {
         payload: [],
       });
     });
-}
+};
 
 export const getAuthVotes = () => (dispatch) => {
   dispatch({ type: LOADING_DATA });
@@ -203,6 +207,7 @@ export const voteScream = (screamId, voteData) => (dispatch) => {
     .post(`/votes/${screamId}`, voteData)
     .then((res) => {
       window.location.href = "/";
+      dispatch({type:SET_ALERT , payload:"Successfully Voted on Scream!"})
     })
     .catch((err) => {
       dispatch({
@@ -217,6 +222,7 @@ export const updateVote = (voteId, updatedVote) => (dispatch) => {
     .put(`/votes/${voteId}`, updatedVote)
     .then((res) => {
       dispatch(getAuthVotes());
+      dispatch({type:SET_ALERT , payload:"Vote Updated Successfully!"})
     })
     .catch((err) => {
       dispatch({
@@ -231,6 +237,7 @@ export const updateScreamStatus = (screamId, status, handle) => (dispatch) => {
     .put(`/screams/${screamId}/${status}`)
     .then((res) => {
       dispatch(getAuthScreams(handle));
+      dispatch({type:SET_ALERT , payload:"Scream Status Updated Successfully!"})
     })
     .catch((err) => {
       dispatch({
@@ -289,6 +296,7 @@ export const postProject = (newProject) => (dispatch) => {
         payload: res.data,
       });
       dispatch(clearErrors());
+      dispatch({type:SET_ALERT , payload:"Project Posted Successfully!"})
     })
     .then(() => {
       window.location.href = "profile";
@@ -298,24 +306,26 @@ export const postProject = (newProject) => (dispatch) => {
 export const updateProject = (projectId, updatedProject) => (dispatch) => {
   dispatch({ type: LOADING_UI });
   dispatch({ type: DELETE_PROJECT, payload: projectId });
-  axios
-    .put(`/projects/${projectId}`, updatedProject)
-    .then((res) => {
-      dispatch({
-        type: UPDATE_PROJECT,
-        payload: res.data,
-      });
-      dispatch(clearErrors());
-    })
+  axios.put(`/projects/${projectId}`, updatedProject).then((res) => {
+    dispatch({
+      type: UPDATE_PROJECT,
+      payload: res.data,
+    });
+    dispatch(clearErrors());
+    dispatch({type:SET_ALERT , payload:"Project Updated Successfully!"})
+  });
 };
 
 export const deleteProject = (projectId) => (dispatch) => {
-  axios
-    .delete(`projects/${projectId}`)
-    .then((res) => {
-      dispatch({
-        type: DELETE_PROJECT,
-        payload: projectId,
-      });
-    })
+  axios.delete(`projects/${projectId}`).then((res) => {
+    dispatch({
+      type: DELETE_PROJECT,
+      payload: projectId,
+    });
+    dispatch({type:SET_ALERT , payload:"Project Deleted Successfully!"})
+  });
+};
+
+export const ClearAlertsMessages = () => (dispatch) => {
+  dispatch({ type: SET_ALERT, payload: "" });
 };

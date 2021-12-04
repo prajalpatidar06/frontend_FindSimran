@@ -72,12 +72,17 @@ const Tabs = ({ color }) => {
   );
 };
 
-export function login({SignInWithGoogle}) {
+export function login({ SignInWithGoogle, loading }) {
   return (
     <>
-     <button
+       {loading &&(
+        <div className="flex justify-center fixed top-[50%] left-[50%] items-center z-10">
+          <div className="animate-spin rounded-full h-20 w-20 border-b-2 border-gray-900"></div>
+        </div>
+      )}
+      <button
         className="flex bg-blue-300 hover:bg-blue-700 mx-auto hover:text-white my-7 py-2 px-4 rounded focus:outline-none"
-        onClick={() =>SignInWithGoogle()}
+        onClick={() => SignInWithGoogle()}
       >
         <img
           src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/2048px-Google_%22G%22_Logo.svg.png"
@@ -88,13 +93,17 @@ export function login({SignInWithGoogle}) {
       </button>
       <p className="my-5 text-center font-medium text-xl">or</p>
       <Tabs />
-     
     </>
   );
 }
 
 login.propTypes = {
   SignInWithGoogle: PropTypes.func.isRequired,
+  loading: PropTypes.func.isRequired,
 };
 
-export default connect(null, { SignInWithGoogle })(login);
+const mapStateToProps = (state) => ({
+  loading: state.UI.loading,
+});
+
+export default connect(mapStateToProps, { SignInWithGoogle })(login);

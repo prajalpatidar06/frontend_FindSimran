@@ -22,7 +22,7 @@ function VoteCard({ vote, FormateDate , userProfile }) {
           axios
             .post(`screams/${vote.screamId}/${vote.voteId}`)
             .then((res) => {
-              window.location.href = "/authorsScreams";
+              window.location.href = "/authorScreams";
             })
         }
     }

@@ -33,28 +33,23 @@ export const signupUser = (newUserData, history) => (dispatch) => {
 };
 
 export const SignInWithGoogle = () => (dispatch) => {
+  dispatch({type: LOADING_UI})
   firebase
     .auth()
     .signInWithPopup(new firebase.auth.GoogleAuthProvider())
     .then((userCred) => {
-      firebase.auth().onAuthStateChanged((user) => {
-        if (user) {
-          user
-            .getIdToken()
-            .then((token) => {
-              setAuthorizationHeaders(token);
-            })
-            .then(() => {
-              console.log(userCred);
-              if (userCred.additionalUserInfo.isNewUser) {
-                axios.post("/user/signupWithGoogle").then(() => {
-                  window.location.href = "/";
-                });
-              } else {
-                window.location.href = "/";
-              }
+      return firebase.auth().onAuthStateChanged(async (user) => {
+        await user.getIdToken().then((token) => {
+          setAuthorizationHeaders(token);
+          if (userCred.additionalUserInfo.isNewUser) {
+            axios.post("user/signupWithGoogle").then(() => {
+              window.location.href = "/";
             });
-        }
+          }
+          else{
+            window.location.href = "/"
+          }
+        });
       });
     });
 };
@@ -108,6 +103,7 @@ export const uploadImage = (formData) => (dispatch) => {
   axios
     .post("/user/image", formData)
     .then(() => {
+      dispatch({type: LOADING_USER})
       dispatch(getUserData());
     })
     .catch((err) => console.log(err));

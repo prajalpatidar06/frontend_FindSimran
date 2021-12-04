@@ -56,7 +56,7 @@ function UserProfileCard({
             <img
               src={imageUrl}
               alt={handle}
-              style={{width:"140px",height:"140px"}}
+              style={{ width: "140px", height: "140px" }}
               className="rounded-full border-4 border-white shadow absolute top-5 left-5"
             />
           </div>
@@ -75,11 +75,8 @@ function UserProfileCard({
               <div className="mx-2 mt-2 flex text-xl font-medium relative">
                 {name && (
                   <p className="items-center flex">
-                    {gender === "male" ? (
-                      <span classNam="mr-2">👦</span>
-                    ) : (
-                      <span className="mr-2">👧</span>
-                    )}
+                    {gender === "male" && <span classNam="mr-2">👦</span>}
+                    {gender === "female" && <span className="mr-2">👧</span>}
                     {name}
                   </p>
                 )}
