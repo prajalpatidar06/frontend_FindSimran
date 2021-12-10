@@ -1,0 +1,9 @@
+.manageMessageDisplay{
+    height: 26rem;
+}
+
+@media(max-width:400px){
+    .manageMessageDisplay{
+        height: 32rem;
+    }
+}

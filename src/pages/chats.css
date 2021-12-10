@@ -1,9 +1,9 @@
 .manageDisplay{
-    height: 26rem;
+    height: 30rem;
 }
 
 @media(max-width:400px){
     .manageDisplay{
-        height: 39rem;
+        height: 33rem;
     }
 }

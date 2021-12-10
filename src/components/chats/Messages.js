@@ -2,14 +2,27 @@ import React from "react";
 import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { getOneGroup, sendMessage } from "../../redux/actions/chatAction";
-import "./Messages.css";
-import { FingerPrintIcon } from "@heroicons/react/solid";
-import dayjs from "dayjs";
-import relativeTime from "dayjs/plugin/relativeTime";
+import {
+  getOneGroup,
+  sendMessage,
+  editGroupName,
+  removeGroupMember,
+  leaveFromGroup,
+} from "../../redux/actions/chatAction";
+import { ArrowLeftIcon, DotsVerticalIcon } from "@heroicons/react/solid";
 
-function Messages({ chat: { group }, getOneGroup, sendMessage }) {
-  dayjs.extend(relativeTime);
+import { Link } from "react-router-dom";
+import Feed from "./Feed";
+import GroupMembers from "./GroupMembers";
+
+function Messages({
+  chat: { group },
+  getOneGroup,
+  sendMessage,
+  editGroupName,
+  removeGroupMember,
+  leaveFromGroup
+}) {
   const location = useLocation();
   React.useEffect(() => {
     const query =
@@ -21,89 +34,42 @@ function Messages({ chat: { group }, getOneGroup, sendMessage }) {
     }
   }, [location]);
 
-  const [message, setMessage] = React.useState("");
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    sendMessage(group.groupId , message);
-    setMessage("");
-  };
-
-  const FormateDate = (createdAt) => {
-    return (
-      parseInt(dayjs().format("YY")) >
-        parseInt(dayjs(createdAt).format("YY")) ||
-      parseInt(dayjs().format("MM")) >
-        parseInt(dayjs(createdAt).format("MM")) ||
-      parseInt(dayjs().format("DD")) -
-        parseInt(dayjs(createdAt).format("DD")) >=
-        1
-    );
-  };
+  const [groupInfo, setGroupInfo] = React.useState(false);
 
   return (
-    <div>
-      <div className="relative p-5 bg-white shadow-sm">
-        <p className="text-xl text-blue-500 font-medium">{group.groupName}</p>
-      </div>
-      <div>
-        <div className="manageDisplay pt-6 overflow-y-auto scrollbar-hide">
-          {group.messages &&
-            group.messages.map((message) => (
-              <div className="block">
-                {localStorage.getItem("handle") === message.handle ? (
-                  <div className="flex">
-                    <div className="flex-1"></div>
-                    <div style={{ width: "50%" }}>
-                      <p className="text-gray-500 text-sm mx-2">you</p>
-                      <p className="shadow-sm bg-white rounded-l-2xl p-2">
-                        {message.message}
-                      </p>
-                      <p className="text-gray-500 text-xs mx-2">
-                        {FormateDate(message.createdAt)
-                          ? dayjs(message.createdAt).format("DD/MM/YY")
-                          : dayjs(message.createdAt).fromNow()}
-                      </p>
-                    </div>
-                  </div>
-                ) : (
-                  <div style={{ width: "50%" }} className="block">
-                    <p className="text-gray-500 text-sm">{message.handle}</p>
-                    <p className="shadow-sm bg-white rounded-r-2xl p-2">
-                      {message.message}
-                    </p>
-                    <p className="text-gray-500 text-xs">
-                      {FormateDate(message.createdAt)
-                        ? dayjs(message.createdAt).format("DD/MM/YY")
-                        : dayjs(message.createdAt).fromNow()}
-                    </p>
-                  </div>
-                )}
-              </div>
-            ))}
+    <div className="flex">
+      <div className={`flex-1 ${groupInfo && "hidden"} sm:inline`}>
+        <div className="flex p-5 bg-white shadow-sm items-center">
+          <div className="flex flex-1">
+            <Link to="/chats">
+              <ArrowLeftIcon
+                width={23}
+                height={23}
+                className="cursor-pointer"
+              />
+            </Link>
+            <p className="text-xl text-blue-500 font-medium mx-2">
+              {group.groupName}
+            </p>
+          </div>
+          <DotsVerticalIcon
+            width={23}
+            height={23}
+            className="cursor-pointer"
+            onClick={() => setGroupInfo(1 ^ groupInfo)}
+          />
         </div>
-        <div className="rounded-t-2xl shadow-sm bg-white p-2">
-          <form
-            className="flex items-center"
-            noValidate
-            onSubmit={handleSubmit}
-          >
-            <input
-              title="message"
-              type="text"
-              name="message"
-              className="p-2 flex-1 rounded-none rounded-r-md sm:text-sm border-blue-300"
-              placeholder="type message..."
-              onChange={(event) => setMessage(event.target.value)}
-              value={message}
-            />
-            <FingerPrintIcon
-              width={23}
-              height={23}
-              className="mx-2 text-blue-500 cursor-pointer"
-              onClick={handleSubmit}
-            />
-          </form>
+        <Feed sendMessage={sendMessage} group={group} />
+      </div>
+      <div className={`${!groupInfo && "hidden"}`}>
+        <div className="sm:w-60 mx-2 mt-4">
+          <ArrowLeftIcon
+            width={23}
+            height={23}
+            className="cursor-pointer"
+            onClick={() => setGroupInfo(false)}
+          />
+          <GroupMembers group={group} editGroupName={editGroupName} removeGroupMember={removeGroupMember} leaveFromGroup={leaveFromGroup} />
         </div>
       </div>
     </div>
@@ -114,10 +80,19 @@ Messages.propTypes = {
   chat: PropTypes.object.isRequired,
   getOneGroup: PropTypes.func.isRequired,
   sendMessage: PropTypes.func.isRequired,
+  editGroupName: PropTypes.func.isRequired,
+  removeGroupMember: PropTypes.func.isRequired,
+  leaveFromGroup: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => ({
   chat: state.chat,
 });
 
-export default connect(mapStateToProps, { getOneGroup, sendMessage })(Messages);
+export default connect(mapStateToProps, {
+  getOneGroup,
+  sendMessage,
+  editGroupName,
+  removeGroupMember,
+  leaveFromGroup
+})(Messages);

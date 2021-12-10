@@ -1,31 +1,28 @@
 import React from "react";
 import dayjs from "dayjs";
 import axios from "axios";
+import { BadgeCheckIcon } from "@heroicons/react/solid";
 
-function VoteCard({ vote, FormateDate , userProfile }) {
-    const deleteVote = () => {
-        let answer = window.confirm("Remove Vote?");
-        console.log(answer)
-        if (answer) {
-          axios
-            .delete(`screams/${vote.screamId}/${vote.voteId}`)
-            .then((res) => {
-              window.location.href = "/authorScreams";
-            })
-        }
-    };
-
-    const AcceptCollab = () => {
-        let answer = window.confirm("Accept Collab?");
-        console.log(answer)
-        if (answer) {
-          axios
-            .post(`screams/${vote.screamId}/${vote.voteId}`)
-            .then((res) => {
-              window.location.href = "/authorScreams";
-            })
-        }
+function VoteCard({ vote, FormateDate, userProfile }) {
+  const deleteVote = () => {
+    let answer = window.confirm("Remove Vote?");
+    console.log(answer);
+    if (answer) {
+      axios.delete(`screams/${vote.screamId}/${vote.voteId}`).then((res) => {
+        window.location.href = "/authorScreams";
+      });
     }
+  };
+
+  const AcceptCollab = () => {
+    let answer = window.confirm("Accept Collab?");
+    console.log(answer);
+    if (answer) {
+      axios.post(`screams/${vote.screamId}/${vote.voteId}`).then((res) => {
+        window.location.href = "/authorScreams";
+      });
+    }
+  };
 
   return (
     <div className="space-y-6 bg-white mt-2 shadow sm:rounded-md sm:overflow-hidden">
@@ -71,16 +68,30 @@ function VoteCard({ vote, FormateDate , userProfile }) {
         </p>
       </div>
       <div className="flex list-none flex-wrap pt-3 px-2 flex-row">
-        <div onClick={AcceptCollab} className="m-2  flex-auto text-center bg-blue-500 text-bold text-white cursor-pointer hove:bg-blue-700">
-          Accept Collab
-        </div>
-        <div onClick={deleteVote} className="m-2 flex-auto text-center bg-red-500 text-white cursor-pinter cursor-pointer hover:bg-red-700">
+        {vote.collabRequest ? (
+          <div className="m-2 flex-auto text-center bg-green-500 text-bold text-white">
+            <div className="flex justify-center">
+              <p>Accepted</p>
+              <BadgeCheckIcon width={21} height={21} />
+            </div>
+          </div>
+        ) : (
+          <div
+            onClick={AcceptCollab}
+            className="m-2  flex-auto text-center bg-blue-500 text-bold text-white cursor-pointer hove:bg-blue-700"
+          >
+            Accept Collab
+          </div>
+        )}
+        <div
+          onClick={deleteVote}
+          className="m-2 flex-auto text-center bg-red-500 text-white cursor-pinter cursor-pointer hover:bg-red-700"
+        >
           Remove Vote
         </div>
       </div>
     </div>
   );
 }
-
 
 export default VoteCard;

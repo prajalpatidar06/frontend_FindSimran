@@ -1,0 +1,9 @@
+.manageMemberDisplay{
+    height: 16rem;
+}
+
+@media(max-width:400px){
+    .manageMemberDisplay{
+        height: 20rem;
+    }
+}

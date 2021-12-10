@@ -54,6 +54,7 @@ export const editGroupName = (groupId, groupName) => (dispatch) => {
     .put(`chats/${groupId}/editName`, groupName)
     .then((res) => {
       dispatch(getOneGroup(groupId));
+      dispatch(getAllGroups())
     })
     .catch((err) => {
       dispatch({
@@ -81,7 +82,7 @@ export const leaveFromGroup = (groupId) => (dispatch) => {
   axios
     .put(`chats/${groupId}/leave`)
     .then((res) => {
-      window.location.href = "/chats";
+      window.location.href = "/";
     })
     .catch((err) => {
       dispatch({

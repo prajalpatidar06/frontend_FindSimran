@@ -8,6 +8,12 @@ import ScreamCard from "./ScreamCard";
 import VoteCard from "./VoteCard";
 
 export class AuthScream extends Component {
+  constructor(){
+    super()
+    window.onload = (event) => {
+      window.location.href = "/authorScreams";
+    };
+  }
   componentDidMount = () => {
         this.props.getAuthScream(
           this.props.user.credentials.handle,
