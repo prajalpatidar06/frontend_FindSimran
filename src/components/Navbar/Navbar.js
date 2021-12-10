@@ -10,6 +10,7 @@ import {
   InformationCircleIcon,
   LightBulbIcon,
   UserGroupIcon,
+  ChatAlt2Icon,
 } from "@heroicons/react/solid";
 
 import { LoginIcon, LogoutIcon } from "@heroicons/react/outline";
@@ -53,6 +54,19 @@ function Navbar({ user, logoutUser }) {
               <HeaderIcon active={state === "users"} Icon={UserGroupIcon} />
             </div>
           </Link>
+          {user.authenticated && (
+            <Link to="/chats">
+              <div
+                title="chats"
+                onClick={() => setstate("chats")}
+              >
+                <HeaderIcon
+                  active={state === "chats"}
+                  Icon={ChatAlt2Icon}
+                />
+              </div>
+            </Link>
+          )}
           {user.authenticated && (
             <Link to="/notifications">
               <div

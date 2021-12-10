@@ -1,0 +1,9 @@
+.manageDisplay{
+    height: 26rem;
+}
+
+@media(max-width:400px){
+    .manageDisplay{
+        height: 39rem;
+    }
+}

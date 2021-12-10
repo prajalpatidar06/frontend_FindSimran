@@ -8,6 +8,7 @@ import profile from "./pages/profile";
 import editProfile from "./pages/editProfile";
 import user from "./pages/user";
 import notifications from "./pages/notifications";
+import chats from "./pages/chats";
 import aboutUs from "./pages/aboutUs";
 import projects from "./pages/projects"
 import users from './pages/users'
@@ -51,6 +52,8 @@ class App extends Component {
               <IsLoginRoute exact path="/profile" component={profile} />
               <IsLoginRoute exact path="/edit-profile" component={editProfile} />
               <Route path="/user" component={user} />
+              <IsLoginRoute exact path="/chats" component={chats} />
+              <IsLoginRoute exact path="/chats/:groupId" component={chats} />
               <IsLoginRoute exact path="/notifications" component={notifications} />
               <Route exact path="/aboutUs" component={aboutUs} />
               <AuthRoute exact path="/login" component={login} />

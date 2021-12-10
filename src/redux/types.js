@@ -30,3 +30,9 @@ export const SET_PROJECTS = "SET_PROJECTS";
 export const POST_PROJECT = "POST_PROJECT";
 export const UPDATE_PROJECT = "UPDATE_PROJECT";
 export const DELETE_PROJECT = "DELETE_PROJECT";
+
+// Chat reducer types
+export const SET_CHATS = "SET_CHATS";
+export const SET_CHAT = "SET_CHAT";
+export const UPDATE_CHAT = "UPDATE_CHAT";
+export const LOADING_CHATS = "LOADING_CHATS";
