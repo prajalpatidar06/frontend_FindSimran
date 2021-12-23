@@ -36,7 +36,7 @@ function ProjectCard({
 
   return (
     <div className="flex flex-col">
-      <div className="relative p-5 bg-white mt-5 rounded-t-2xl shadow-sm">
+      <div className="relative p-5 bg-white mt-5 rounded-2xl shadow-sm">
         <div className="flex items-center space-x-2">
           <img
             className="rounded-full cursor-pointer"

@@ -6,7 +6,7 @@ function UsersCard({ user: { handle, imageUrl, email, name } }) {
       localStorage.getItem("handle") === handle ? "profile" : `user/${handle}`;
   };
   return (
-    <div className="flex flex-col bg-white justify-center mt-5 rounded-t-2xl shadow-sm">
+    <div className="flex flex-col bg-white justify-center mt-5 rounded-2xl shadow-sm">
       <div
         className="my-3 mx-3 py-3 font-medium cursor-pointer"
         onClick={() => userProfile(handle)}

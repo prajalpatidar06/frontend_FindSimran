@@ -10,7 +10,7 @@ const Tabs = ({ color }) => {
   return (
     <>
       <div className="flex flex-wrap">
-        <div className="w-full">
+        <div className="w-full sm:px-28">
           <ul
             className="flex mb-0 list-none flex-wrap pt-3 pb-4 flex-row"
             role="tablist"
@@ -54,7 +54,7 @@ const Tabs = ({ color }) => {
               </a>
             </li>
           </ul>
-          <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">
+          <div className="relative flex flex-col min-w-0 break-words bg-white m-auto mb-6 shadow-lg rounded">
             <div className="px-4 py-5 flex-auto">
               <div className="tab-content tab-space">
                 <div className={openTab === 1 ? "block" : "hidden"} id="link1">
@@ -75,7 +75,7 @@ const Tabs = ({ color }) => {
 export function login({ SignInWithGoogle, loading }) {
   return (
     <>
-       {loading &&(
+      {loading && (
         <div className="flex justify-center fixed top-[50%] left-[50%] items-center z-10">
           <div className="animate-spin rounded-full h-20 w-20 border-b-2 border-gray-900"></div>
         </div>

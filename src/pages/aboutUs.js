@@ -32,7 +32,7 @@ export class aboutUs extends Component {
         return (
             <div  style={{display: 'block',position:"absolute",  justifyContent:'center', alignItems:'center', height: '100vh', width:"100%", textAlign:"center"}}>
                 <div className="about" style={{margin:'50px'}}>
-               <h1 style={{ fontWeight: 'bold' },{fontSize : "40px"}}>About FindSimran</h1>
+               <h1 style={{ fontWeight: 'bold' },{fontSize : "35px"}}>About FindSimran</h1>
                <p style={{fontSize : "20px"}}><span style={{fontWeight:'bold', color:"#2563EB"}}>Welcome to FindSimran</span>, the peer to peer network of nerds, where you can find your coding partner or search relevant projects to work on.</p>
                </div>
 

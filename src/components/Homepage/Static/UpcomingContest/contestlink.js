@@ -10,7 +10,7 @@ class Contest extends Component {
     } = this.props;
     return (
       <div className="flex flex-col">
-        <div className="relative p-5 bg-white mt-5 rounded-t-2xl shadow-sm">
+        <div className="relative p-5 bg-white mt-5 rounded-2xl shadow-sm">
           <h2 className="sitename" style={{ fontWeight: "bold" }}>
             {site}
           </h2>

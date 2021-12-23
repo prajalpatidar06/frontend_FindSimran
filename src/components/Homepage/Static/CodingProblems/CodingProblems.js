@@ -17,9 +17,9 @@ export class CodingProblems extends Component {
           450 DSA Questions
         </h1>
         {Data.map((block) => (
-          <div className="flex flex-col bg-white rounded-t-2xl mt-2 shadow-sm">
+          <div className="flex flex-col bg-white rounded-2xl mt-2 shadow-sm">
             <div
-              className={`relative px-3 py-3 flex rounded-t-2xl font-medium cursor-pointer border-b-2 ${
+              className={`relative px-3 py-3 flex rounded-2xl font-medium cursor-pointer border-b-2 ${
                 this.state.topic === block.topicName && "bg-blue-300"
               }`}
               onClick={() =>
