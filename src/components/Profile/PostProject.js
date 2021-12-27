@@ -35,20 +35,20 @@ export class PostProject extends Component {
   };
 
   handleChange = (event) => {
-    if (event.target.name === "body" && event.target.value.length >= 800) {
+    if (event.target.name === "body" && event.target.value.length >= 1000) {
       this.setState({
-        errors: { body: "max char length is not more than 800" },
+        errors: { body: "max char length is not more than 1000" },
       });
     } else if (
       event.target.name === "title" &&
-      event.target.value.length >= 80
+      event.target.value.length >= 100
     ) {
       this.setState({
-        errors: { title: "max char length is not more than 80" },
+        errors: { title: "max char length is not more than 100" },
       });
-    } else if (event.target.name === "url" && event.target.value.length >= 50) {
+    } else if (event.target.name === "url" && event.target.value.length >= 150) {
       this.setState({
-        errors: { url: "max char length is not more than 50" },
+        errors: { url: "max char length is not more than 150" },
       });
     } else {
       this.setState({

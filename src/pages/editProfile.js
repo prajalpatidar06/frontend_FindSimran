@@ -260,15 +260,15 @@ export class editProfile extends Component {
                 <div className="mt-4 mx-2 sm:flex">
                   <div className="mt-4 mx-2 items-center">
                     <label class="text-sm font-medium text-gray-700 mx-2">
-                      Collage :
+                      College :
                     </label>
                     <input
-                      title="Collage"
+                      title="College"
                       type="text"
                       name="collage"
                       id="collage"
                       className="focus:ring-blue-500 p-2 focus:border-blue-500 flex-1 rounded-none rounded-r-md sm:text-sm border-blue-300"
-                      placeholder="Collage"
+                      placeholder="College"
                       onChange={this.handleChange}
                       value={this.state.collage}
                     />

@@ -72,7 +72,7 @@ function UserProfileCard({
         <div className="sm:flex">
           <div className="flex-1 mx-2 sm:mr-10 sm:ml-3 mt-20">
             <div className="bg-white p-2 rounded-2xl shadow">
-              <div className="mx-2 mt-2 flex text-xl font-medium relative">
+              <div className="mx-2 mt-2 flex text-2xl font-medium relative">
                 {name && (
                   <p className="items-center flex">
                     {gender === "male" && <span classNam="mr-2">👦</span>}

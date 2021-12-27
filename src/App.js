@@ -10,6 +10,7 @@ import user from "./pages/user";
 import notifications from "./pages/notifications";
 import chats from "./pages/chats";
 import aboutUs from "./pages/aboutUs";
+import Queries from "./pages/Queries";
 import projects from "./pages/projects"
 import users from './pages/users'
 import login from "./pages/login";
@@ -56,6 +57,7 @@ class App extends Component {
               <IsLoginRoute exact path="/chats/:groupId" component={chats} />
               <IsLoginRoute exact path="/notifications" component={notifications} />
               <Route exact path="/aboutUs" component={aboutUs} />
+              <Route exact path="/queries" component={Queries} />
               <AuthRoute exact path="/login" component={login} />
               <Route component={home} />
             </Switch>
